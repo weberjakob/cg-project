@@ -270,7 +270,7 @@ function createSceneGraphContext(gl, shader) {
     gl: gl,
     sceneMatrix: mat4.create(),
     viewMatrix: calculateViewMatrix(),
-    projectionMatrix: projectionMatrix,
+    projectionMatrix: projectionMatrix, //comment
     shader: shader
   };
 }
