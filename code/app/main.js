@@ -1,5 +1,6 @@
 /**
  * Created by Marc Streit on 01.04.2016.
+ * //TODO: change this comment
  */
 
 //the OpenGL context
@@ -271,7 +272,7 @@ function createSceneGraphContext(gl, shader) {
     gl: gl,
     sceneMatrix: mat4.create(),
     viewMatrix: calculateViewMatrix(),
-    projectionMatrix: projectionMatrix,
+    projectionMatrix: projectionMatrix, //com
     shader: shader
   };
 }
