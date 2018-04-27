@@ -42,6 +42,7 @@ var quadColors = new Float32Array([
     0, 0, 0, 1]);
 
 var s = 0.3; //size of cube
+//additional comment which is useless
 var cubeVertices = new Float32Array([
    -s,-s,-s, s,-s,-s, s, s,-s, -s, s,-s,
    -s,-s, s, s,-s, s, s, s, s, -s, s, s,
