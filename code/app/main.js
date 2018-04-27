@@ -2,7 +2,9 @@
  * Created by Marc Streit on 01.04.2016.
  * //TODO: change this comment
  * usless comment
- */
+ *
+ * blabala
+ * */
 
 //the OpenGL context
 var gl = null;
