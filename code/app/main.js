@@ -1,16 +1,6 @@
 /**
  * Created by Marc Streit on 01.04.2016.
- * //TODO: change this comment
- * usless comment
  *
- * blabala
- * blabla
- * blabla
- *
- * email test comment
- * blablabla 3
- * blabla 2
- * blablabla
  * */
 
 //the OpenGL context
@@ -29,7 +19,14 @@ var context;
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 
+//scene settings
+var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
+var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
+
+
+
 var robotTransformationNode;
+var tramTransformationNode;
 var headTransformationNode;
 
 //links to buffer stored on the GPU
@@ -63,6 +60,8 @@ var cubeVertices = new Float32Array([
    -s, s,-s, -s, s, s, s, s, s, s, s,-s,
 ]);
 
+//used for colored cube
+/*
 var cubeColors = new Float32Array([
    0,1,1, 0,1,1, 0,1,1, 0,1,1,
    1,0,1, 1,0,1, 1,0,1, 1,0,1,
@@ -70,6 +69,16 @@ var cubeColors = new Float32Array([
    0,0,1, 0,0,1, 0,0,1, 0,0,1,
    1,1,0, 1,1,0, 1,1,0, 1,1,0,
    0,1,0, 0,1,0, 0,1,0, 0,1,0
+]);*/
+
+//used for tram
+var cubeColors = new Float32Array([
+    0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,
+    1,0.5,0, 1,0.5,0, 1,1,1, 1,1,1,
+    1,0,0, 1,0,0, 1,0,0, 1,0,0,
+    1,0,0, 1,0,0, 1,0,0, 1,0,0,
+    1,0.5,0, 1,0.5,0, 1,1,1, 1,1,1,
+    0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,
 ]);
 
 var cubeIndices =  new Float32Array([
@@ -117,21 +126,24 @@ function init(resources) {
   //Task 3-1
   var quadTransformationMatrix = glm.rotateX(90);
   quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.translate(0.0,-0.5,0));
-  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(0.5,0.5,1));
+  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(0.5,5,1));
 
   //Task 3-2
   var transformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
   rootNode.append(transformationNode);
 
+
   //TASK 5-3
   var staticColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.fs));
   transformationNode.append(staticColorShaderNode);
+
 
   //TASK 2-2
   var quadNode = new QuadRenderNode();
   staticColorShaderNode.append(quadNode);
 
-  createRobot(rootNode);
+  //createRobot(rootNode);
+    createTram(rootNode, 0);
 
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
@@ -167,11 +179,30 @@ function initCubeBuffer() {
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 }
 
+function createTram(rootNode, angleBetweenSections) {
+  //whole vehicle
+  var tramTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(0));
+  tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateX(0));
+  tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(0, 0.5, 0));
+  tramTransformationNode = new TransformationSceneGraphNode(tramTransformationMatrix);
+  rootNode.append(tramTransformationNode);
+
+  //front part of tram
+    tramSectionNode = new CubeRenderNode();
+    var tramSectionTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.scale(2.5, 1, 0.5));
+    tramSectionTransformationNode = new TransformationSceneGraphNode(tramSectionTransformationMatrix);
+    tramSectionTransformationNode.append(tramSectionNode);
+
+    //adding first part to main part of tram
+    tramTransformationNode.append(tramSectionTransformationNode);
+
+}
+
 function createRobot(rootNode) {
 
   //TASK 6-1
 
-  //transformations of whole body
+  //transformations of whole robot
   var robotTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle/2));
   robotTransformationMatrix = mat4.multiply(mat4.create(), robotTransformationMatrix, glm.translate(0.3,0.9,0));
   robotTransformationNode = new TransformationSceneGraphNode(robotTransformationMatrix);
@@ -234,25 +265,67 @@ function render(timeInMilliseconds) {
   gl.useProgram(shaderProgram);
 
   //TASK 6-2
+    /*
   //update transformation of robot for rotation animation
   var robotTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle/2));
   robotTransformationMatrix = mat4.multiply(mat4.create(), robotTransformationMatrix, glm.translate(0.3,0.9,0));
   robotTransformationNode.setMatrix(robotTransformationMatrix);
 
+
   var headTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle));
   headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.translate(0.0,0.4,0));
   headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.scale(0.4,0.33,0.5));
   headTransformationNode.setMatrix(headTransformationMatrix);
+*/
+
+
+
+    //update tram transformation
+    switch (sceneIndex) {
+        case 1:
+            var tramTransformationMatrix = mat4.create();
+            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1, 1, 1));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
+            tramTransformationNode.setMatrix(tramTransformationMatrix);
+            rootNode.render(context);
+            break;
+        case 2:
+          var sceneCoefficient = (projectTimeInMilliSeconds-5000)/20000;
+            var tramTransformationMatrix = mat4.create();
+            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1+2*sceneCoefficient, 1, 1));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
+            tramTransformationNode.setMatrix(tramTransformationMatrix);
+            rootNode.render(context);
+            break;
+        case 3:
+            var tramTransformationMatrix = mat4.create();
+            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(1, 1, 1));
+            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
+            tramTransformationNode.setMatrix(tramTransformationMatrix);
+            rootNode.render(context);
+            break;
+    }
 
   context = createSceneGraphContext(gl, shaderProgram);
 
-  rootNode.render(context);
+
+
 
   //request another render call as soon as possible
   requestAnimationFrame(render);
 
   //animate based on elapsed time
   animatedAngle = timeInMilliseconds/10;
+  //project lasts for 30 seconds
+  projectTimeInMilliSeconds = timeInMilliseconds%30000;
+  //0 to 5: scene
+  // 5 to 25: scene 2
+  //26 to 30: scene 3
+  sceneIndex = projectTimeInMilliSeconds<5000 ? 1:
+      projectTimeInMilliSeconds <25000 ? 2 : 3;
 }
 
 function renderCube() {
@@ -398,7 +471,12 @@ class CubeRenderNode extends SceneGraphNode {
 
     //set alpha value for blending
     //TASK 1-3
-    gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 0.5);
+      switch (sceneIndex) {
+          case 1: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 1);break;
+          case 2: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 0.8);break;
+          case 3: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 2);break;
+      }
+
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
     gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
