@@ -23,7 +23,7 @@ var fieldOfViewInRadians = convertDegreeToRadians(30);
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
 var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
-
+var tramNode;
 
 var robotTransformationNode;
 var tramTransformationNode;
@@ -143,8 +143,12 @@ function init(resources) {
   staticColorShaderNode.append(quadNode);
 
   //createRobot(rootNode);
-    createTram(rootNode, 0);
+    // createTram(rootNode, 0);
 
+    tramNode = new TramNode();
+    rootNode.append(tramNode);
+
+    createRails(rootNode);
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -179,70 +183,25 @@ function initCubeBuffer() {
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 }
 
-function createTram(rootNode, angleBetweenSections) {
-  //whole vehicle
-  var tramTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(0));
-  tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateX(0));
-  tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(0, 0.5, 0));
-  tramTransformationNode = new TransformationSceneGraphNode(tramTransformationMatrix);
-  rootNode.append(tramTransformationNode);
+function createRails(rootNode) {
+    for(var i = 0; i < 100; i++)
+    {
+        var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(0.2, 0.05, 0.05));
+        railTransformationMatrix = mat4.multiply(mat4.create(),railTransformationMatrix, glm.rotateZ(i < 30 ? i : (60-i)));
 
-  //front part of tram
-    tramSectionNode = new CubeRenderNode();
-    var tramSectionTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.scale(2.5, 1, 0.5));
-    tramSectionTransformationNode = new TransformationSceneGraphNode(tramSectionTransformationMatrix);
-    tramSectionTransformationNode.append(tramSectionNode);
+        for(var railAxe = 0; railAxe < 2; railAxe++)
+        {
+            var rail = new CubeRenderNode();
+            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(-8 + i/8, railAxe * 3, -20));
 
-    //adding first part to main part of tram
-    tramTransformationNode.append(tramSectionTransformationNode);
+            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
+            railTransformationNode.append(rail);
+            rootNode.append(railTransformationNode);
+        }
+    }
 
 }
 
-function createRobot(rootNode) {
-
-  //TASK 6-1
-
-  //transformations of whole robot
-  var robotTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle/2));
-  robotTransformationMatrix = mat4.multiply(mat4.create(), robotTransformationMatrix, glm.translate(0.3,0.9,0));
-  robotTransformationNode = new TransformationSceneGraphNode(robotTransformationMatrix);
-  rootNode.append(robotTransformationNode);
-
-  //body
-  cubeNode = new CubeRenderNode();
-  robotTransformationNode.append(cubeNode);
-
-  //transformation of head
-  var headTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle));
-  headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.translate(0.0,0.4,0));
-  headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.scale(0.4,0.33,0.5));
-  headTransformationNode = new TransformationSceneGraphNode(headTransformationMatrix);
-  robotTransformationNode.append(headTransformationNode);
-
-  //head
-  cubeNode = new CubeRenderNode();
-  headTransformationNode.append(cubeNode);
-
-  //transformation of left leg
-  var leftLegTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(0.16,-0.6,0));
-  leftLegTransformationMatrix = mat4.multiply(mat4.create(), leftLegTransformationMatrix, glm.scale(0.2,1,1));
-  var leftLegTransformationNode = new TransformationSceneGraphNode(leftLegTransformationMatrix);
-  robotTransformationNode.append(leftLegTransformationNode);
-
-  //left leg
-  cubeNode = new CubeRenderNode();
-  leftLegTransformationNode.append(cubeNode);
-
-  //transformation of right leg
-  var rightLegTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-0.16,-0.6,0));
-  rightLegTransformationMatrix = mat4.multiply(mat4.create(), rightLegTransformationMatrix, glm.scale(0.2,1,1));
-  var rightLegtTransformationNode = new TransformationSceneGraphNode(rightLegTransformationMatrix);
-  robotTransformationNode.append(rightLegtTransformationNode);
-
-  //right leg
-  cubeNode = new CubeRenderNode();
-  rightLegtTransformationNode.append(cubeNode);
-}
 
 /**
  * render one frame
@@ -264,52 +223,27 @@ function render(timeInMilliseconds) {
   //activate this shader program
   gl.useProgram(shaderProgram);
 
-  //TASK 6-2
-    /*
-  //update transformation of robot for rotation animation
-  var robotTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle/2));
-  robotTransformationMatrix = mat4.multiply(mat4.create(), robotTransformationMatrix, glm.translate(0.3,0.9,0));
-  robotTransformationNode.setMatrix(robotTransformationMatrix);
-
-
-  var headTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.rotateY(animatedAngle));
-  headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.translate(0.0,0.4,0));
-  headTransformationMatrix = mat4.multiply(mat4.create(), headTransformationMatrix, glm.scale(0.4,0.33,0.5));
-  headTransformationNode.setMatrix(headTransformationMatrix);
-*/
-
-
+    context = createSceneGraphContext(gl, shaderProgram);
 
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            var tramTransformationMatrix = mat4.create();
+            tramNode.setSpeed(2);
+
+            //var tramTransformationMatrix = mat4.create();
             //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1, 1, 1));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
-            tramTransformationNode.setMatrix(tramTransformationMatrix);
-            rootNode.render(context);
+            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1, 1, 1));
+            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
+            //tramTransformationNode.setMatrix(tramTransformationMatrix);
             break;
         case 2:
-          var sceneCoefficient = (projectTimeInMilliSeconds-5000)/20000;
-            var tramTransformationMatrix = mat4.create();
-            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1+2*sceneCoefficient, 1, 1));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
-            tramTransformationNode.setMatrix(tramTransformationMatrix);
-            rootNode.render(context);
+            tramNode.setSpeed(1);
             break;
         case 3:
-            var tramTransformationMatrix = mat4.create();
-            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(1, 1, 1));
-            tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
-            tramTransformationNode.setMatrix(tramTransformationMatrix);
-            rootNode.render(context);
+            tramNode.setSpeed(5);
             break;
     }
-
-  context = createSceneGraphContext(gl, shaderProgram);
+    rootNode.render(context);
 
 
 
@@ -324,13 +258,8 @@ function render(timeInMilliseconds) {
   //0 to 5: scene
   // 5 to 25: scene 2
   //26 to 30: scene 3
-  sceneIndex = projectTimeInMilliSeconds<5000 ? 1:
-      projectTimeInMilliSeconds <25000 ? 2 : 3;
-}
-
-function renderCube() {
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
-  gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
+  sceneIndex = projectTimeInMilliSeconds<5000 ? 1: projectTimeInMilliSeconds <25000 ? 2 : 3;
+  //sceneIndex = 3;
 }
 
 function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
@@ -448,11 +377,70 @@ class QuadRenderNode extends SceneGraphNode {
   }
 }
 
+class TramNode extends SceneGraphNode {
+
+    constructor() {
+        super();
+        this.speed = 0;
+        this.matrix = mat4.create();
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(-1, 0.5, 1));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(1, 0.3, 0.3));
+    }
+
+    render(context) {
+        //backup previous one
+        var previous = context.sceneMatrix;
+
+        //set current world matrix by multiplying it
+        mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed/1000, 0, 0));
+
+        if (previous === null) {
+            context.sceneMatrix = mat4.clone(this.matrix);
+        }
+        else {
+            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
+        }
+
+        //setting the model view and projection matrix on shader
+        setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
+
+        var positionLocation = gl.getAttribLocation(context.shader, 'a_position');
+        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexBuffer);
+        gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false,0,0) ;
+        gl.enableVertexAttribArray(positionLocation);
+
+        var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
+        gl.bindBuffer(gl.ARRAY_BUFFER, cubeColorBuffer);
+        gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false,0,0) ;
+        gl.enableVertexAttribArray(colorLocation);
+
+        //set alpha value for blending
+        //TASK 1-3
+        gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 1);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
+        gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
+
+
+
+        //render children
+        super.render(context);
+
+        //restore backup
+        context.sceneMatrix = previous;
+        //this.lastRenderedTime = projectTimeInMilliSeconds;
+    }
+
+    setSpeed(speed) {
+        this.speed = speed;
+    }
+}
 //TASK 4-1
 /**
  * a cube node that renders a cube at its local origin
  */
 class CubeRenderNode extends SceneGraphNode {
+
 
   render(context) {
 
