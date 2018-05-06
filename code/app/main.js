@@ -25,6 +25,8 @@ var up = vec3.create();
 //keyboard and mouse buttons
 var upButtonPressed=false;
 var downButtonPressed = false;
+var rightButtonPressed = false;
+var leftButtonPressed = false;
 var userCamera = false;
 
 
@@ -176,7 +178,8 @@ function init(resources) {
 function keyUp(key) {
     upButtonPressed &= key.keyCode!=38;
   downButtonPressed &= key.keyCode!=40;
-
+rightButtonPressed &= key.keyCode !=39;
+leftButtonPressed &= key.keyCode !=37;
 }
 
 function keyDown(key) {
@@ -185,6 +188,8 @@ function keyDown(key) {
     }
     upButtonPressed |= key.keyCode==38;
     downButtonPressed |=key.keyCode==40;
+    rightButtonPressed |= key.keyCode ==39;
+    leftButtonPressed |= key.keyCode ==37;
 }
 
 function createTram() {
@@ -362,12 +367,22 @@ function calculateViewMatrix() {
         vec3.sub(direction, eye, center);
         if(upButtonPressed) {
             var scaled = vec3.create();
-            vec3.multiply(scaled, direction, [0.01, 0.01, 0.01]);
+            vec3.multiply(scaled, direction, [-0.01, -0.01, -0.01]);
             vec3.add(eye, eye, scaled);
         } else if(downButtonPressed) {
             var scaled = vec3.create();
-            vec3.multiply(scaled, direction, [-0.01, -0.01, -0.01]);
+            vec3.multiply(scaled, direction, [0.01, 0.01, 0.01]);
             vec3.add(eye, eye, scaled);
+        } else if(leftButtonPressed) {
+            var crossProd = vec3.create();
+                vec3.cross(crossProd, up, direction);
+            vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
+            vec3.add(eye, eye, crossProd);
+        } else if(rightButtonPressed) {
+            var crossProd = vec3.create();
+            vec3.cross(crossProd, direction, up);
+            vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
+            vec3.add(eye, eye, crossProd);
         }
     } else {
         eye = [projectTimeInMilliSeconds / 2000, 3, 5];
