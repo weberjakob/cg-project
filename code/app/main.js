@@ -21,6 +21,7 @@ var fieldOfViewInRadians = convertDegreeToRadians(30);
 
 //scene settings
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
+var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
 var tramNode;
@@ -139,8 +140,8 @@ function init(resources) {
 
 
   //TASK 2-2
-  var quadNode = new QuadRenderNode();
-  staticColorShaderNode.append(quadNode);
+  //var quadNode = new QuadRenderNode();
+  //staticColorShaderNode.append(quadNode);
 
   //createRobot(rootNode);
     // createTram(rootNode, 0);
@@ -150,7 +151,9 @@ function init(resources) {
 
     createRails();
 
-    createBridge();
+    createStation();
+
+    //createBridge();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -166,6 +169,11 @@ function createTram() {
 function createBridge() {
     var bridge = new Bridge();
     rootNode.append(bridge);
+}
+
+function createStation() {
+    var station = new Station();
+    rootNode.append(station);
 }
 function initQuadBuffer() {
 
@@ -253,7 +261,7 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            tramNode.setSpeed(0.3);
+            tramNode.setSpeed(3);
 
             //var tramTransformationMatrix = mat4.create();
             //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
@@ -262,10 +270,10 @@ function render(timeInMilliseconds) {
             //tramTransformationNode.setMatrix(tramTransformationMatrix);
             break;
         case 2:
-            tramNode.setSpeed(0.5);
+            tramNode.setSpeed(3);
             break;
         case 3:
-            tramNode.setSpeed(5);
+            tramNode.setSpeed(3);
             break;
     }
     rootNode.render(context);
@@ -279,7 +287,12 @@ function render(timeInMilliseconds) {
   //animate based on elapsed time
   animatedAngle = timeInMilliseconds/10;
   //project lasts for 30 seconds
+  var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
   projectTimeInMilliSeconds = timeInMilliseconds%30000;
+  //if animation gets repeated:
+  if(projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
+      tramNode.resetPosition();
+  }
   //0 to 5: scene
   // 5 to 25: scene 2
   //26 to 30: scene 3
@@ -407,10 +420,8 @@ class TramNode extends SceneGraphNode {
     constructor() {
         super();
         this.speed = 0;
-        this.matrix = mat4.create();
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0.4, 0));
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
-
+        //sets the matrix to its inital state
+        this.resetPosition();
 
         //render all components of the tram
         //all the dimensions of these components are relative to the tram node
@@ -453,14 +464,14 @@ class TramNode extends SceneGraphNode {
         var previous = context.sceneMatrix;
 
         //set current world matrix by multiplying it
-        //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed/1000, 0, 0));
+        mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed/1000, 0, 0));
 
         if (previous === null) {
             context.sceneMatrix = mat4.clone(this.matrix);
         }
         else {
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
-            // context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
+            //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
+             context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
         }
 
         /*
@@ -496,6 +507,12 @@ class TramNode extends SceneGraphNode {
 
     setSpeed(speed) {
         this.speed = speed;
+    }
+
+    resetPosition() {
+        this.matrix = mat4.create();
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0.4, 0));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
     }
 }
 //TASK 4-1
@@ -556,6 +573,15 @@ class Bridge extends SceneGraphNode {
 /**
  * a cube node that renders a cube at its local origin
  */
+
+class Station extends SceneGraphNode {
+    constructor() {
+        super();
+        var platform = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(2, 0.25, -1), glm.scale(5, 0.05, 1)));
+        platform.append(new CubeRenderNode());
+        this.append(platform);
+    }
+}
 class CubeRenderNode extends SceneGraphNode {
     constructor() {
         super();
