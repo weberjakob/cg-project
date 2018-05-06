@@ -125,8 +125,8 @@ function init(resources) {
 
   //Task 3-1
   var quadTransformationMatrix = glm.rotateX(90);
-  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.translate(0.0,-0.5,0));
-  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(0.5,5,1));
+  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.translate(3,-0.5,0));
+  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(4,5,1));
 
   //Task 3-2
   var transformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
@@ -283,7 +283,7 @@ function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
 function createSceneGraphContext(gl, shader) {
 
   //create a default projection matrix
-  projectionMatrix = mat4.perspective(mat4.create(), fieldOfViewInRadians, aspectRatio, 0.01, 10);
+  projectionMatrix = mat4.perspective(mat4.create(), fieldOfViewInRadians, aspectRatio, 0.01, 20);
   //set projection matrix
   gl.uniformMatrix4fv(gl.getUniformLocation(shader, 'u_projection'), false, projectionMatrix);
 
@@ -298,8 +298,8 @@ function createSceneGraphContext(gl, shader) {
 
 function calculateViewMatrix() {
   //compute the camera's matrix
-  var eye = [0,3,5];
-  var center = [0,0,0];
+  var eye = [projectTimeInMilliSeconds/2000,3,5];
+  var center = [projectTimeInMilliSeconds/10000,0,0];
   var up = [0,1,0];
   viewMatrix = mat4.lookAt(mat4.create(), eye, center, up);
   return viewMatrix;
