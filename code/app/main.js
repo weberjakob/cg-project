@@ -2,6 +2,7 @@
  * Created by Marc Streit on 01.04.2016.
  *
  * */
+//inserted this comment to check if commit was succsessfull
 
 //the OpenGL context
 var gl = null;
