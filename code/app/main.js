@@ -149,6 +149,8 @@ function init(resources) {
     createTram();
 
     createRails();
+
+    createBridge();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -157,9 +159,13 @@ function init(resources) {
 function createTram() {
     tramNode = new TramNode();
     rootNode.append(tramNode);
-
     //inserting the cockpit, translation is relative to the tram
 
+}
+
+function createBridge() {
+    var bridge = new Bridge();
+    rootNode.append(bridge);
 }
 function initQuadBuffer() {
 
@@ -190,7 +196,7 @@ function initCubeBuffer() {
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 }
 
-function createRails() {
+/*function createRails() {
     for(var i = 0; i < 100; i++)
     {
         var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(0.2, 0.05, 0.05));
@@ -207,6 +213,18 @@ function createRails() {
         }
     }
 
+}*/
+
+function createRails() {
+        var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(200, 0.05, 0.05));
+        for(var railAxe = 0; railAxe < 2; railAxe++) {
+            var rail = new CubeRenderNode();
+            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, railAxe * 2, 0));
+
+            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
+            railTransformationNode.append(rail);
+            rootNode.append(railTransformationNode);
+        }
 }
 
 
@@ -235,7 +253,7 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            tramNode.setSpeed(2);
+            tramNode.setSpeed(0.3);
 
             //var tramTransformationMatrix = mat4.create();
             //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
@@ -244,7 +262,7 @@ function render(timeInMilliseconds) {
             //tramTransformationNode.setMatrix(tramTransformationMatrix);
             break;
         case 2:
-            tramNode.setSpeed(3);
+            tramNode.setSpeed(0.5);
             break;
         case 3:
             tramNode.setSpeed(5);
@@ -390,7 +408,7 @@ class TramNode extends SceneGraphNode {
         super();
         this.speed = 0;
         this.matrix = mat4.create();
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(-1, 0.5, 1));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0.4, 0));
         this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
 
 
@@ -435,13 +453,14 @@ class TramNode extends SceneGraphNode {
         var previous = context.sceneMatrix;
 
         //set current world matrix by multiplying it
-        mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed/1000, 0, 0));
+        //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed/1000, 0, 0));
 
         if (previous === null) {
             context.sceneMatrix = mat4.clone(this.matrix);
         }
         else {
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
+            context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
+            // context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
         }
 
         /*
@@ -480,6 +499,60 @@ class TramNode extends SceneGraphNode {
     }
 }
 //TASK 4-1
+
+class Bridge extends SceneGraphNode {
+    constructor() {
+        super();
+        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(2, 0.25, -1), glm.scale(10, 0.1, 1)));
+        floor.append(new CubeRenderNode());
+        this.append(floor);
+
+        for(var rightSide = 0; rightSide < 2; rightSide++) {
+            for(var i = 0; i < 10 ; i++) {
+                for(var j = 0; j < 8; j++) {
+                    var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i*1.65, 0.35, rightSide *0.5));
+                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(-90 + (25.7 * j)));
+
+                    var balkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(12.5));
+
+                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.translate(0, 0.45, 0));
+                    var smallBalkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.translate(0, 0.45, 0));
+                    balkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.translate(0, 0.9, 0));
+
+                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.scale(0.05, 1.5, 0.05));
+                    balkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.scale(0.7, 0.05, 0.05));
+                    smallBalkMatrix = mat4.multiply(mat4.create(), smallBalkMatrix, glm.scale(0.4, 0.05, 0.05));
+
+                    var column = new TransformationSceneGraphNode(columnMatrix);
+                    column.append(new CubeRenderNode());
+                    this.append(column);
+
+                    if(j >= 0 && j < 7) {
+                        var balk = new TransformationSceneGraphNode(balkMatrix);
+                        balk.append(new CubeRenderNode());
+
+                        var smallBalk = new TransformationSceneGraphNode(smallBalkMatrix);
+                        smallBalk.append(new CubeRenderNode());
+
+                        this.append(balk);
+                        this.append(smallBalk);
+                    } //not append the last balk
+
+                    //append crossBalk only from one side
+                    if(rightSide == 0 && j >= 1 && j < 7) {
+                        var crossBalkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.translate(0, 0.32, 5));
+                        crossBalkMatrix = mat4.multiply(mat4.create(), crossBalkMatrix, glm.scale(1, 0.01, 18));
+                        var crossBalk = new TransformationSceneGraphNode(crossBalkMatrix);
+                        crossBalk.append(new CubeRenderNode());
+                        this.append(crossBalk);
+                    }
+
+
+                }
+            }
+        }
+    }
+}
 /**
  * a cube node that renders a cube at its local origin
  */
