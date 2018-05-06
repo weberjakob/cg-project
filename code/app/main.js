@@ -145,15 +145,22 @@ function init(resources) {
   //createRobot(rootNode);
     // createTram(rootNode, 0);
 
-    tramNode = new TramNode();
-    rootNode.append(tramNode);
 
-    createRails(rootNode);
+    createTram();
+
+    createRails();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
 }
 
+function createTram() {
+    tramNode = new TramNode();
+    rootNode.append(tramNode);
+
+    //inserting the cockpit, translation is relative to the tram
+
+}
 function initQuadBuffer() {
 
   //create buffer for vertices
@@ -183,7 +190,7 @@ function initCubeBuffer() {
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 }
 
-function createRails(rootNode) {
+function createRails() {
     for(var i = 0; i < 100; i++)
     {
         var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(0.2, 0.05, 0.05));
@@ -237,7 +244,7 @@ function render(timeInMilliseconds) {
             //tramTransformationNode.setMatrix(tramTransformationMatrix);
             break;
         case 2:
-            tramNode.setSpeed(1);
+            tramNode.setSpeed(3);
             break;
         case 3:
             tramNode.setSpeed(5);
@@ -384,7 +391,43 @@ class TramNode extends SceneGraphNode {
         this.speed = 0;
         this.matrix = mat4.create();
         this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(-1, 0.5, 1));
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(1, 0.3, 0.3));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
+
+
+        //render all components of the tram
+        //all the dimensions of these components are relative to the tram node
+        var ceiling = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0, -0.27, 0), glm.scale(1, 0.1, 1)));
+        ceiling.append(new CubeRenderNode());
+        this.append(ceiling);
+
+        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0, +0.27, 0), glm.scale(1, 0.1, 1)));
+        floor.append(new CubeRenderNode());
+        this.append(floor);
+
+
+        for(var i = 0; i < 6 ; i++) {
+            for(var j = 0; j < 2; j++) {
+                var cockpitSideTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i* 0.1, 0, -0.27 + j*0.54), glm.scale(0.05, 1, 0.1)));
+                cockpitSideTransformation.append(new CubeRenderNode());
+                this.append(cockpitSideTransformation);
+
+                var cockpitSideGlassTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i* 0.1 + 0.05, 0, -0.27 + j*0.54), glm.scale(0.1, 1, 0.1)));
+                var cockpitSideGlass = new CubeRenderNode();
+                cockpitSideGlass.setAlphaValue(0.1);
+                cockpitSideGlassTransformation.append(cockpitSideGlass);
+                this.append(cockpitSideGlassTransformation);
+            }
+        }
+
+        var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
+        var frontGlass = new CubeRenderNode();
+        frontGlass.setAlphaValue(0.1);
+        front.append(frontGlass);
+        this.append(front);
+
+        var back = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.3, 0, 0), glm.scale(0.01, 1, 1)));
+        back.append(new CubeRenderNode());
+        this.append(back);
     }
 
     render(context) {
@@ -401,6 +444,7 @@ class TramNode extends SceneGraphNode {
             context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
         }
 
+        /*
         //setting the model view and projection matrix on shader
         setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
 
@@ -421,7 +465,7 @@ class TramNode extends SceneGraphNode {
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
         gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
 
-
+        */
 
         //render children
         super.render(context);
@@ -440,9 +484,12 @@ class TramNode extends SceneGraphNode {
  * a cube node that renders a cube at its local origin
  */
 class CubeRenderNode extends SceneGraphNode {
+    constructor() {
+        super();
+        this.alpha = 1; //initialy the cube is not transparent at all
+    }
 
-
-  render(context) {
+   render(context) {
 
     //setting the model view and projection matrix on shader
     setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
@@ -457,20 +504,17 @@ class CubeRenderNode extends SceneGraphNode {
     gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false,0,0) ;
     gl.enableVertexAttribArray(colorLocation);
 
-    //set alpha value for blending
-    //TASK 1-3
-      switch (sceneIndex) {
-          case 1: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 1);break;
-          case 2: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 0.8);break;
-          case 3: gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 2);break;
-      }
-
+    gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), this.alpha);
 
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
     gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
 
     //render children
     super.render(context);
+  }
+
+  setAlphaValue(alpha) {
+       this.alpha = alpha;
   }
 }
 
