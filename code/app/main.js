@@ -18,6 +18,15 @@ var context;
 //camera and projection settings
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
+var eye = vec3.create();
+var center = vec3.create();
+var up = vec3.create();
+
+//keyboard and mouse buttons
+var upButtonPressed=false;
+var downButtonPressed = false;
+var userCamera = false;
+
 
 //scene settings
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
@@ -61,16 +70,17 @@ var cubeVertices = new Float32Array([
    -s, s,-s, -s, s, s, s, s, s, s, s,-s,
 ]);
 
-//used for colored cube
-/*
-var cubeColors = new Float32Array([
-   0,1,1, 0,1,1, 0,1,1, 0,1,1,
-   1,0,1, 1,0,1, 1,0,1, 1,0,1,
-   1,0,0, 1,0,0, 1,0,0, 1,0,0,
-   0,0,1, 0,0,1, 0,0,1, 0,0,1,
-   1,1,0, 1,1,0, 1,1,0, 1,1,0,
-   0,1,0, 0,1,0, 0,1,0, 0,1,0
-]);*/
+//used for bridge
+
+var bridgeColors = new Float32Array([
+   0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
+   0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
+   0,0,0, 0,0,0, 0,0,0, 0,0,0,
+   0,0,0, 0,0,0, 0,0,0, 0,0,0,
+    0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
+    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
+    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0
+]);
 
 //used for tram
 var cubeColors = new Float32Array([
@@ -157,6 +167,24 @@ function init(resources) {
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
+
+   //register keyboard events
+    window.addEventListener("keyup", keyUp, false);
+    window.addEventListener("keydown", keyDown, false);
+}
+
+function keyUp(key) {
+    upButtonPressed &= key.keyCode!=38;
+  downButtonPressed &= key.keyCode!=40;
+
+}
+
+function keyDown(key) {
+    if(key.keyCode==67) {
+        userCamera = !userCamera;
+    }
+    upButtonPressed |= key.keyCode==38;
+    downButtonPressed |=key.keyCode==40;
 }
 
 function createTram() {
@@ -329,9 +357,23 @@ function createSceneGraphContext(gl, shader) {
 
 function calculateViewMatrix() {
   //compute the camera's matrix
-  var eye = [projectTimeInMilliSeconds/2000,3,5];
-  var center = [projectTimeInMilliSeconds/10000,0,0];
-  var up = [0,1,0];
+    if(userCamera) {
+        var direction = vec3.create();
+        vec3.sub(direction, eye, center);
+        if(upButtonPressed) {
+            var scaled = vec3.create();
+            vec3.multiply(scaled, direction, [0.01, 0.01, 0.01]);
+            vec3.add(eye, eye, scaled);
+        } else if(downButtonPressed) {
+            var scaled = vec3.create();
+            vec3.multiply(scaled, direction, [-0.01, -0.01, -0.01]);
+            vec3.add(eye, eye, scaled);
+        }
+    } else {
+        eye = [projectTimeInMilliSeconds / 2000, 3, 5];
+        center = [projectTimeInMilliSeconds / 10000, 0, 0];
+        up = [0, 1, 0];
+    }
   viewMatrix = mat4.lookAt(mat4.create(), eye, center, up);
   return viewMatrix;
 }
@@ -548,6 +590,7 @@ class Bridge extends SceneGraphNode {
                         var balk = new TransformationSceneGraphNode(balkMatrix);
                         balk.append(new CubeRenderNode());
 
+
                         var smallBalk = new TransformationSceneGraphNode(smallBalkMatrix);
                         smallBalk.append(new CubeRenderNode());
 
@@ -615,6 +658,7 @@ class CubeRenderNode extends SceneGraphNode {
   setAlphaValue(alpha) {
        this.alpha = alpha;
   }
+
 }
 
 //TASK 3-0
