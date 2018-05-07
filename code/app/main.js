@@ -449,6 +449,17 @@ function render(timeInMilliseconds) {
         case 2:
             break;
         case 3:
+            if(projectTimeInMilliSeconds>29000) {
+                if(personParent=="Tram") {
+                    personParent = "Station";
+                for(i=0;i<persons.length;i++) {
+                    tram.remove(persons[i]);
+                    persons[i]=new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5,0.1,0.5), glm.translate(i/2.5+0.3, 0, 0)));
+                    rootNode.append(persons[i]);
+
+                }
+            }
+            }
             break;
     }
     rootNode.render(context);
