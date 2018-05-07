@@ -595,13 +595,13 @@ function calculateViewMatrix() {
                 }
                 break;
             case 2:
-                eye = [projectTimeInMilliSeconds / 2000, 3, 5];
-                center = [projectTimeInMilliSeconds / 10000, 0, 0];
+                eye = [projectTimeInMilliSeconds / 1500-8, 2, 3];
+                center = [30, 0, 0];
                 up = [0, 1, 0];
                 break;
             case 3:
-                eye = [projectTimeInMilliSeconds / 2000, 3, 5];
-                center = [projectTimeInMilliSeconds / 10000, 0, 0];
+                eye = [projectTimeInMilliSeconds / 1500-8, 2, 3];
+                center = [30, 0, 0];
                 up = [0, 1, 0];
                 break;
         }
