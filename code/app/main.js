@@ -31,6 +31,7 @@ var leftButtonPressed = false;
 var userCamera = false;
 var mouseButtonPressed = false;
 var mouseX=0, mouseY=0, mousePrevX=0, mousePrevY=0;
+var zoomspeed=0.2;
 
 //scene settings
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
@@ -211,8 +212,8 @@ function mouseDown(event) {
 
 function mouseMoved(event) {
    if(mouseButtonPressed) {
-        mousePrevX=mouseX;
-        mousePrevY=mouseY;
+       mousePrevX=mouseX;
+       mousePrevY=mouseY;
         mouseX = event.pageX;
         mouseY = event.pageY;
     }
@@ -403,16 +404,22 @@ function createSceneGraphContext(gl, shader) {
 function calculateViewMatrix() {
   //compute the camera's matrix
     if(userCamera) {
+        var mouseDX = mouseX-mousePrevX;
+        var mouseDY = mouseY-mousePrevY;
         var direction = vec3.create();
         vec3.sub(direction, eye, center);
         if(upButtonPressed) {
-            var scaled = vec3.create();
-            vec3.multiply(scaled, direction, [-0.01, -0.01, -0.01]);
-            vec3.add(eye, eye, scaled);
+            var scaling = vec3.create();
+            var dirlength = vec3.length(direction)/zoomspeed;
+            vec3.divide(scaling, direction, [dirlength, dirlength, dirlength]);
+            vec3.sub(eye, eye, scaling);
+            vec3.sub(center, center, scaling);
         } else if(downButtonPressed) {
-            var scaled = vec3.create();
-            vec3.multiply(scaled, direction, [0.01, 0.01, 0.01]);
-            vec3.add(eye, eye, scaled);
+            var scaling = vec3.create();
+            var dirlength = vec3.length(direction)/zoomspeed;
+            vec3.divide(scaling, direction, [dirlength, dirlength, dirlength]);
+            vec3.add(eye, eye, scaling);
+            vec3.add(center, center, scaling);
         } else if(leftButtonPressed) {
             var crossProd = vec3.create();
                 vec3.cross(crossProd, up, direction);
@@ -424,15 +431,23 @@ function calculateViewMatrix() {
             vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
             vec3.add(eye, eye, crossProd);
         } else if(mouseButtonPressed) {
-            var mouseDX = mouseX-mousePrevX;
-            var mouseDY = mouseY-mousePrevY;
+
             //HANDLE X
             var crossProd = vec3.create();
             vec3.cross(crossProd, direction, up);
             vec3.multiply(crossProd, crossProd, [mouseDX/500, mouseDX/500, mouseDX/500]);
             vec3.add(eye, eye, crossProd);
-           //userCamera=false;
+
             //HANDLE Y
+            //displayText(angleDirUp);
+            var oldUp = vec3.create();
+            vec3.multiply(oldUp, up, [mouseDY/100, mouseDY/100, mouseDY/100]);
+            vec3.add(eye, eye, oldUp);
+            var nv = vec3.create();
+            vec3.cross(nv, direction, oldUp);
+            vec3.cross(nv, direction, nv);
+            var nvLength = vec3.length(nv);
+            //vec3.divide(up, nv, [nvLength, nvLength, nvLength]);
 
         }
     } else {
