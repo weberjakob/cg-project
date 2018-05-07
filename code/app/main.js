@@ -43,7 +43,7 @@ var headTransformationNode;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer;
-var cubeVertexBuffer, cubeColorBuffer, cubeIndexBuffer;
+var cubeVertexBuffer, cubeColorBuffer, bridgeColorBuffer, cubeIndexBuffer;
 
 var quadVertices = new Float32Array([
     -1.0, -1.0,
@@ -165,7 +165,7 @@ function init(resources) {
 
     createStation();
 
-    //createBridge();
+    createBridge();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -201,7 +201,9 @@ function createTram() {
 
 function createBridge() {
     var bridge = new Bridge();
-    rootNode.append(bridge);
+    var bridgePosition = new TransformationSceneGraphNode(glm.translate(0,-0.05,-0.1))
+    bridgePosition.append(bridge);
+    rootNode.append(bridgePosition);
 }
 
 function createStation() {
@@ -231,6 +233,10 @@ function initCubeBuffer() {
   cubeColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, cubeColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, cubeColors, gl.STATIC_DRAW);
+
+  bridgeColorBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, bridgeColorBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, bridgeColors, gl.STATIC_DRAW);
 
   cubeIndexBuffer = gl.createBuffer ();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
@@ -607,14 +613,14 @@ class TramNode extends SceneGraphNode {
 class Bridge extends SceneGraphNode {
     constructor() {
         super();
-        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(2, 0.25, -1), glm.scale(10, 0.1, 1)));
-        floor.append(new CubeRenderNode());
+        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(3, 0, 0.25), glm.scale(20, 0.1, 1)));
+        floor.append(new CubeRenderNode(bridgeColorBuffer));
         this.append(floor);
 
         for(var rightSide = 0; rightSide < 2; rightSide++) {
-            for(var i = 0; i < 10 ; i++) {
+            for(var i = 0; i < 6 ; i++) {
                 for(var j = 0; j < 8; j++) {
-                    var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i*1.65, 0.35, rightSide *0.5));
+                    var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i*1.65, 0.05, rightSide *0.5));
                     columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(-90 + (25.7 * j)));
 
                     var balkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(12.5));
@@ -628,16 +634,16 @@ class Bridge extends SceneGraphNode {
                     smallBalkMatrix = mat4.multiply(mat4.create(), smallBalkMatrix, glm.scale(0.4, 0.05, 0.05));
 
                     var column = new TransformationSceneGraphNode(columnMatrix);
-                    column.append(new CubeRenderNode());
+                    column.append(new CubeRenderNode(bridgeColorBuffer));
                     this.append(column);
 
                     if(j >= 0 && j < 7) {
                         var balk = new TransformationSceneGraphNode(balkMatrix);
-                        balk.append(new CubeRenderNode());
+                        balk.append(new CubeRenderNode(bridgeColorBuffer));
 
 
                         var smallBalk = new TransformationSceneGraphNode(smallBalkMatrix);
-                        smallBalk.append(new CubeRenderNode());
+                        smallBalk.append(new CubeRenderNode(bridgeColorBuffer));
 
                         this.append(balk);
                         this.append(smallBalk);
@@ -648,7 +654,7 @@ class Bridge extends SceneGraphNode {
                         var crossBalkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.translate(0, 0.32, 5));
                         crossBalkMatrix = mat4.multiply(mat4.create(), crossBalkMatrix, glm.scale(1, 0.01, 18));
                         var crossBalk = new TransformationSceneGraphNode(crossBalkMatrix);
-                        crossBalk.append(new CubeRenderNode());
+                        crossBalk.append(new CubeRenderNode(bridgeColorBuffer));
                         this.append(crossBalk);
                     }
 
@@ -671,9 +677,13 @@ class Station extends SceneGraphNode {
     }
 }
 class CubeRenderNode extends SceneGraphNode {
-    constructor() {
+    constructor(colorBuffer) {
         super();
         this.alpha = 1; //initialy the cube is not transparent at all
+        if(colorBuffer == null) {
+            this.colorBuffer = cubeColorBuffer;
+        }
+        else this.colorBuffer = colorBuffer;
     }
 
    render(context) {
@@ -687,7 +697,7 @@ class CubeRenderNode extends SceneGraphNode {
     gl.enableVertexAttribArray(positionLocation);
 
     var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
-    gl.bindBuffer(gl.ARRAY_BUFFER, cubeColorBuffer);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
     gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false,0,0) ;
     gl.enableVertexAttribArray(colorLocation);
 
@@ -702,6 +712,10 @@ class CubeRenderNode extends SceneGraphNode {
 
   setAlphaValue(alpha) {
        this.alpha = alpha;
+  }
+
+  setColorBuffer(colorBuffer) {
+        this.colorBuffer = colorBuffer;
   }
 
 }
