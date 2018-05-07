@@ -165,7 +165,7 @@ function init(resources) {
 
     createStation();
 
-    createBridge();
+    //createBridge();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -194,9 +194,9 @@ function keyDown(key) {
 
 function createTram() {
     tramNode = new TramNode();
-    rootNode.append(tramNode);
-    //inserting the cockpit, translation is relative to the tram
-
+    var tramPosition = new TransformationSceneGraphNode(glm.translate(0,0.1,0.05));
+    tramPosition.append(tramNode);
+    rootNode.append(tramPosition);
 }
 
 function createBridge() {
@@ -260,7 +260,7 @@ function createRails() {
         var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(200, 0.05, 0.05));
         for(var railAxe = 0; railAxe < 2; railAxe++) {
             var rail = new CubeRenderNode();
-            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, railAxe * 2, 0));
+            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2));
 
             var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
             railTransformationNode.append(rail);
@@ -303,10 +303,16 @@ function render(timeInMilliseconds) {
             //tramTransformationNode.setMatrix(tramTransformationMatrix);
             break;
         case 2:
-            tramNode.setSpeed(3);
+            tramNode.setSpeed(0);
+            if(projectTimeInMilliSeconds > 6000) {
+                tramNode.openDoors();
+            }
             break;
         case 3:
-            tramNode.setSpeed(3);
+            tramNode.closeDoors();
+            if(projectTimeInMilliSeconds > 11000) {
+                tramNode.setSpeed(3);
+            }
             break;
     }
     rootNode.render(context);
@@ -329,7 +335,7 @@ function render(timeInMilliseconds) {
   //0 to 5: scene
   // 5 to 25: scene 2
   //26 to 30: scene 3
-  sceneIndex = projectTimeInMilliSeconds<5000 ? 1: projectTimeInMilliSeconds <25000 ? 2 : 3;
+  sceneIndex = projectTimeInMilliSeconds<5000 ? 1: projectTimeInMilliSeconds <10000 ? 2 : 3;
   //sceneIndex = 3;
 }
 
@@ -477,6 +483,8 @@ class TramNode extends SceneGraphNode {
     constructor() {
         super();
         this.speed = 0;
+        this.doors = [];
+        this.doorsAreOpen = false;
         //sets the matrix to its inital state
         this.resetPosition();
 
@@ -502,6 +510,10 @@ class TramNode extends SceneGraphNode {
                 cockpitSideGlass.setAlphaValue(0.1);
                 cockpitSideGlassTransformation.append(cockpitSideGlass);
                 this.append(cockpitSideGlassTransformation);
+
+                if(j == 1) {
+                    this.doors.push(cockpitSideGlassTransformation);
+                }
             }
         }
 
@@ -568,8 +580,26 @@ class TramNode extends SceneGraphNode {
 
     resetPosition() {
         this.matrix = mat4.create();
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0.4, 0));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0, 0));
         this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
+    }
+
+    openDoors() {
+        if (!this.doorsAreOpen) {
+            this.doors.forEach(function (door) {
+                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.scale(0.1, 1, 1)));
+            });
+            this.doorsAreOpen = true;
+        }
+    }
+
+    closeDoors() {
+        if(this.doorsAreOpen) {
+            this.doors.forEach(function (door) {
+                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.scale(10, 1, 1)));
+            });
+            this.doorsAreOpen = false;
+        }
     }
 }
 //TASK 4-1
