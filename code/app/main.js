@@ -39,6 +39,8 @@ var animationRepeatedCount = 0;   //tells us how often our scene was already rep
 var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
 var tram;
+var persons;
+var personParent = "Station";
 
 var robotTransformationNode;
 var tramTransformationNode;
@@ -46,7 +48,7 @@ var headTransformationNode;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer;
-var cubeVertexBuffer, cubeColorBuffer, bridgeColorBuffer, cubeIndexBuffer;
+var cubeVertexBuffer, cubeColorBuffer, bridgeColorBuffer, cubeIndexBuffer, personColorBuffer;
 
 var quadVertices = new Float32Array([
     -1.0, -1.0,
@@ -85,6 +87,15 @@ var bridgeColors = new Float32Array([
     0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
     0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
     0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0
+]);
+
+var personColors = new Float32Array([
+    0,0,1, 0,0,1, 0,0,1, 0,0,1,
+    0,0.25,1, 0,0.25,1, 0,0.25,1, 0,0.25,1,
+    0,0,0, 0,0,0, 0,0,0, 0,0,0,
+    0,0,0, 0,0,0, 0,0,0, 0,0,0,
+    0,0.25,1, 0,0.25,1, 0,0.25,1, 0,0.25,1,
+    0,0,1, 0,0,1, 0,0,1, 0,0,1
 ]);
 
 //used for tram
@@ -169,6 +180,8 @@ function init(resources) {
     createStation();
 
     createBridge();
+
+    createPerson();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
@@ -226,6 +239,17 @@ function createTram() {
     rootNode.append(tramPosition);
 }
 
+function createPerson() {
+    persons = new Array(1, 2, 3);
+    for(i=0;i<persons.length;i++) {
+        persons[i]=new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5,0.1,0.5), glm.translate(i/2.5+0.3, 0, 0)));
+        rootNode.append(persons[i]);
+
+    }
+
+
+}
+
 function createBridge() {
     var bridge = new Bridge();
     var bridgePosition = new TransformationSceneGraphNode(glm.translate(30,-0.05,-0.1))
@@ -266,6 +290,10 @@ function initCubeBuffer() {
   bridgeColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, bridgeColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, bridgeColors, gl.STATIC_DRAW);
+
+    personColorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, personColorBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, personColors, gl.STATIC_DRAW);
 
   cubeIndexBuffer = gl.createBuffer ();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
@@ -337,11 +365,27 @@ function render(timeInMilliseconds) {
             }
             else if(projectTimeInMilliSeconds < 8000) {
                 tram.openDoors();
+                for(i=0;i<3;i++) {
+                    persons[i].setSpeed(1.25);
+                }
+            }
+            else if(projectTimeInMilliSeconds < 10000) {
+                for(i=0;i<3;i++) {
+                    persons[i].setSpeed(0);
+                }
             }
             else if(projectTimeInMilliSeconds < 11000) {
                 tram.closeDoors();
             }
             else if(projectTimeInMilliSeconds < 12500) {
+                if(personParent=="Station") {
+                    personParent = "Tram";
+                    for(i=0;i<3;i++) {
+                        rootNode.remove(persons[i]);
+                        persons[i].rotateAndTranslate(-0.10, -0.005, -0.03);
+                        tram.append(persons[i]);
+                    }
+                }
                 tram.setSpeed(3);
             }
             break;
@@ -370,7 +414,7 @@ function render(timeInMilliseconds) {
   //0 to 5: scene
   // 5 to 25: scene 2
   //26 to 30: scene 3
-  sceneIndex = projectTimeInMilliSeconds<15000 ? 1: projectTimeInMilliSeconds <20000 ? 2 : 3;
+  sceneIndex = projectTimeInMilliSeconds<15000 ? 1: projectTimeInMilliSeconds <25000 ? 2 : 3;
   //sceneIndex = 3;
 }
 
@@ -451,9 +495,30 @@ function calculateViewMatrix() {
 
         }
     } else {
-        eye = [projectTimeInMilliSeconds / 2000, 3, 5];
-        center = [projectTimeInMilliSeconds / 10000, 0, 0];
-        up = [0, 1, 0];
+        switch (sceneIndex) {
+            case 1:
+                if(projectTimeInMilliSeconds<13000) {
+                    eye = [7, 2.5, 5];
+                    center = [0, 0, 0];
+                    up = [0, 1, 0];
+                } else {
+                    eye = [projectTimeInMilliSeconds/13000*7, 2.5, 5];
+                    center = [projectTimeInMilliSeconds/13000*7-7, 0, 0];
+                    up=[0, 1, 0];
+                }
+                break;
+            case 2:
+                eye = [projectTimeInMilliSeconds / 2000, 3, 5];
+                center = [projectTimeInMilliSeconds / 10000, 0, 0];
+                up = [0, 1, 0];
+                break;
+            case 3:
+                eye = [projectTimeInMilliSeconds / 2000, 3, 5];
+                center = [projectTimeInMilliSeconds / 10000, 0, 0];
+                up = [0, 1, 0];
+                break;
+        }
+
     }
   viewMatrix = mat4.lookAt(mat4.create(), eye, center, up);
   return viewMatrix;
@@ -536,6 +601,96 @@ class QuadRenderNode extends SceneGraphNode {
     //render children
     super.render(context);
   }
+}
+
+class PersonNode extends SceneGraphNode {
+    constructor(initialPosition) {
+        super();
+        this.turned = false;
+        this.speed=0;
+        this.legOffset=0;
+        this.rigidBodyTransformationMatrix = mat4.create();
+        if(initialPosition == null) {
+            this.initialPosition = glm.translate(0, 0, 0);
+
+        }
+        else {
+            this.initialPosition = initialPosition;
+        }
+
+        this.resetPosition();
+        var rigidBodyNode = new TransformationSceneGraphNode(this.rigidBodyTransformationMatrix);
+        var body = new TransformationSceneGraphNode(glm.scale(0.01, 0.01, 0.01));
+        var bodyTrans = new TransformationSceneGraphNode(glm.scale(0.6, 1, 0.4));
+
+        bodyTrans.append(new CubeRenderNode(personColorBuffer));
+        body.append(bodyTrans);
+
+        var head = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 0.2, 0.2), glm.translate(0, 2, 0)));
+        head.append(new CubeRenderNode(personColorBuffer));
+    body.append(head);
+        var leftleg = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 1, 0.2), glm.translate(0.4, -0.5, 0)));
+        var rightleg = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 1, 0.2), glm.translate(-0.4, -0.5, 0)));
+        leftleg.append(new CubeRenderNode(personColorBuffer));
+        rightleg.append(new CubeRenderNode(personColorBuffer));
+
+        body.append(leftleg);
+        body.append(rightleg);
+        var leftarm = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.4, 0.1, 0.1), glm.translate(0.7, 0, 0)));
+        var rightarm = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.4, 0.1, 0.1), glm.translate(-0.7, 0, 0)));
+        leftarm.append(new CubeRenderNode(personColorBuffer));
+        rightarm.append(new CubeRenderNode(personColorBuffer));
+        body.append(leftarm);
+        body.append(rightarm);
+        rigidBodyNode.append(body);
+        this.append(rigidBodyNode);
+
+    }
+
+    rotateAndTranslate(a, b, c) {
+        this.resetPosition();
+        mat4.multiply(this.rigidBodyTransformationMatrix, glm.rotateY(-90), glm.translate(a, b, c));
+        mat4.multiply(this.matrix, this.matrix, this.rigidBodyTransformationMatrix);
+    }
+
+    closeDoors() {
+        if(!this.turned) {
+
+            this.initialPosition = mat4.multiply(mat4.create(), glm.rotateY(-90), glm.translate(1, 1, 1));
+            this.resetPosition();
+            this.turned=true;
+        }
+    }
+
+    setSpeed(speed) {
+        this.speed = speed;
+    }
+
+    resetPosition() {
+        this.matrix = this.initialPosition;
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0, 0));
+        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(7, 7, 7));
+    }
+
+    render(context) {
+        //backup previous one
+        var previous = context.sceneMatrix;
+
+        //set current world matrix by multiplying it
+        mat4.multiply(this.matrix, this.matrix, glm.translate(0, 0, -this.speed / 3500));
+
+        if (previous === null) {
+            context.sceneMatrix = mat4.clone(this.matrix);
+        }
+        else {
+            //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
+            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
+        }
+
+        super.render(context);
+        context.sceneMatrix=previous;
+    }
+
 }
 
 class TramNode extends SceneGraphNode {
