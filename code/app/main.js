@@ -29,6 +29,7 @@ var downButtonPressed = false;
 var rightButtonPressed = false;
 var leftButtonPressed = false;
 var userCamera = false;
+var tramFrontCamera = true; //TODO: set false and assign a key to get into this view
 var mouseButtonPressed = false;
 var mouseX=0, mouseY=0, mousePrevX=0, mousePrevY=0;
 var zoomspeed=0.2;
@@ -443,7 +444,7 @@ function render(timeInMilliseconds) {
                         tram.append(persons[i]);
                     }
                 }
-                tram.setSpeed(3);
+                tram.setSpeed(10);
             }
             break;
         case 2:
@@ -477,7 +478,7 @@ function render(timeInMilliseconds) {
   projectTimeInMilliSeconds = timeInMilliseconds%30000;
   //if animation gets repeated:
   if(projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
-      tram.resetPosition();
+      resetPositions();
   }
   //0 to 5: scene
   // 5 to 25: scene 2
@@ -486,6 +487,12 @@ function render(timeInMilliseconds) {
   //sceneIndex = 3;
 }
 
+//called to restart after 30 seconds
+function resetPositions() {
+    tram.resetPosition();
+    tram2.resetPosition();
+    xPosition = 0;
+}
 function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
   var modelViewMatrix = mat4.multiply(mat4.create(), viewMatrix, sceneMatrix);
   gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_modelView'), false, modelViewMatrix);
@@ -513,47 +520,48 @@ function createSceneGraphContext(gl, shader) {
   };
 }
 
+var xPosition = 0;
 function calculateViewMatrix() {
-  //compute the camera's matrix
-    if(userCamera) {
-        var mouseDX = mouseX-mousePrevX;
-        var mouseDY = mouseY-mousePrevY;
+    //compute the camera's matrix
+    if (userCamera) {
+        var mouseDX = mouseX - mousePrevX;
+        var mouseDY = mouseY - mousePrevY;
         var direction = vec3.create();
         vec3.sub(direction, eye, center);
-        if(upButtonPressed) {
+        if (upButtonPressed) {
             var scaling = vec3.create();
-            var dirlength = vec3.length(direction)/zoomspeed;
+            var dirlength = vec3.length(direction) / zoomspeed;
             vec3.divide(scaling, direction, [dirlength, dirlength, dirlength]);
             vec3.sub(eye, eye, scaling);
             vec3.sub(center, center, scaling);
-        } else if(downButtonPressed) {
+        } else if (downButtonPressed) {
             var scaling = vec3.create();
-            var dirlength = vec3.length(direction)/zoomspeed;
+            var dirlength = vec3.length(direction) / zoomspeed;
             vec3.divide(scaling, direction, [dirlength, dirlength, dirlength]);
             vec3.add(eye, eye, scaling);
             vec3.add(center, center, scaling);
-        } else if(leftButtonPressed) {
+        } else if (leftButtonPressed) {
             var crossProd = vec3.create();
-                vec3.cross(crossProd, up, direction);
+            vec3.cross(crossProd, up, direction);
             vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
             vec3.add(eye, eye, crossProd);
-        } else if(rightButtonPressed) {
+        } else if (rightButtonPressed) {
             var crossProd = vec3.create();
             vec3.cross(crossProd, direction, up);
             vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
             vec3.add(eye, eye, crossProd);
-        } else if(mouseButtonPressed) {
+        } else if (mouseButtonPressed) {
 
             //HANDLE X
             var crossProd = vec3.create();
             vec3.cross(crossProd, direction, up);
-            vec3.multiply(crossProd, crossProd, [mouseDX/500, mouseDX/500, mouseDX/500]);
+            vec3.multiply(crossProd, crossProd, [mouseDX / 500, mouseDX / 500, mouseDX / 500]);
             vec3.add(eye, eye, crossProd);
 
             //HANDLE Y
             //displayText(angleDirUp);
             var oldUp = vec3.create();
-            vec3.multiply(oldUp, up, [mouseDY/100, mouseDY/100, mouseDY/100]);
+            vec3.multiply(oldUp, up, [mouseDY / 100, mouseDY / 100, mouseDY / 100]);
             vec3.add(eye, eye, oldUp);
             var nv = vec3.create();
             vec3.cross(nv, direction, oldUp);
@@ -562,17 +570,24 @@ function calculateViewMatrix() {
             //vec3.divide(up, nv, [nvLength, nvLength, nvLength]);
 
         }
-    } else {
+    }
+    else if (tramFrontCamera) {
+        xPosition += tram.speed/500;
+        eye = [xPosition + 0.5, 0.15, 0.05];
+        center = [100, 0, 0];
+        up = [0, 1, 0];
+    }
+    else {
         switch (sceneIndex) {
             case 1:
-                if(projectTimeInMilliSeconds<13000) {
+                if (projectTimeInMilliSeconds < 13000) {
                     eye = [7, 2.5, 5];
                     center = [0, 0, 0];
                     up = [0, 1, 0];
                 } else {
-                    eye = [projectTimeInMilliSeconds/13000*7, 2.5, 5];
-                    center = [projectTimeInMilliSeconds/13000*7-7, 0, 0];
-                    up=[0, 1, 0];
+                    eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
+                    center = [projectTimeInMilliSeconds / 13000 * 7 - 7, 0, 0];
+                    up = [0, 1, 0];
                 }
                 break;
             case 2:
@@ -586,7 +601,6 @@ function calculateViewMatrix() {
                 up = [0, 1, 0];
                 break;
         }
-
     }
   viewMatrix = mat4.lookAt(mat4.create(), eye, center, up);
   return viewMatrix;
@@ -899,12 +913,14 @@ class Tram extends SceneGraphNode {
 
     constructor() {
         super();
+        this.speed = 0;
         for (var i = 0; i < 3; i++) {
             super.append(new TramNode(glm.translate(i * 1.25, 0, 0)));
         }
     }
 
     setSpeed(speed) {
+        this.speed = speed;
         this.children.forEach(function (child) {
             child.setSpeed(speed);
         })
