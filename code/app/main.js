@@ -215,7 +215,11 @@ leftButtonPressed &= key.keyCode !=37;
 
 function keyDown(key) {
     if(key.keyCode==67) {
-        userCamera = !userCamera;
+        userCamera = !userCamera | tramFrontCamera;
+        tramFrontCamera &= !userCamera;
+    } else if(key.keyCode==70) {
+        tramFrontCamera = !tramFrontCamera | userCamera;
+        userCamera &= !tramFrontCamera;
     }
     upButtonPressed |= key.keyCode==38;
     downButtonPressed |=key.keyCode==40;
