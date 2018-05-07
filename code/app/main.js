@@ -165,7 +165,7 @@ function init(resources) {
 
     createStation();
 
-    //createBridge();
+    createBridge();
   //TASK 4-2
   //var cubeNode = new CubeRenderNode();
   //rootNode.append(cubeNode);
