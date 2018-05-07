@@ -49,8 +49,7 @@ var headTransformationNode;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer;
-var cubeVertexBuffer, cubeColorBuffer, bridgeColorBuffer, cubeIndexBuffer, personColorBuffer;
-var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, prismColorBuffer, cubeIndexBuffer;
+var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, prismColorBuffer, cubeIndexBuffer, personColorBuffer;
 
 var quadVertices = new Float32Array([
     -1.0, -1.0,
@@ -130,7 +129,7 @@ var cubeColors = new Float32Array([
     1,0,0, 1,0,0, 1,0,0, 1,0,0,
     1,0,0, 1,0,0, 1,0,0, 1,0,0,
     1,0.5,0, 1,0.5,0, 1,1,1, 1,1,1,
-    0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,
+    0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5]);
 //used for prism
 var prismColors = new Float32Array([
     1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3,
@@ -364,7 +363,7 @@ function initBuffer() {
   cubeIndexBuffer = gl.createBuffer ();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
-}
+
 
 }
 /*function createRails() {
