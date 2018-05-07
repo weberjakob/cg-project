@@ -29,6 +29,8 @@ var downButtonPressed = false;
 var rightButtonPressed = false;
 var leftButtonPressed = false;
 var userCamera = false;
+var mouseButtonPressed = false;
+var mouseX=0, mouseY=0, mousePrevX=0, mousePrevY=0;
 
 //scene settings
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
@@ -173,6 +175,9 @@ function init(resources) {
    //register keyboard events
     window.addEventListener("keyup", keyUp, false);
     window.addEventListener("keydown", keyDown, false);
+    window.addEventListener("mousemove", mouseMoved, false);
+    window.addEventListener("mouseup", mouseUp, false);
+    window.addEventListener("mousedown", mouseDown, false);
 }
 
 function keyUp(key) {
@@ -190,6 +195,27 @@ function keyDown(key) {
     downButtonPressed |=key.keyCode==40;
     rightButtonPressed |= key.keyCode ==39;
     leftButtonPressed |= key.keyCode ==37;
+}
+
+function mouseUp(event) {
+    if(event.button==0) {
+        mouseButtonPressed = false;
+    }
+}
+
+function mouseDown(event) {
+    if(event.button==0) {
+        mouseButtonPressed=true;
+    }
+}
+
+function mouseMoved(event) {
+   if(mouseButtonPressed) {
+        mousePrevX=mouseX;
+        mousePrevY=mouseY;
+        mouseX = event.pageX;
+        mouseY = event.pageY;
+    }
 }
 
 function createTram() {
@@ -383,6 +409,17 @@ function calculateViewMatrix() {
             vec3.cross(crossProd, direction, up);
             vec3.multiply(crossProd, crossProd, [0.01, 0.01, 0.01]);
             vec3.add(eye, eye, crossProd);
+        } else if(mouseButtonPressed) {
+            var mouseDX = mouseX-mousePrevX;
+            var mouseDY = mouseY-mousePrevY;
+            //HANDLE X
+            var crossProd = vec3.create();
+            vec3.cross(crossProd, direction, up);
+            vec3.multiply(crossProd, crossProd, [mouseDX/500, mouseDX/500, mouseDX/500]);
+            vec3.add(eye, eye, crossProd);
+           //userCamera=false;
+            //HANDLE Y
+
         }
     } else {
         eye = [projectTimeInMilliSeconds / 2000, 3, 5];
