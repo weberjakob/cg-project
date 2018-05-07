@@ -25,5 +25,5 @@ void main() {
   a_color;
 
   //setting a static color (yellow) to the output varying color
-  v_color = vec3(0.5,0.5,1);
+  v_color = vec3(0.2,0.2,0.8);
 }

@@ -38,7 +38,7 @@ var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
-var tram;
+var tram, tram2;
 
 var robotTransformationNode;
 var tramTransformationNode;
@@ -46,7 +46,7 @@ var headTransformationNode;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer;
-var cubeVertexBuffer, cubeColorBuffer, bridgeColorBuffer, cubeIndexBuffer;
+var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, prismColorBuffer, cubeIndexBuffer;
 
 var quadVertices = new Float32Array([
     -1.0, -1.0,
@@ -66,26 +66,29 @@ var quadColors = new Float32Array([
 
 var s = 0.3; //size of cube
 //additional comment which is useless
+
+var pScale = 0.5; //scale of the top of the prism
+var prismVertices = new Float32Array([
+   -s,-s,-s,    s,-s,-s,   s*pScale, s,-s,    -s*pScale, s,-s,
+   -s,-s, s,    s,-s, s,   s*pScale, s, s,    -s*pScale, s, s,
+   -s,-s,-s,    -s*pScale, s,-s,  -s*pScale, s, s,   -s,-s, s,
+   s,-s,-s,     s*pScale, s,-s,   s*pScale, s, s,    s,-s, s,
+   -s,-s,-s,    -s,-s, s,  s,-s, s,    s,-s,-s,
+   -s*pScale, s,-s,    -s*pScale, s, s,  s*pScale, s, s,    s*pScale, s,-s,
+]);
+
 var cubeVertices = new Float32Array([
-   -s,-s,-s, s,-s,-s, s, s,-s, -s, s,-s,
-   -s,-s, s, s,-s, s, s, s, s, -s, s, s,
-   -s,-s,-s, -s, s,-s, -s, s, s, -s,-s, s,
-   s,-s,-s, s, s,-s, s, s, s, s,-s, s,
-   -s,-s,-s, -s,-s, s, s,-s, s, s,-s,-s,
-   -s, s,-s, -s, s, s, s, s, s, s, s,-s,
+    -s,-s,-s, s,-s,-s, s, s,-s, -s, s,-s,
+    -s,-s, s, s,-s, s, s, s, s, -s, s, s,
+    -s,-s,-s, -s, s,-s, -s, s, s, -s,-s, s,
+    s,-s,-s, s, s,-s, s, s, s, s,-s, s,
+    -s,-s,-s, -s,-s, s, s,-s, s, s,-s,-s,
+    -s, s,-s, -s, s, s, s, s, s, s, s,-s,
 ]);
 
-//used for bridge
 
-var bridgeColors = new Float32Array([
-   0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
-   0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
-   0,0,0, 0,0,0, 0,0,0, 0,0,0,
-   0,0,0, 0,0,0, 0,0,0, 0,0,0,
-    0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
-    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
-    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0
-]);
+
+
 
 //used for tram
 var cubeColors = new Float32Array([
@@ -95,6 +98,25 @@ var cubeColors = new Float32Array([
     1,0,0, 1,0,0, 1,0,0, 1,0,0,
     1,0.5,0, 1,0.5,0, 1,1,1, 1,1,1,
     0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,  0.5,0.5,0.5,
+]);
+//used for bridge
+var bridgeColors = new Float32Array([
+    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
+    0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
+    0,0,0, 0,0,0, 0,0,0, 0,0,0,
+    0,0,0, 0,0,0, 0,0,0, 0,0,0,
+    0,0.25,0, 0,0.25,0, 0,0.25,0, 0,0.25,0,
+    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0,
+    0,0.5,0, 0,0.5,0, 0,0.5,0, 0,0.5,0
+]);
+//used for prism
+var prismColors = new Float32Array([
+    1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3,
+    1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3,
+    0.8,0.35,0.15, 0.8,0.35,0.15, 0.8,0.35,0.15, 0.8,0.35,0.15,
+    0.8,0.35,0.15, 0.8,0.35,0.15, 0.8,0.35,0.15, 0.8,0.35,0.15,
+    0.5,0.7,0.3, 0.5,0.7,0.3, 0.5,0.7,0.3, 0.5,0.7,0.3,
+    1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3, 1,0.7,0.3
 ]);
 
 var cubeIndices =  new Float32Array([
@@ -131,36 +153,13 @@ function init(resources) {
   //create the shader program
   shaderProgram = createProgram(gl, resources.vs, resources.fs);
 
-  //set buffers for quad
-  initQuadBuffer();
   //set buffers for cube
-  initCubeBuffer();
+  initBuffer();
 
   //create scenegraph
   rootNode = new SceneGraphNode();
 
-  //Task 3-1
-  var quadTransformationMatrix = glm.rotateX(90);
-  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.translate(3,-0.5,0));
-  quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(4,5,1));
-
-  //Task 3-2
-  var transformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
-  rootNode.append(transformationNode);
-
-
-  //TASK 5-3
-  var staticColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.fs));
-  transformationNode.append(staticColorShaderNode);
-
-
-  //TASK 2-2
-  //var quadNode = new QuadRenderNode();
-  //staticColorShaderNode.append(quadNode);
-
-  //createRobot(rootNode);
-    // createTram(rootNode, 0);
-
+    createRiver(resources);
 
     createTram();
 
@@ -169,9 +168,8 @@ function init(resources) {
     createStation();
 
     createBridge();
-  //TASK 4-2
-  //var cubeNode = new CubeRenderNode();
-  //rootNode.append(cubeNode);
+
+    createPrism();
 
    //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -219,18 +217,48 @@ function mouseMoved(event) {
     }
 }
 
+function createRiver(resources) {
+    var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateX(90), glm.translate(21,0,0.2));
+    quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(3.9,100,1));
+    var transformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
+    var staticColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.fs));
+    transformationNode.append(staticColorShaderNode);
+    staticColorShaderNode.append(new QuadRenderNode());
+    rootNode.append(transformationNode);
+}
+
 function createTram() {
     tram = new Tram();
     var tramPosition = new TransformationSceneGraphNode(glm.translate(-2,0.1,0.05));
     tramPosition.append(tram);
     rootNode.append(tramPosition);
+
+    //tram2 is driving in the opposite direction
+    tram2 = new Tram();
+    var tramPosition2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(20,0.1, -0.175), glm.rotateY(180)));
+    tramPosition2.append(tram2);
+    rootNode.append(tramPosition2);
 }
 
 function createBridge() {
     var bridge = new Bridge();
-    var bridgePosition = new TransformationSceneGraphNode(glm.translate(30,-0.05,-0.1))
+    var bridgePosition = new TransformationSceneGraphNode(glm.translate(20,-0.05, -0.32))
     bridgePosition.append(bridge);
     rootNode.append(bridgePosition);
+}
+
+function createRails() {
+    var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(200, 0.05, 0.05));
+    for(var secondLine = 0; secondLine < 2; secondLine++) {
+        for (var railAxe = 0; railAxe < 2; railAxe++) {
+            var rail = new CubeRenderNode();
+            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2 - secondLine * 4.5));
+
+            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
+            railTransformationNode.append(rail);
+            rootNode.append(railTransformationNode);
+        }
+    }
 }
 
 function createStation() {
@@ -239,26 +267,47 @@ function createStation() {
     stationPosition.append(station);
     rootNode.append(stationPosition);
 }
-function initQuadBuffer() {
 
-  //create buffer for vertices
+function createPrism() {
+    //prism before the bridge:
+    var prism = new PrismRenderNode(prismColorBuffer);
+    var prismTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateY(90), glm.scale(1.5,0.3, 57));
+    mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.0,-0.3,0));
+    var prismTransformation = new TransformationSceneGraphNode(prismTransformationMatrix);
+    prismTransformation.append(prism);
+    rootNode.append(prismTransformation);
+
+    //prism after the bridge
+    var prismTransformation2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0,0,0.74)));
+    prismTransformation2.append(new PrismRenderNode(prismColorBuffer));
+    rootNode.append(prismTransformation2);
+}
+
+function initBuffer() {
+  //init quad buffer
   quadVertexBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, quadVertexBuffer);
   //copy data to GPU
   gl.bufferData(gl.ARRAY_BUFFER, quadVertices, gl.STATIC_DRAW);
-
-  //same for the color
   quadColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, quadColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, quadColors, gl.STATIC_DRAW);
-}
 
-function initCubeBuffer() {
-
+  //init cube buffer
   cubeVertexBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, cubeVertices, gl.STATIC_DRAW);
 
+  cubeIndexBuffer = gl.createBuffer ();
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
+  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
+
+  //init prism buffer
+  prismVertexBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, prismVertexBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, prismVertices, gl.STATIC_DRAW);
+
+  //init color buffers
   cubeColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, cubeColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, cubeColors, gl.STATIC_DRAW);
@@ -267,11 +316,11 @@ function initCubeBuffer() {
   gl.bindBuffer(gl.ARRAY_BUFFER, bridgeColorBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, bridgeColors, gl.STATIC_DRAW);
 
-  cubeIndexBuffer = gl.createBuffer ();
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
-  gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
-}
+  prismColorBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, prismColorBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, prismColors, gl.STATIC_DRAW);
 
+}
 /*function createRails() {
     for(var i = 0; i < 100; i++)
     {
@@ -291,17 +340,7 @@ function initCubeBuffer() {
 
 }*/
 
-function createRails() {
-        var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(200, 0.05, 0.05));
-        for(var railAxe = 0; railAxe < 2; railAxe++) {
-            var rail = new CubeRenderNode();
-            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2));
 
-            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
-            railTransformationNode.append(rail);
-            rootNode.append(railTransformationNode);
-        }
-}
 
 
 /**
@@ -331,6 +370,7 @@ function render(timeInMilliseconds) {
         case 1:
             if (projectTimeInMilliSeconds < 4000) {
                 tram.setSpeed(4);
+                tram2.setSpeed(4);
             }
             else if(projectTimeInMilliSeconds < 5000) {
                 tram.setSpeed(0);
@@ -713,12 +753,12 @@ class Tram extends SceneGraphNode {
 class Bridge extends SceneGraphNode {
     constructor() {
         super();
-        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(5, 0, 0.25), glm.scale(20, 0.1, 1)));
+        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.2, 0, 0.25), glm.scale(16, 0.1, 1)));
         floor.append(new CubeRenderNode(bridgeColorBuffer));
         this.append(floor);
 
         for(var rightSide = 0; rightSide < 2; rightSide++) {
-            for(var i = 0; i < 6 ; i++) {
+            for(var i = 0; i < 5 ; i++) {
                 for(var j = 0; j < 8; j++) {
                     var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i*1.65, 0.05, rightSide *0.5));
                     columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(-90 + (25.7 * j)));
@@ -826,6 +866,41 @@ class CubeRenderNode extends SceneGraphNode {
 
 }
 
+
+class PrismRenderNode extends SceneGraphNode {
+    constructor(colorBuffer) {
+        super();
+        this.alpha = 1; //initialy the cube is not transparent at all
+        if(colorBuffer == null) {
+            this.colorBuffer = cubeColorBuffer;
+        }
+        else this.colorBuffer = colorBuffer;
+    }
+
+    render(context) {
+
+        //setting the model view and projection matrix on shader
+        setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
+
+        var positionLocation = gl.getAttribLocation(context.shader, 'a_position');
+        gl.bindBuffer(gl.ARRAY_BUFFER, prismVertexBuffer);
+        gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false,0,0) ;
+        gl.enableVertexAttribArray(positionLocation);
+
+        var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
+        gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false,0,0) ;
+        gl.enableVertexAttribArray(colorLocation);
+
+        gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), this.alpha);
+
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
+        gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
+
+        //render children
+        super.render(context);
+    }
+}
 //TASK 3-0
 /**
  * a transformation node, i.e applied a transformation matrix to its successors
