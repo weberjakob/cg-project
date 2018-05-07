@@ -37,7 +37,7 @@ var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex=0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
-var tramNode;
+var tram;
 
 var robotTransformationNode;
 var tramTransformationNode;
@@ -219,22 +219,24 @@ function mouseMoved(event) {
 }
 
 function createTram() {
-    tramNode = new TramNode();
-    var tramPosition = new TransformationSceneGraphNode(glm.translate(0,0.1,0.05));
-    tramPosition.append(tramNode);
+    tram = new Tram();
+    var tramPosition = new TransformationSceneGraphNode(glm.translate(-2,0.1,0.05));
+    tramPosition.append(tram);
     rootNode.append(tramPosition);
 }
 
 function createBridge() {
     var bridge = new Bridge();
-    var bridgePosition = new TransformationSceneGraphNode(glm.translate(0,-0.05,-0.1))
+    var bridgePosition = new TransformationSceneGraphNode(glm.translate(30,-0.05,-0.1))
     bridgePosition.append(bridge);
     rootNode.append(bridgePosition);
 }
 
 function createStation() {
     var station = new Station();
-    rootNode.append(station);
+    var stationPosition = new TransformationSceneGraphNode(glm.translate(1, 0, 0.51));
+    stationPosition.append(station);
+    rootNode.append(stationPosition);
 }
 function initQuadBuffer() {
 
@@ -326,25 +328,25 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            tramNode.setSpeed(3);
-
-            //var tramTransformationMatrix = mat4.create();
-            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.rotateY(30-projectTimeInMilliSeconds/1000));
-            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.translate(-1, 1, 1));
-            //tramTransformationMatrix = mat4.multiply(mat4.create(), tramTransformationMatrix, glm.scale(0.3, 0.3, 0.3));
-            //tramTransformationNode.setMatrix(tramTransformationMatrix);
+            if (projectTimeInMilliSeconds < 4000) {
+                tram.setSpeed(4);
+            }
+            else if(projectTimeInMilliSeconds < 5000) {
+                tram.setSpeed(0);
+            }
+            else if(projectTimeInMilliSeconds < 8000) {
+                tram.openDoors();
+            }
+            else if(projectTimeInMilliSeconds < 11000) {
+                tram.closeDoors();
+            }
+            else if(projectTimeInMilliSeconds < 12500) {
+                tram.setSpeed(3);
+            }
             break;
         case 2:
-            tramNode.setSpeed(0);
-            if(projectTimeInMilliSeconds > 6000) {
-                tramNode.openDoors();
-            }
             break;
         case 3:
-            tramNode.closeDoors();
-            if(projectTimeInMilliSeconds > 11000) {
-                tramNode.setSpeed(3);
-            }
             break;
     }
     rootNode.render(context);
@@ -362,12 +364,12 @@ function render(timeInMilliseconds) {
   projectTimeInMilliSeconds = timeInMilliseconds%30000;
   //if animation gets repeated:
   if(projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
-      tramNode.resetPosition();
+      tram.resetPosition();
   }
   //0 to 5: scene
   // 5 to 25: scene 2
   //26 to 30: scene 3
-  sceneIndex = projectTimeInMilliSeconds<5000 ? 1: projectTimeInMilliSeconds <10000 ? 2 : 3;
+  sceneIndex = projectTimeInMilliSeconds<15000 ? 1: projectTimeInMilliSeconds <20000 ? 2 : 3;
   //sceneIndex = 3;
 }
 
@@ -523,11 +525,17 @@ class QuadRenderNode extends SceneGraphNode {
 
 class TramNode extends SceneGraphNode {
 
-    constructor() {
+    constructor(initialPosition) {
         super();
+        if(initialPosition == null) {
+            this.initialPosition = mat4.create();
+        }
+        else {
+            this.initialPosition = initialPosition;
+        }
         this.speed = 0;
         this.doors = [];
-        this.doorsAreOpen = false;
+        this.doorsOpenIndex = 1;
         //sets the matrix to its inital state
         this.resetPosition();
 
@@ -548,13 +556,13 @@ class TramNode extends SceneGraphNode {
                 cockpitSideTransformation.append(new CubeRenderNode());
                 this.append(cockpitSideTransformation);
 
-                var cockpitSideGlassTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i* 0.1 + 0.05, 0, -0.27 + j*0.54), glm.scale(0.1, 1, 0.1)));
+                var cockpitSideGlassTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i* 0.1 + 0.05, 0, -0.27 + j*0.54), glm.scale(0.11, 1, 0.1)));
                 var cockpitSideGlass = new CubeRenderNode();
-                cockpitSideGlass.setAlphaValue(0.1);
+                cockpitSideGlass.setAlphaValue(i%2 == 1 ? 0.3 : 0.1);
                 cockpitSideGlassTransformation.append(cockpitSideGlass);
                 this.append(cockpitSideGlassTransformation);
 
-                if(j == 1) {
+                if(j == 1 && i%2 == 1) {
                     this.doors.push(cockpitSideGlassTransformation);
                 }
             }
@@ -622,35 +630,75 @@ class TramNode extends SceneGraphNode {
     }
 
     resetPosition() {
-        this.matrix = mat4.create();
+        this.matrix = this.initialPosition;
         this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0, 0));
         this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
     }
 
     openDoors() {
-        if (!this.doorsAreOpen) {
+        if (this.doorsOpenIndex > 0.25) {
+            this.doorsOpenIndex -= 0.01;
             this.doors.forEach(function (door) {
-                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.scale(0.1, 1, 1)));
+                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(-0.01, 0, 0)));
             });
-            this.doorsAreOpen = true;
         }
     }
 
     closeDoors() {
-        if(this.doorsAreOpen) {
+        if(this.doorsOpenIndex < 1) {
+            this.doorsOpenIndex += 0.01;
             this.doors.forEach(function (door) {
-                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.scale(10, 1, 1)));
+                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(0.01, 0, 0)));
             });
-            this.doorsAreOpen = false;
         }
     }
 }
+
+/**
+ * A tram consists of multiple tram nodes
+ */
+class Tram extends SceneGraphNode {
+
+    constructor() {
+        super();
+        for (var i = 0; i < 3; i++) {
+            super.append(new TramNode(glm.translate(i * 1.25, 0, 0)));
+        }
+    }
+
+    setSpeed(speed) {
+        this.children.forEach(function (child) {
+            child.setSpeed(speed);
+        })
+    }
+
+    resetPosition() {
+        this.children.forEach(function (child) {
+            child.resetPosition();
+        })
+    }
+
+    openDoors() {
+        this.children.forEach(function (child) {
+            child.openDoors();
+        })
+    }
+
+    closeDoors() {
+        this.children.forEach(function (child) {
+            child.closeDoors();
+        })
+    }
+
+
+}
+
 //TASK 4-1
 
 class Bridge extends SceneGraphNode {
     constructor() {
         super();
-        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(3, 0, 0.25), glm.scale(20, 0.1, 1)));
+        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(5, 0, 0.25), glm.scale(20, 0.1, 1)));
         floor.append(new CubeRenderNode(bridgeColorBuffer));
         this.append(floor);
 
@@ -701,16 +749,22 @@ class Bridge extends SceneGraphNode {
         }
     }
 }
-/**
- * a cube node that renders a cube at its local origin
- */
+
 
 class Station extends SceneGraphNode {
     constructor() {
         super();
-        var platform = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(2, 0.25, -1), glm.scale(5, 0.05, 1)));
+        var platform = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)));
         platform.append(new CubeRenderNode());
         this.append(platform);
+
+        var column = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2, -0.2), glm.scale(0.02, 0.5, 0.02)));
+        column.append(new CubeRenderNode());
+        this.append(column);
+
+        var display = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)));
+        display.append(new CubeRenderNode());
+        this.append(display);
     }
 }
 class CubeRenderNode extends SceneGraphNode {
