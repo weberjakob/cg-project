@@ -437,7 +437,7 @@ function render(timeInMilliseconds) {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    //displayText("c: User cam, f: front tram cam");
+    displayText("c: User cam, f: front tram cam");
     //update tram transformation
     switch (sceneIndex) {
         case 1:
@@ -1156,7 +1156,6 @@ class BillboardNode extends TransformationSceneGraphNode {
         var yAngle = vec3.angle(dir, dirGround);
         xAngle = convertRadiansToDegree(xAngle);
         yAngle = convertRadiansToDegree(yAngle);
-        displayText(xAngle+"|"+yAngle);
         this.matrix = mat4.multiply(this.matrix, glm.rotateY(xAngle+90), glm.rotateZ(90+yAngle));
         super.render(context);
     }
