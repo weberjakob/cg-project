@@ -197,9 +197,8 @@ function init(resources) {
     createPrism();
 
     createPerson();
-    //TASK 4-2
-    //var cubeNode = new CubeRenderNode();
-    //rootNode.append(cubeNode);
+
+    createBillBoards();
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -321,10 +320,18 @@ function createRails() {
 }
 
 function createStation() {
-    var station = new Station();
+    /*var station = new Station();
     var stationPosition = new TransformationSceneGraphNode(glm.translate(1, 0, 0.51));
     stationPosition.append(station);
-    rootNode.append(stationPosition);
+    rootNode.append(stationPosition);*/
+}
+
+function createBillBoards() {
+    var billboard = new BillboardNode();
+    billboard.setPosition(1, 0, 1);
+    var billboardPos = new TransformationSceneGraphNode(glm.translate(1, 0, 1));
+    billboardPos.append(billboard);
+    rootNode.append(billboardPos);
 }
 
 function createPrism() {
@@ -430,7 +437,7 @@ function render(timeInMilliseconds) {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    displayText("c: User cam, f: front tram cam");
+    //displayText("c: User cam, f: front tram cam");
     //update tram transformation
     switch (sceneIndex) {
         case 1:
@@ -1129,6 +1136,37 @@ class TransformationSceneGraphNode extends SceneGraphNode {
     }
 }
 
+class BillboardNode extends TransformationSceneGraphNode {
+
+    constructor() {
+        super();
+        this.alpha = 1;
+        var quadRenderNode = new QuadRenderNode();
+        this.append(quadRenderNode);
+        this.absPosition = [1, 0, 1];
+    }
+
+    render(context) {
+        var dir = vec3.create();
+        vec3.sub(dir, eye, this.absPosition);
+        var dirGround = [dir[0], 0, dir[2]];
+        var stdVec = [1, 0, 0];
+
+        var xAngle = vec3.angle(dirGround, stdVec);
+        var yAngle = vec3.angle(dir, dirGround);
+        xAngle = convertRadiansToDegree(xAngle);
+        yAngle = convertRadiansToDegree(yAngle);
+        displayText(xAngle+"|"+yAngle);
+        this.matrix = mat4.multiply(this.matrix, glm.rotateY(xAngle+90), glm.rotateZ(90+yAngle));
+        super.render(context);
+    }
+
+    setPosition(x, y, z) {
+        this.absPosition = [x, y, z];
+    }
+
+}
+
 //TASK 5-0
 /**
  * a shader node sets a specific shader for the successors
@@ -1164,4 +1202,8 @@ class ShaderSceneGraphNode extends SceneGraphNode {
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
+}
+
+function convertRadiansToDegree(degree) {
+    return degree * 180/Math.PI;
 }
