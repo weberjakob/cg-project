@@ -775,7 +775,7 @@ class PersonNode extends SceneGraphNode {
 
 class TramNode extends SceneGraphNode {
 
-    constructor(initialPosition) {
+    constructor(initialPosition, alphaOfFrontGlas) {
         super();
         if (initialPosition == null) {
             this.initialPosition = mat4.create();
@@ -820,7 +820,7 @@ class TramNode extends SceneGraphNode {
 
         var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
         var frontGlass = new CubeRenderNode(); //new QuadRenderNode();
-        frontGlass.setAlphaValue(0.2);
+        frontGlass.setAlphaValue(alphaOfFrontGlas);
         front.append(frontGlass);
         this.append(front);
 
@@ -899,7 +899,8 @@ class Tram extends SceneGraphNode {
     constructor() {
         super();
         for (var i = 0; i < 3; i++) {
-            super.append(new TramNode(glm.translate(i * 1.25, 0, 0)));
+            var alphaOfFrontGlas = i == 2 ? 0.2 : 1;
+            super.append(new TramNode(glm.translate(i * 1.25, 0, 0), alphaOfFrontGlas));
         }
     }
 
