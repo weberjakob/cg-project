@@ -186,8 +186,6 @@ function init(resources) {
 
     createRiver(resources);
 
-    createTram();
-
     createRails();
 
     createStation();
@@ -197,6 +195,9 @@ function init(resources) {
     createPrism();
 
     createPerson();
+
+    createTram();
+
     //TASK 4-2
     //var cubeNode = new CubeRenderNode();
     //rootNode.append(cubeNode);
@@ -279,13 +280,14 @@ function createTram() {
     tram = new Tram();
     var tramPosition = new TransformationSceneGraphNode(glm.translate(-2, 0.1, 0.05));
     tramPosition.append(tram);
-    rootNode.append(tramPosition);
 
     //tram2 is driving in the opposite direction
     tram2 = new Tram();
     var tramPosition2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)));
     tramPosition2.append(tram2);
+
     rootNode.append(tramPosition2);
+    rootNode.append(tramPosition);
 }
 
 function createPerson() {
@@ -509,7 +511,6 @@ function render(timeInMilliseconds) {
 function resetPositions() {
     tram.resetPosition();
     tram2.resetPosition();
-    xPosition = 0;
 }
 
 function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
@@ -542,7 +543,7 @@ function createSceneGraphContext(gl, shader) {
 var xPosition = 0;
 
 function calculateViewMatrix() {
-    xPosition += tram.speed / 500;
+    xPosition = tram.getXPosition();
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
@@ -563,7 +564,7 @@ function calculateViewMatrix() {
         up = [0, 1, 0];
     } else if (tramFrontCamera) {
 
-        eye = [xPosition + 0.1, 0.05, 0.1];
+        eye = [xPosition + 0.5, 0.05, 0.1];
         center = [100, 0, 0];
         up = [0, 1, 0];
     }
@@ -648,9 +649,6 @@ class SceneGraphNode {
 class QuadRenderNode extends SceneGraphNode {
 
     render(context) {
-
-        //TASK 2-1
-
         //setting the model view and projection matrix on shader
         setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
 
@@ -776,11 +774,11 @@ class TramNode extends SceneGraphNode {
         else {
             this.initialPosition = initialPosition;
         }
+        mat4.multiply(this.initialPosition, this.initialPosition, glm.scale(2, 0.3, 0.3));
         this.speed = 0;
+        this.resetPosition();//sets offset and timeSinceLastSpeedSet to initial value
         this.doors = [];
         this.doorsOpenIndex = 1;
-        //sets the matrix to its inital state
-        this.resetPosition();
 
         //render all components of the tram
         //all the dimensions of these components are relative to the tram node
@@ -812,8 +810,8 @@ class TramNode extends SceneGraphNode {
         }
 
         var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
-        var frontGlass = new CubeRenderNode();
-        frontGlass.setAlphaValue(0.1);
+        var frontGlass = new CubeRenderNode(); //new QuadRenderNode();
+        frontGlass.setAlphaValue(0.2);
         front.append(frontGlass);
         this.append(front);
 
@@ -827,7 +825,9 @@ class TramNode extends SceneGraphNode {
         var previous = context.sceneMatrix;
 
         //set current world matrix by multiplying it
-        mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed / 1000, 0, 0));
+        //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed / 1000, 0, 0));
+        this.matrix = this.getPositionMatrix();
+        //mat4.multiply(this.matrix, mat4.create(), glm.translate((this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 1000, 0, 0));
 
         if (previous === null) {
             context.sceneMatrix = mat4.clone(this.matrix);
@@ -836,30 +836,6 @@ class TramNode extends SceneGraphNode {
             //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
             context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
         }
-
-        /*
-        //setting the model view and projection matrix on shader
-        setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
-
-        var positionLocation = gl.getAttribLocation(context.shader, 'a_position');
-        gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexBuffer);
-        gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false,0,0) ;
-        gl.enableVertexAttribArray(positionLocation);
-
-        var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
-        gl.bindBuffer(gl.ARRAY_BUFFER, cubeColorBuffer);
-        gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false,0,0) ;
-        gl.enableVertexAttribArray(colorLocation);
-
-        //set alpha value for blending
-        //TASK 1-3
-        gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), 1);
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
-        gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
-
-        */
-
         //render children
         super.render(context);
 
@@ -868,14 +844,24 @@ class TramNode extends SceneGraphNode {
         //this.lastRenderedTime = projectTimeInMilliSeconds;
     }
 
+
     setSpeed(speed) {
+        this.offset += this.speed * (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet);
+        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
         this.speed = speed;
     }
 
+    getPositionMatrix() {
+        return mat4.multiply(mat4.create(), glm.translate(this.getXPosition(), 0, 0), this.initialPosition);
+    }
+
+    getXPosition() {
+        return (this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 8000;
+    }
+
     resetPosition() {
-        this.matrix = this.initialPosition;
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0, 0));
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(2, 0.3, 0.3));
+        this.offset = 0;
+        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
     }
 
     openDoors() {
@@ -904,14 +890,12 @@ class Tram extends SceneGraphNode {
 
     constructor() {
         super();
-        this.speed = 0;
         for (var i = 0; i < 3; i++) {
             super.append(new TramNode(glm.translate(i * 1.25, 0, 0)));
         }
     }
 
     setSpeed(speed) {
-        this.speed = speed;
         this.children.forEach(function (child) {
             child.setSpeed(speed);
         })
@@ -935,7 +919,13 @@ class Tram extends SceneGraphNode {
         })
     }
 
+    getPosition() {
+        return this.children[0].getPosition();
+    }
 
+    getXPosition() {
+        return this.children[0].getXPosition();
+    }
 }
 
 //TASK 4-1
