@@ -157,6 +157,8 @@ var cubeIndices = new Float32Array([
 loadResources({
     vs: 'shader/simple.vs.glsl',
     fs: 'shader/simple.fs.glsl',
+    church: 'models/neuer_dom.jpg',
+    //link_materials: "http://devernay.free.fr/cours/opengl/materials.html",
     //TASK 5-3
     staticcolorvs: 'shader/static_color.vs.glsl'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
@@ -222,11 +224,23 @@ function keyUp(key) {
 
 function keyDown(key) {
     if (key.keyCode == 67) {
-        userCamera = !userCamera | tramFrontCamera;
-        tramFrontCamera &= !userCamera;
+        //'c' is pressed
+        if(userCamera) {
+            userCamera=false;
+            tramFrontCamera=false;
+        } else {
+            userCamera=true;
+            tramFrontCamera=false;
+        }
     } else if (key.keyCode == 70) {
-        tramFrontCamera = !tramFrontCamera | userCamera;
-        userCamera &= !tramFrontCamera;
+        //'f' is pressed
+        if(tramFrontCamera) {
+            userCamera=false;
+            tramFrontCamera=false;
+        } else {
+            userCamera=false;
+            tramFrontCamera=true;
+        }
     } else if (key.keyCode == 38) {
         camera.zoom = 1;//zoom in
         upButtonPressed = true;
