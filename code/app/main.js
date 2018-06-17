@@ -813,6 +813,16 @@ class TramNode extends SceneGraphNode {
         floor.append(new CubeRenderNode());
         this.append(floor);
 
+        var back = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.3, 0, 0), glm.scale(0.01, 1, 1)));
+        back.append(new CubeRenderNode());
+        this.append(back);
+
+
+        var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
+        var frontGlass = new CubeRenderNode(); //new QuadRenderNode();
+        frontGlass.setAlphaValue(alphaOfFrontGlas);
+        front.append(frontGlass);
+        this.append(front);
 
         for (var i = 0; i < 6; i++) {
             for (var j = 0; j < 2; j++) {
@@ -831,16 +841,6 @@ class TramNode extends SceneGraphNode {
                 }
             }
         }
-
-        var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
-        var frontGlass = new CubeRenderNode(); //new QuadRenderNode();
-        frontGlass.setAlphaValue(alphaOfFrontGlas);
-        front.append(frontGlass);
-        this.append(front);
-
-        var back = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.3, 0, 0), glm.scale(0.01, 1, 1)));
-        back.append(new CubeRenderNode());
-        this.append(back);
     }
 
     render(context) {
