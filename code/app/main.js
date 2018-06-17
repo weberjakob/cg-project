@@ -550,7 +550,7 @@ function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
 function createSceneGraphContext(gl, shader) {
 
     //create a default projection matrix
-    projectionMatrix = mat4.perspective(mat4.create(), fieldOfViewInRadians, aspectRatio, 0.01, 20);
+    projectionMatrix = mat4.perspective(mat4.create(), fieldOfViewInRadians, aspectRatio, 0.01, 200);
     //set projection matrix
     gl.uniformMatrix4fv(gl.getUniformLocation(shader, 'u_projection'), false, projectionMatrix);
 
@@ -770,7 +770,7 @@ class PersonNode extends SceneGraphNode {
         //backup previous one
         var previous = context.sceneMatrix;
 
-        //set current world matrix by multiplying it
+        //set current world matrix by multiplying it)
         mat4.multiply(this.matrix, this.matrix, glm.translate(0, 0, -this.speed / 3500));
 
         if (previous === null) {
