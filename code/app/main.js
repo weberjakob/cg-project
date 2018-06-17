@@ -444,8 +444,10 @@ function render(timeInMilliseconds) {
     //clear the buffer
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     //enable depth test to let objects in front occluse objects further away
+    //set viewport back to original size
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.enable(gl.DEPTH_TEST);
-
+    gl.disable(gl.SCISSOR_TEST);
     //TASK 1-1
     gl.enable(gl.BLEND);
     //TASK 1-2
@@ -510,6 +512,28 @@ function render(timeInMilliseconds) {
     }
     rootNode.render(context);
 
+    // draw mini map
+    const miniMapWidth = gl.canvas.width / 3 | 0;
+    const miniMapHeight = gl.canvas.height / 3 | 0;
+    const miniMapX = gl.canvas.width - miniMapWidth;
+    const miniMapY = gl.canvas.height - miniMapHeight;
+    gl.viewport(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
+    gl.scissor(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
+    gl.enable(gl.SCISSOR_TEST);
+
+    gl.clearColor(0.3,0.3,0.3,1);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    var minimapViewMatrix = mat4.create();
+    var minimapEye = vec3.fromValues(eye[0],20,eye[2]);
+    var minimapCenter = vec3.fromValues(center[0], 0, center[2]);
+    mat4.lookAt(minimapViewMatrix, minimapEye, minimapCenter, up);
+    //save viewMatrix
+    var previous = context.viewMatrix;
+    context.viewMatrix = minimapViewMatrix;
+    rootNode.render(context);
+    //restore viewMatrix
+    context.viewMatrix = previous;
 
     //request another render call as soon as possible
     requestAnimationFrame(render);
@@ -587,8 +611,8 @@ function calculateViewMatrix() {
         up = [0, 1, 0];
     } else if (tramFrontCamera) {
 
-        eye = [xPosition + 0.5, 0.05, 0.1];
-        center = [100, 0, 0];
+        eye = [xPosition, 0.1, 0.05];
+        center = [xPosition + 0.5, 0.1, 0.05];
         up = [0, 1, 0];
     }
     else {
