@@ -14,6 +14,7 @@ var context;
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
+var minimapYHeight = 20;
 var center = vec3.create();
 var up = vec3.create();
 const camera = {
@@ -48,7 +49,7 @@ var personParent = "Station";
 var tram, tram2;
 
 //links to buffer stored on the GPU
-var quadVertexBuffer, quadColorBuffer;
+var quadVertexBuffer, quadColorBuffer, sunColorBuffer;
 var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, prismColorBuffer, cubeIndexBuffer,
     personColorBuffer;
 
@@ -61,12 +62,21 @@ var quadVertices = new Float32Array([
     1.0, 1.0]);
 
 var quadColors = new Float32Array([
-    0, 0, 0, 1,
-    0, 1, 0, 1,
+    1, 0, 0, 1,
+    1, 1, 0, 1,
     0, 0, 1, 1,
     0, 0, 1, 1,
-    0, 1, 0, 1,
-    0, 0, 0, 1]);
+    1, 1, 0, 1,
+    0, 1, 0, 1]);
+
+var sunColors = new Float32Array([
+    1, 0.8, 0, 1,
+    1, 1, 0, 1,
+    1, 0.5, 0, 1,
+    1, 0.5, 0, 1,
+    1, 1, 0, 1,
+    1, 0.8, 0, 1]);
+
 
 var s = 0.3; //size of cube
 //additional comment which is useless
@@ -188,7 +198,7 @@ function init(resources) {
 
     createRiver(resources);
 
-    //createRiverNew();
+    //createRiverNew(resources);
 
     createRails();
 
@@ -203,7 +213,6 @@ function init(resources) {
     createBillBoards();
 
     createTram();
-
 
     //createLightNodes(resources);
 
@@ -303,7 +312,7 @@ function mouseMoved(event) {
 
 function createRiver(resources) {
 
-    var riverBase = new QuadRenderNode();
+    var riverBase = new QuadRenderNode(quadColorBuffer);
     var riverTexture = new TextureSGNode(waterTexture, 2, [riverBase]);
 
     var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateX(90), glm.translate(21, 0, 0.2));
@@ -323,7 +332,7 @@ function createRiver(resources) {
 
 }
 
-function createRiverNew() {
+function createRiverNew(resources) {
 
     let river = new MaterialSGNode(
         new TextureSGNode(waterTexture, 2,
@@ -335,10 +344,16 @@ function createRiverNew() {
     river.specular = [0.5, 0.5, 1, 1];
     river.shininess = 50.0;
 
-    rootNode.append(//new TransformationSGNode(glm.transform({translate: [21, 0, 0.2], rotateX: 90, scale: 300}), [
-        river
-        //]));
-    );
+    var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateX(90), glm.translate(21, 0, 0.2));
+    quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(3.9, 100, 1));
+
+    var riverShaderNode = new ShaderSceneGraphNode(gl.createProgram(gl, resources.phong_vs, resources.phong_fs));
+    riverShaderNode.append(river);
+
+    var riverTransformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
+    riverTransformationNode.append(riverShaderNode);
+    rootNode.append(riverTransformationNode);
+
 }
 
 
@@ -380,9 +395,9 @@ function createBridge(resources) {
     materialBridgeNode.specular = [0.393548, 0.271906, 0.166721,1];
     materialBridgeNode.shininess = 0.2;
     //OPTION 2.a: use static color (blue) for bridge
-    var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.simple_fs));
+    //var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.simple_fs));
     //OPTION 2.b: use material/phong shader for bridge
-    //var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.phong_vs, resources.phong_fs));
+    var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.phong_vs, resources.phong_fs));
     shaderBridgeNode.append(bridge);
     bridgePosition.append(shaderBridgeNode);*/
 
@@ -412,10 +427,10 @@ function createStation() {
 }
 
 function createBillBoards() {
-    var billboard = new BillboardNode();
-    billboard.setPosition(1, 0, 1);
-    var billboardPos = new TransformationSceneGraphNode(glm.translate(1, 0, 1));
-    billboardPos.append(billboard);
+    var billboard1 = new BillboardNode();
+    billboard1.setPosition(30, 2, -2);
+    var billboardPos = new TransformationSceneGraphNode(glm.translate(30, 2, -2));
+    billboardPos.append(billboard1);
     rootNode.append(billboardPos);
 }
 
@@ -436,7 +451,6 @@ function createPrism() {
 
 function makeRiver() {
     var river = makeRect(2, 2);
-    //TASK 3: adapt texture coordinates
     river.texture = [0, 0, 1, 0, 1, 1, 0, 1];
     river.normal = [0, 1, 0];
     river.position = [21, 0, 0];
@@ -452,6 +466,9 @@ function initBuffer() {
     quadColorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, quadColorBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, quadColors, gl.STATIC_DRAW);
+    sunColorBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, sunColorBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, sunColors, gl.STATIC_DRAW);
 
     //init cube buffer
     cubeVertexBuffer = gl.createBuffer();
@@ -533,7 +550,7 @@ function render(timeInMilliseconds) {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    //displayText("c: User cam, f: front tram cam");
+    displayText("c: User cam, f: front tram cam");
     //update tram transformation
     switch (sceneIndex) {
         case 1:
@@ -601,7 +618,7 @@ function render(timeInMilliseconds) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     var minimapViewMatrix = mat4.create();
-    var minimapEye = vec3.fromValues(eye[0], 20, eye[2]);
+    var minimapEye = vec3.fromValues(eye[0], minimapYHeight, eye[2]);
     var minimapCenter = vec3.fromValues(center[0], 0, center[2]);
     mat4.lookAt(minimapViewMatrix, minimapEye, minimapCenter, up);
     //save viewMatrix
@@ -771,6 +788,11 @@ class SceneGraphNode {
  */
 class QuadRenderNode extends SceneGraphNode {
 
+    constructor(colorBuffer) {
+        super();
+        this.colorBuffer = colorBuffer;
+    }
+
     render(context) {
         //setting the model view and projection matrix on shader
         setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
@@ -781,7 +803,7 @@ class QuadRenderNode extends SceneGraphNode {
         gl.enableVertexAttribArray(positionLocation);
 
         var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
-        gl.bindBuffer(gl.ARRAY_BUFFER, quadColorBuffer);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
         gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 0);
         gl.enableVertexAttribArray(colorLocation);
 
@@ -1205,10 +1227,7 @@ class PrismRenderNode extends SceneGraphNode {
     }
 }
 
-//TASK 3-0
-/**
- * a transformation node, i.e applied a transformation matrix to its successors
- */
+
 class TransformationSceneGraphNode extends SceneGraphNode {
     /**
      * the matrix to apply
@@ -1246,7 +1265,7 @@ class BillboardNode extends TransformationSceneGraphNode {
     constructor() {
         super();
         this.alpha = 1;
-        var quadRenderNode = new QuadRenderNode();
+        var quadRenderNode = new QuadRenderNode(sunColorBuffer);
         this.append(quadRenderNode);
         this.absPosition = [1, 0, 1];
     }
@@ -1262,7 +1281,21 @@ class BillboardNode extends TransformationSceneGraphNode {
         var yAngle = vec3.angle(dir, dirGround);
         xAngle = convertRadiansToDegree(xAngle);
         yAngle = convertRadiansToDegree(yAngle);
-        this.matrix = mat4.multiply(this.matrix, glm.rotateX(yAngle), glm.rotateY(xAngle + 90));
+        //cos(alpha)=cos(360-alpha): xAngle value is [0;180].
+        // Depending on the x-axis difference we should use xAngle or (360-xAngle) [+90 degrees offset]
+        if (eye[2] < this.absPosition[2]) {
+            xAngle = xAngle + 90;
+        } else {
+            xAngle = 90 - xAngle;
+        }
+        //cos(alpha)=cos(360-alpha): yAngle value is [0;180].
+        // Depending on the y-axis difference we should use yAngle or (360-yAngle)
+        if (eye[1] > this.absPosition[1]) {
+            yAngle = 360-yAngle;
+        }
+
+        this.matrix = mat4.multiply(this.matrix, glm.rotateY(xAngle), glm.rotateX(yAngle));
+
         super.render(context);
     }
 
