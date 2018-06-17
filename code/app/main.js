@@ -1,12 +1,6 @@
-/**
- * Created by Marc Streit on 01.04.2016.
- *
- * */
-//inserted this comment to check if commit was succsessfull
-
-//the OpenGL context
+//OpenGL context
 var gl = null;
-//our shader program
+//shader program
 var shaderProgram = null;
 
 var canvasWidth = 800;
@@ -39,7 +33,11 @@ var mouseButtonPressed = false;
 var mouseX = 0, mouseY = 0, mousePrevX = 0, mousePrevY = 0;
 var zoomspeed = 0.1;
 
-//scene settings
+//textures
+var waterTexture;
+var churchTexture;
+
+/*scene settings*/
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
@@ -48,10 +46,6 @@ var tram;
 var persons;
 var personParent = "Station";
 var tram, tram2;
-
-var robotTransformationNode;
-var tramTransformationNode;
-var headTransformationNode;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer;
@@ -155,11 +149,15 @@ var cubeIndices = new Float32Array([
 
 //load the shader resources using a utility function
 loadResources({
-    vs: 'shader/simple.vs.glsl',
-    fs: 'shader/simple.fs.glsl',
-    church: 'models/neuer_dom.jpg',
+    simple_vs: 'shader/simple.vs.glsl',
+    simple_fs: 'shader/simple.fs.glsl',
+    texture_vs: 'shader/simple.vs.glsl',
+    texture_fs: 'shader/simple.fs.glsl',
+    phong_vs: 'shader/phong.vs.glsl',
+    phong_fs: 'shader/phong.fs.glsl',
+    churchtexture: 'models/neuer_dom.jpg',
+    rivertexture: 'models/river-water-texture.jpg',
     //link_materials: "http://devernay.free.fr/cours/opengl/materials.html",
-    //TASK 5-3
     staticcolorvs: 'shader/static_color.vs.glsl'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
@@ -178,21 +176,25 @@ function init(resources) {
 
     //in WebGL / OpenGL3 we have to create and use our own shaders for the programmable pipeline
     //create the shader program
-    shaderProgram = createProgram(gl, resources.vs, resources.fs);
+    shaderProgram = createProgram(gl, resources.simple_vs, resources.simple_fs);
 
-    //set buffers for cube
+    /*set buffers for cube*/
     initBuffer();
 
-    //create scenegraph
+    initTextures(resources);
+
+    /*create scene graph*/
     rootNode = new SceneGraphNode();
 
     createRiver(resources);
+
+    //createRiverNew();
 
     createRails();
 
     createStation();
 
-    createBridge();
+    createBridge(resources);
 
     createPrism();
 
@@ -202,8 +204,8 @@ function init(resources) {
 
     createTram();
 
-    //var cubeNode = new CubeRenderNode();
-    //rootNode.append(cubeNode);
+
+    //createLightNodes(resources);
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -211,6 +213,25 @@ function init(resources) {
     window.addEventListener("mousemove", mouseMoved, false);
     window.addEventListener("mouseup", mouseUp, false);
     window.addEventListener("mousedown", mouseDown, false);
+}
+
+function initTextures(resources) {
+    //create texture object
+    waterTexture = gl.createTexture();
+    //select a texture unit
+    gl.activeTexture(gl.TEXTURE2);
+    //bind texture to active texture unit
+    gl.bindTexture(gl.TEXTURE_2D, waterTexture);
+    //set sampling parameters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    //change texture sampling behaviour
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    //upload texture data
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, resources.rivertexture);
+    //clean up/unbind texture
+    gl.bindTexture(gl.TEXTURE_2D, null);
 }
 
 function keyUp(key) {
@@ -225,21 +246,21 @@ function keyUp(key) {
 function keyDown(key) {
     if (key.keyCode == 67) {
         //'c' is pressed
-        if(userCamera) {
-            userCamera=false;
-            tramFrontCamera=false;
+        if (userCamera) {
+            userCamera = false;
+            tramFrontCamera = false;
         } else {
-            userCamera=true;
-            tramFrontCamera=false;
+            userCamera = true;
+            tramFrontCamera = false;
         }
     } else if (key.keyCode == 70) {
         //'f' is pressed
-        if(tramFrontCamera) {
-            userCamera=false;
-            tramFrontCamera=false;
+        if (tramFrontCamera) {
+            userCamera = false;
+            tramFrontCamera = false;
         } else {
-            userCamera=false;
-            tramFrontCamera=true;
+            userCamera = false;
+            tramFrontCamera = true;
         }
     } else if (key.keyCode == 38) {
         camera.zoom = 1;//zoom in
@@ -274,7 +295,6 @@ function mouseMoved(event) {
         camera.rotation.y += deltaY;
         camera.rotation.y = Math.min(camera.rotation.y, 90);
         camera.rotation.y = Math.max(camera.rotation.y, -90);
-
     } else {
         deltaX = 0;
         deltaY = 0;
@@ -282,14 +302,45 @@ function mouseMoved(event) {
 }
 
 function createRiver(resources) {
+
+    var riverBase = new QuadRenderNode();
+    var riverTexture = new TextureSGNode(waterTexture, 2, [riverBase]);
+
     var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateX(90), glm.translate(21, 0, 0.2));
     quadTransformationMatrix = mat4.multiply(mat4.create(), quadTransformationMatrix, glm.scale(3.9, 100, 1));
     var transformationNode = new TransformationSceneGraphNode(quadTransformationMatrix);
-    var staticColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.fs));
-    transformationNode.append(staticColorShaderNode);
-    staticColorShaderNode.append(new QuadRenderNode());
+
+    //OPTION 1/2: ORIGINAL DANUBE
+    var textureColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.simple_fs));
+    textureColorShaderNode.append(riverBase);
+
+    //OPTION 2/2: TEXTURED DANUBE
+    //var textureColorShaderNode = new ShaderSceneGraphNode(createProgram(gl, resources.texture_vs, resources.texture_fs));
+    //textureColorShaderNode.append(riverTexture);
+
+    transformationNode.append(textureColorShaderNode);
     rootNode.append(transformationNode);
+
 }
+
+function createRiverNew() {
+
+    let river = new MaterialSGNode(
+        new TextureSGNode(waterTexture, 2,
+            new RenderSGNode(makeRiver())));
+
+    //blue
+    river.ambient = [0, 0, 1, 1];
+    river.diffuse = [0.1, 0.1, 1, 1];
+    river.specular = [0.5, 0.5, 1, 1];
+    river.shininess = 50.0;
+
+    rootNode.append(//new TransformationSGNode(glm.transform({translate: [21, 0, 0.2], rotateX: 90, scale: 300}), [
+        river
+        //]));
+    );
+}
+
 
 function createTram() {
     tram = new Tram();
@@ -312,14 +363,30 @@ function createPerson() {
         rootNode.append(persons[i]);
 
     }
-
-
 }
 
-function createBridge() {
+function createBridge(resources) {
     var bridge = new Bridge();
-    var bridgePosition = new TransformationSceneGraphNode(glm.translate(20, -0.05, -0.32))
+    var bridgePosition = new TransformationSceneGraphNode(glm.translate(20, -0.05, -0.32));
+
+    //OPTION 1: original bridge
     bridgePosition.append(bridge);
+
+    //OPTION 2: material bridge
+    /*
+    var materialBridgeNode = new MaterialSGNode([bridge]);
+    materialBridgeNode.ambient = [0.2125, 0.1275, 0.054,1];
+    materialBridgeNode.diffuse = [0.714, 0.4284, 0.18144,1];
+    materialBridgeNode.specular = [0.393548, 0.271906, 0.166721,1];
+    materialBridgeNode.shininess = 0.2;
+    //OPTION 2.a: use static color (blue) for bridge
+    var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.staticcolorvs, resources.simple_fs));
+    //OPTION 2.b: use material/phong shader for bridge
+    //var shaderBridgeNode = new ShaderSceneGraphNode(createProgram(gl, resources.phong_vs, resources.phong_fs));
+    shaderBridgeNode.append(bridge);
+    bridgePosition.append(shaderBridgeNode);*/
+
+
     rootNode.append(bridgePosition);
 }
 
@@ -365,6 +432,15 @@ function createPrism() {
     var prismTransformation2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)));
     prismTransformation2.append(new PrismRenderNode(prismColorBuffer));
     rootNode.append(prismTransformation2);
+}
+
+function makeRiver() {
+    var river = makeRect(2, 2);
+    //TASK 3: adapt texture coordinates
+    river.texture = [0, 0, 1, 0, 1, 1, 0, 1];
+    river.normal = [0, 1, 0];
+    river.position = [21, 0, 0];
+    return river;
 }
 
 function initBuffer() {
@@ -457,7 +533,7 @@ function render(timeInMilliseconds) {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    displayText("c: User cam, f: front tram cam");
+    //displayText("c: User cam, f: front tram cam");
     //update tram transformation
     switch (sceneIndex) {
         case 1:
@@ -521,11 +597,11 @@ function render(timeInMilliseconds) {
     gl.scissor(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
     gl.enable(gl.SCISSOR_TEST);
 
-    gl.clearColor(0.3,0.3,0.3,1);
+    gl.clearColor(0.3, 0.3, 0.3, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     var minimapViewMatrix = mat4.create();
-    var minimapEye = vec3.fromValues(eye[0],20,eye[2]);
+    var minimapEye = vec3.fromValues(eye[0], 20, eye[2]);
     var minimapCenter = vec3.fromValues(center[0], 0, center[2]);
     mat4.lookAt(minimapViewMatrix, minimapEye, minimapCenter, up);
     //save viewMatrix
@@ -902,7 +978,7 @@ class TramNode extends SceneGraphNode {
     }
 
     getXPosition() {
-        return (this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 8000;
+        return (this.offset + (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet) * this.speed) / 8000;
     }
 
     resetPosition() {
@@ -975,7 +1051,6 @@ class Tram extends SceneGraphNode {
     }
 }
 
-//TASK 4-1
 
 class Bridge extends SceneGraphNode {
     constructor() {
@@ -1179,6 +1254,7 @@ class BillboardNode extends TransformationSceneGraphNode {
     render(context) {
         var dir = vec3.create();
         vec3.sub(dir, eye, this.absPosition);
+        vec3.scale(dir, dir, 1 / vec3.length(dir));
         var dirGround = [dir[0], 0, dir[2]];
         var stdVec = [1, 0, 0];
 
@@ -1186,7 +1262,7 @@ class BillboardNode extends TransformationSceneGraphNode {
         var yAngle = vec3.angle(dir, dirGround);
         xAngle = convertRadiansToDegree(xAngle);
         yAngle = convertRadiansToDegree(yAngle);
-        this.matrix = mat4.multiply(this.matrix, glm.rotateY(xAngle+90), glm.rotateZ(90+yAngle));
+        this.matrix = mat4.multiply(this.matrix, glm.rotateX(yAngle), glm.rotateY(xAngle + 90));
         super.render(context);
     }
 
@@ -1196,10 +1272,39 @@ class BillboardNode extends TransformationSceneGraphNode {
 
 }
 
-//TASK 5-0
-/**
- * a shader node sets a specific shader for the successors
- */
+//a scene graph node for setting texture parameters
+class TextureSGNode extends SGNode {
+    constructor(texture, textureunit, children) {
+        super(children);
+        this.texture = texture;
+        this.textureunit = textureunit;
+    }
+
+    render(context) {
+        //tell shader to use our texture; alternatively we could use two phong shaders: one with and one without texturing support
+        gl.uniform1i(gl.getUniformLocation(context.shader, 'u_enableObjectTexture'), 1);
+
+        //set shader parameters
+        //TASK 1: set texture unit to sampler in shader
+        gl.uniform1i(gl.getUniformLocation(context.shader, 'u_tex'), this.textureunit);
+        //activate/select texture unit and bind texture
+        //TASK 1: activate/select texture unit and bind texture
+        gl.activeTexture(gl.TEXTURE0 + this.textureunit);
+        gl.bindTexture(gl.TEXTURE_2D, this.texture);
+
+        //render children
+        super.render(context);
+
+        //clean up
+        //TASK 1: activate/select texture unit and bind null
+        gl.activeTexture(gl.TEXTURE0 + this.textureunit);
+        gl.bindTexture(gl.TEXTURE_2D, null);
+
+        //disable texturing in shader
+        gl.uniform1i(gl.getUniformLocation(context.shader, 'u_enableObjectTexture'), 0);
+    }
+}
+
 class ShaderSceneGraphNode extends SceneGraphNode {
     /**
      * constructs a new shader node with the given shader program
@@ -1227,12 +1332,12 @@ class ShaderSceneGraphNode extends SceneGraphNode {
         //activate the shader
         context.gl.useProgram(backup);
     }
-};
+}
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
 }
 
 function convertRadiansToDegree(degree) {
-    return degree * 180/Math.PI;
+    return degree * 180 / Math.PI;
 }

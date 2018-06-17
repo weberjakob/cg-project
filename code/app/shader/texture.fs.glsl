@@ -32,10 +32,10 @@ varying vec3 v_lightVec;
 
 //texture related variables
 uniform bool u_enableObjectTexture;
-//define texture sampler and texture coordinates
+//TASK 1: define texture sampler and texture coordinates
 varying vec2 v_texCoord;
 uniform sampler2D u_tex;
-//define uniform for time variable
+//EXTRA TASK: define uniform for time variable
 uniform float u_wobbleTime;
 
 vec4 calculateSimplePointLight(Light light, Material material, vec3 lightVec, vec3 normalVec, vec3 eyeVec, vec4 textureColor) {
@@ -52,7 +52,7 @@ vec4 calculateSimplePointLight(Light light, Material material, vec3 lightVec, ve
 
   if(u_enableObjectTexture)
   {
-    //replace diffuse and ambient material color with texture color
+    //TASK 2: replace diffuse and ambient material color with texture color
     material.diffuse = textureColor;
     material.ambient = textureColor;
 		//Note: an alternative to replacing the material color is to multiply it with the texture color
@@ -71,7 +71,7 @@ void main (void) {
   vec4 textureColor = vec4(0,0,0,1);
   if(u_enableObjectTexture)
   {
-
+    //EXTRA TASK: animate texture coordinates
     vec2 wobblecoords = v_texCoord;
     wobblecoords.s = wobblecoords.s + sin(wobblecoords.t*3.14+u_wobbleTime/100.0)*0.1;
 		textureColor = texture2D(u_tex,wobblecoords);
