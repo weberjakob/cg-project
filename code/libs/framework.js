@@ -800,7 +800,7 @@ class RenderSGNode extends SGNode {
   setTransformationUniforms(context) {
     //set matrix uniforms
     const modelViewMatrix = mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix);
-    const normalMatrix = mat3.normalFromMat4(mat3.create(), modelViewMatrix);
+    const normalMatrix = mat3.normalFromMat4(mat3.create(), modelViewMatrix) || mat3.create();
     const projectionMatrix = context.projectionMatrix;
 
     const gl = context.gl,
