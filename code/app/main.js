@@ -62,27 +62,6 @@ var quadColors = new Float32Array([
     1, 1, 0, 1,
     0, 1, 0, 1]);
 
-var sunColors = new Float32Array([
-    1, 0.8, 0, 1,
-    1, 1, 0, 1,
-    1, 0.5, 0, 1,
-    1, 0.5, 0, 1,
-    1, 1, 0, 1,
-    1, 0.8, 0, 1]);
-
-
-var pScale = 0.5; //scale of the top of the prism
-
-var s = 0.3;
-var prismVertices = new Float32Array([
-    -s, -s, -s, s, -s, -s, s * pScale, s, -s, -s * pScale, s, -s,
-    -s, -s, s, s, -s, s, s * pScale, s, s, -s * pScale, s, s,
-    -s, -s, -s, -s * pScale, s, -s, -s * pScale, s, s, -s, -s, s,
-    s, -s, -s, s * pScale, s, -s, s * pScale, s, s, s, -s, s,
-    -s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s,
-    -s * pScale, s, -s, -s * pScale, s, s, s * pScale, s, s, s * pScale, s, -s,
-]);
-
 
 //used for tram
 var cubeColors = new Float32Array([
@@ -139,7 +118,10 @@ loadResources({
     cobblestone: 'models/cobblestone.jpg',
     bridge_metal: 'models/metal.jpg',
     sun: 'models/sun.png',
-    //link_materials: "http://devernay.free.fr/cours/opengl/materials.html",
+    traintracks: 'models/bronze.jpg',
+    cement: 'models/cement.jpg',
+    orange: 'models/orange.jpg',
+    red: 'models/red.jpg',
     staticcolorvs: 'shader/static_color.vs.glsl'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
@@ -172,7 +154,7 @@ function init(resources) {
     createRails(resources);
     createStation(resources);
     createBridge(resources);
-    //FIXME createPrism();
+    createPrism(resources);
     createPerson(resources);
     createBillBoards(resources);
     createTram(resources);
@@ -277,7 +259,7 @@ function createRiver(resources) {
     var riverBase = new QuadRenderNode();
     var riverTexture = new AdvancedTextureSGNode(resources.rivertexture, [riverBase]);
 
-    var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.translate(21, -0.5, 0.2),glm.rotateY(90));
+    var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.translate(21, -0.5, 0.2), glm.rotateY(90));
     quadTransformationMatrix = mat4.multiply(quadTransformationMatrix, quadTransformationMatrix, glm.scale(100, 0, 3.9));
 
     var transformationNode = new TransformationSGNode(quadTransformationMatrix, [riverTexture]);
@@ -288,13 +270,13 @@ function createRiver(resources) {
 
 function createTram(resources) {
     tram = new Tram();
-    var tramPosition = new TransformationSceneGraphNode(glm.translate(-2, 0.1, 0.05));
-    tramPosition.append(tram);
+    var tramtextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
+    var tramPosition = new TransformationSGNode(glm.translate(-2, 0.1, 0.05), [tramtextureNode]);
 
     //tram2 is driving in the opposite direction
     tram2 = new Tram();
-    var tramPosition2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)));
-    tramPosition2.append(tram2);
+    var tram2textureNode = new AdvancedTextureSGNode(resources.red, [tram2]);
+    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)), [tram2textureNode]);
 
     rootNode.append(tramPosition2);
     rootNode.append(tramPosition);
@@ -323,9 +305,8 @@ function createLightSphere(resources) {
 function createBridge(resources) {
     var bridge = new Bridge();
     var bridgeTexture = new AdvancedTextureSGNode(resources.bridge_metal, [bridge]);
-    var bridgePosition = new TransformationSceneGraphNode(glm.translate(20, -0.05, -0.32));
+    var bridgePosition = new TransformationSGNode(glm.translate(20, -0.05, -0.32), [bridgeTexture]);
 
-    bridgePosition.append(bridgeTexture);
     rootNode.append(bridgePosition);
 }
 
@@ -335,9 +316,8 @@ function createRails(resources) {
         for (var railAxe = 0; railAxe < 2; railAxe++) {
             var rail = new CubeRenderNode();
             var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2 - secondLine * 4.5));
-
-            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
-            railTransformationNode.append(rail);
+            var railTextureNode = new AdvancedTextureSGNode(resources.traintracks, [rail])
+            var railTransformationNode = new TransformationSGNode(railAxeTransformationMatrix, [railTextureNode]);
             rootNode.append(railTransformationNode);
         }
     }
@@ -358,18 +338,19 @@ function createBillBoards(resources) {
     rootNode.append(billboardPos);
 }
 
-function createPrism() {
+function createPrism(resources) {
     //prism before the bridge:
-    var prism = new PrismRenderNode(prismColorBuffer);
+    var prism = new PrismRenderNode();
     var prismTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateY(90), glm.scale(1.5, 0.3, 57));
     mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.0, -0.3, 0));
-    var prismTransformation = new TransformationSceneGraphNode(prismTransformationMatrix);
-    prismTransformation.append(prism);
+    var texturePrismNode = new AdvancedTextureSGNode(resources.cement, [prism]);
+    var prismTransformation = new TransformationSGNode(prismTransformationMatrix, [texturePrismNode]);
     rootNode.append(prismTransformation);
 
     //prism after the bridge
-    var prismTransformation2 = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)));
-    prismTransformation2.append(new PrismRenderNode(prismColorBuffer));
+    var prism2 = new PrismRenderNode();
+    var texturePrismNode2 = new AdvancedTextureSGNode(resources.cement, [prism2]);
+    var prismTransformation2 = new TransformationSGNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)), [texturePrismNode2]);
     rootNode.append(prismTransformation2);
 }
 
@@ -384,7 +365,6 @@ function initBuffer() {
     gl.bufferData(gl.ARRAY_BUFFER, quadColors, gl.STATIC_DRAW);
     sunColorBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, sunColorBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, sunColors, gl.STATIC_DRAW);
 
     //init cube buffer
     cubeVertexBuffer = gl.createBuffer();
@@ -423,26 +403,6 @@ function initBuffer() {
 
 }
 
-/*function createRails() {
-    for(var i = 0; i < 100; i++)
-    {
-        var railTransformationMatrix = mat4.multiply(mat4.create(),  mat4.create(), glm.scale(0.2, 0.05, 0.05));
-        railTransformationMatrix = mat4.multiply(mat4.create(),railTransformationMatrix, glm.rotateZ(i < 30 ? i : (60-i)));
-
-        for(var railAxe = 0; railAxe < 2; railAxe++)
-        {
-            var rail = new CubeRenderNode();
-            var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(-8 + i/8, railAxe * 3, -20));
-
-            var railTransformationNode = new TransformationSceneGraphNode(railAxeTransformationMatrix);
-            railTransformationNode.append(rail);
-            rootNode.append(railTransformationNode);
-        }
-    }
-
-}*/
-
-
 /**
  * render one frame
  */
@@ -479,7 +439,7 @@ function render(timeInMilliseconds) {
                 tram.setSpeed(0);
             }
             else if (projectTimeInMilliSeconds < 8000) {
-                tram.openDoors();
+                //FIXME tram.openDoors();
                 for (i = 0; i < 3; i++) {
                     persons[i].setSpeed(1.25);
                 }
@@ -490,7 +450,7 @@ function render(timeInMilliseconds) {
                 }
             }
             else if (projectTimeInMilliSeconds < 11000) {
-                tram.closeDoors();
+                //FIXME tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 12500) {
                 if (personParent == "Station") {
@@ -705,448 +665,18 @@ class SceneGraphNode {
  */
 
 
-class PersonNode extends SceneGraphNode {
-    constructor(initialPosition) {
-        super();
-        this.turned = false;
-        this.speed = 0;
-        this.legOffset = 0;
-        this.rigidBodyTransformationMatrix = mat4.create();
-        if (initialPosition == null) {
-            this.initialPosition = glm.translate(0, 0, 0);
-
-        }
-        else {
-            this.initialPosition = initialPosition;
-        }
-
-        this.resetPosition();
-        var rigidBodyNode = new TransformationSceneGraphNode(this.rigidBodyTransformationMatrix);
-        var body = new TransformationSceneGraphNode(glm.scale(0.01, 0.01, 0.01));
-        var bodyTrans = new TransformationSceneGraphNode(glm.scale(0.6, 1, 0.4));
-
-        bodyTrans.append(new CubeRenderNode(personColorBuffer));
-        body.append(bodyTrans);
-
-        var head = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 0.2, 0.2), glm.translate(0, 2, 0)));
-        head.append(new CubeRenderNode(personColorBuffer));
-        body.append(head);
-        var leftleg = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 1, 0.2), glm.translate(0.4, -0.5, 0)));
-        var rightleg = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.2, 1, 0.2), glm.translate(-0.4, -0.5, 0)));
-        leftleg.append(new CubeRenderNode(personColorBuffer));
-        rightleg.append(new CubeRenderNode(personColorBuffer));
-
-        body.append(leftleg);
-        body.append(rightleg);
-        var leftarm = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.4, 0.1, 0.1), glm.translate(0.7, 0, 0)));
-        var rightarm = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.scale(0.4, 0.1, 0.1), glm.translate(-0.7, 0, 0)));
-        leftarm.append(new CubeRenderNode(personColorBuffer));
-        rightarm.append(new CubeRenderNode(personColorBuffer));
-        body.append(leftarm);
-        body.append(rightarm);
-        rigidBodyNode.append(body);
-        this.append(rigidBodyNode);
-
-    }
-
-    rotateAndTranslate(a, b, c) {
-        this.resetPosition();
-        mat4.multiply(this.rigidBodyTransformationMatrix, glm.rotateY(-90), glm.translate(a, b, c));
-        mat4.multiply(this.matrix, this.matrix, this.rigidBodyTransformationMatrix);
-    }
-
-    closeDoors() {
-        if (!this.turned) {
-
-            this.initialPosition = mat4.multiply(mat4.create(), glm.rotateY(-90), glm.translate(1, 1, 1));
-            this.resetPosition();
-            this.turned = true;
-        }
-    }
-
-    setSpeed(speed) {
-        this.speed = speed;
-    }
-
-    resetPosition() {
-        this.matrix = this.initialPosition;
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.translate(0, 0, 0));
-        this.matrix = mat4.multiply(mat4.create(), this.matrix, glm.scale(7, 7, 7));
-    }
-
-    render(context) {
-        //backup previous one
-        var previous = context.sceneMatrix;
-
-        //set current world matrix by multiplying it)
-        mat4.multiply(this.matrix, this.matrix, glm.translate(0, 0, -this.speed / 3500));
-
-        if (previous === null) {
-            context.sceneMatrix = mat4.clone(this.matrix);
-        }
-        else {
-            //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
-        }
-
-        super.render(context);
-        context.sceneMatrix = previous;
-    }
-
-}
-
-class TramNode extends SceneGraphNode {
-
-    constructor(initialPosition, alphaOfFrontGlas) {
-        super();
-        if (initialPosition == null) {
-            this.initialPosition = mat4.create();
-        }
-        else {
-            this.initialPosition = initialPosition;
-        }
-        mat4.multiply(this.initialPosition, this.initialPosition, glm.scale(2, 0.3, 0.3));
-        this.speed = 0;
-        this.resetPosition();//sets offset and timeSinceLastSpeedSet to initial value
-        this.doors = [];
-        this.doorsOpenIndex = 1;
-
-        //render all components of the tram
-        //all the dimensions of these components are relative to the tram node
-        var ceiling = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0, -0.27, 0), glm.scale(1, 0.1, 1)));
-        ceiling.append(new CubeRenderNode());
-        this.append(ceiling);
-
-        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0, +0.27, 0), glm.scale(1, 0.1, 1)));
-        floor.append(new CubeRenderNode());
-        this.append(floor);
-
-        var back = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.3, 0, 0), glm.scale(0.01, 1, 1)));
-        back.append(new CubeRenderNode());
-        this.append(back);
-
-
-        var front = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(0.3, 0, 0), glm.scale(0.01, 1, 1)));
-        var frontGlass = new CubeRenderNode(); //new QuadRenderNode();
-        //FIXME frontGlass.setAlphaValue(alphaOfFrontGlas);
-        front.append(frontGlass);
-        this.append(front);
-
-        for (var i = 0; i < 6; i++) {
-            for (var j = 0; j < 2; j++) {
-                var cockpitSideTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i * 0.1, 0, -0.27 + j * 0.54), glm.scale(0.05, 1, 0.1)));
-                cockpitSideTransformation.append(new CubeRenderNode());
-                this.append(cockpitSideTransformation);
-
-                var cockpitSideGlassTransformation = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i * 0.1 + 0.05, 0, -0.27 + j * 0.54), glm.scale(0.11, 1, 0.1)));
-                var cockpitSideGlass = new CubeRenderNode();
-                //FIXME cockpitSideGlass.setAlphaValue(i % 2 == 1 ? 0.3 : 0.1);
-                cockpitSideGlassTransformation.append(cockpitSideGlass);
-                this.append(cockpitSideGlassTransformation);
-
-                if (j == 1 && i % 2 == 1) {
-                    this.doors.push(cockpitSideGlassTransformation);
-                }
-            }
-        }
-    }
-
-    render(context) {
-        //backup previous one
-        var previous = context.sceneMatrix;
-
-        //set current world matrix by multiplying it
-        //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed / 1000, 0, 0));
-        this.matrix = this.getPositionMatrix();
-        //mat4.multiply(this.matrix, mat4.create(), glm.translate((this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 1000, 0, 0));
-
-        if (previous === null) {
-            context.sceneMatrix = mat4.clone(this.matrix);
-        }
-        else {
-            //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
-        }
-        //render children
-        super.render(context);
-
-        //restore backup
-        context.sceneMatrix = previous;
-        //this.lastRenderedTime = projectTimeInMilliSeconds;
-    }
-
-    setSpeed(speed) {
-        this.offset += this.speed * (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet);
-        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
-        this.speed = speed;
-    }
-
-    getPositionMatrix() {
-        return mat4.multiply(mat4.create(), glm.translate(this.getXPosition(), 0, 0), this.initialPosition);
-    }
-
-    getXPosition() {
-        return (this.offset + (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet) * this.speed) / 8000;
-    }
-
-    resetPosition() {
-        this.offset = 0;
-        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
-    }
-
-    openDoors() {
-        if (this.doorsOpenIndex > 0.25) {
-            this.doorsOpenIndex -= 0.01;
-            this.doors.forEach(function (door) {
-                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(-0.01, 0, 0)));
-            });
-        }
-    }
-
-    closeDoors() {
-        if (this.doorsOpenIndex < 1) {
-            this.doorsOpenIndex += 0.01;
-            this.doors.forEach(function (door) {
-                door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(0.01, 0, 0)));
-            });
-        }
-    }
-}
-
-/**
- * A tram consists of multiple tram nodes
- */
-class Tram extends SceneGraphNode {
-
-    constructor() {
-        super();
-        for (var i = 0; i < 3; i++) {
-            var alphaOfFrontGlas = i == 2 ? 0.2 : 1;
-            super.append(new TramNode(glm.translate(i * 1.25, 0, 0), alphaOfFrontGlas));
-        }
-    }
-
-    setSpeed(speed) {
-        this.children.forEach(function (child) {
-            child.setSpeed(speed);
-        })
-    }
-
-    resetPosition() {
-        this.children.forEach(function (child) {
-            child.resetPosition();
-        })
-    }
-
-    openDoors() {
-        this.children.forEach(function (child) {
-            child.openDoors();
-        })
-    }
-
-    closeDoors() {
-        this.children.forEach(function (child) {
-            child.closeDoors();
-        })
-    }
-
-    getPosition() {
-        return this.children[0].getPosition();
-    }
-
-    getXPosition() {
-        return this.children[0].getXPosition();
-    }
-}
-
-
-class Bridge extends SceneGraphNode {
-    constructor() {
-        super();
-        var floor = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.2, 0, 0.25), glm.scale(16, 0.1, 1)));
-        floor.append(new CubeRenderNode(bridgeColorBuffer));
-        this.append(floor);
-
-        for (var rightSide = 0; rightSide < 2; rightSide++) {
-            for (var i = 0; i < 5; i++) {
-                for (var j = 0; j < 8; j++) {
-                    var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i * 1.65, 0.05, rightSide * 0.5));
-                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(-90 + (25.7 * j)));
-
-                    var balkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(12.5));
-
-                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.translate(0, 0.45, 0));
-                    var smallBalkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.translate(0, 0.45, 0));
-                    balkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.translate(0, 0.9, 0));
-
-                    columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.scale(0.05, 1.5, 0.05));
-                    balkMatrix = mat4.multiply(mat4.create(), balkMatrix, glm.scale(0.7, 0.05, 0.05));
-                    smallBalkMatrix = mat4.multiply(mat4.create(), smallBalkMatrix, glm.scale(0.4, 0.05, 0.05));
-
-                    var column = new TransformationSceneGraphNode(columnMatrix);
-                    column.append(new CubeRenderNode(bridgeColorBuffer));
-                    this.append(column);
-
-                    if (j >= 0 && j < 7) {
-                        var balk = new TransformationSceneGraphNode(balkMatrix);
-                        balk.append(new CubeRenderNode(bridgeColorBuffer));
-
-
-                        var smallBalk = new TransformationSceneGraphNode(smallBalkMatrix);
-                        smallBalk.append(new CubeRenderNode(bridgeColorBuffer));
-
-                        this.append(balk);
-                        this.append(smallBalk);
-                    } //not append the last balk
-
-                    //append crossBalk only from one side
-                    if (rightSide == 0 && j >= 1 && j < 7) {
-                        var crossBalkMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.translate(0, 0.32, 5));
-                        crossBalkMatrix = mat4.multiply(mat4.create(), crossBalkMatrix, glm.scale(1, 0.01, 18));
-                        var crossBalk = new TransformationSceneGraphNode(crossBalkMatrix);
-                        crossBalk.append(new CubeRenderNode(bridgeColorBuffer));
-                        this.append(crossBalk);
-                    }
-
-
-                }
-            }
-        }
-    }
-}
-
-
 class Station extends SceneGraphNode {
     constructor() {
         super();
-        var platform = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)));
-        platform.append(new CubeRenderNode());
+        var platform = new TransformationSGNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)), new CubeRenderNode());
         this.append(platform);
 
-        var column = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2, -0.2), glm.scale(0.02, 0.5, 0.02)));
-        column.append(new CubeRenderNode());
+        var column = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2, -0.2), glm.scale(0.02, 0.5, 0.02)), new CubeRenderNode());
         this.append(column);
 
-        var display = new TransformationSceneGraphNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)));
-        display.append(new CubeRenderNode());
+        var display = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)), new CubeRenderNode());
         this.append(display);
     }
-}
-
-
-class PrismRenderNode extends SceneGraphNode {
-    constructor(colorBuffer) {
-        super();
-        this.alpha = 1; //initialy the cube is not transparent at all
-        if (colorBuffer == null) {
-            this.colorBuffer = cubeColorBuffer;
-        }
-        else this.colorBuffer = colorBuffer;
-    }
-
-    render(context) {
-
-        //setting the model view and projection matrix on shader
-        setUpModelViewMatrix(context.sceneMatrix, context.viewMatrix);
-
-        var positionLocation = gl.getAttribLocation(context.shader, 'a_position');
-        gl.bindBuffer(gl.ARRAY_BUFFER, prismVertexBuffer);
-        gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(positionLocation);
-
-        var colorLocation = gl.getAttribLocation(context.shader, 'a_color');
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.colorBuffer);
-        gl.vertexAttribPointer(colorLocation, 3, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(colorLocation);
-
-        gl.uniform1f(gl.getUniformLocation(context.shader, 'u_alpha'), this.alpha);
-
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
-        gl.drawElements(gl.TRIANGLES, cubeIndices.length, gl.UNSIGNED_SHORT, 0); //LINE_STRIP
-
-        //render children
-        super.render(context);
-    }
-}
-
-
-class TransformationSceneGraphNode extends SceneGraphNode {
-    /**
-     * the matrix to apply
-     * @param matrix
-     */
-    constructor(matrix) {
-        super();
-        this.matrix = matrix || mat4.create();
-    }
-
-    render(context) {
-        //backup previous one
-        var previous = context.sceneMatrix;
-        //set current world matrix by multiplying it
-        if (previous === null) {
-            context.sceneMatrix = mat4.clone(this.matrix);
-        }
-        else {
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
-        }
-
-        //render children
-        super.render(context);
-        //restore backup
-        context.sceneMatrix = previous;
-    }
-
-    setMatrix(matrix) {
-        this.matrix = matrix;
-    }
-}
-
-class BillboardNode extends TransformationSceneGraphNode {
-
-    constructor() {
-        super();
-        this.alpha = 1;
-        var quadRenderNode = new QuadRenderNode();
-        this.append(quadRenderNode);
-        this.absPosition = [1, 0, 1];
-    }
-
-    render(context) {
-        var dir = vec3.create();
-        vec3.sub(dir, eye, this.absPosition);
-        vec3.scale(dir, dir, 1 / vec3.length(dir));
-        var dirGround = [dir[0], 0, dir[2]];
-        var stdVec = [1, 0, 0];
-
-        var xAngle = vec3.angle(dirGround, stdVec);
-        var yAngle = vec3.angle(dir, dirGround);
-        xAngle = convertRadiansToDegree(xAngle);
-        yAngle = convertRadiansToDegree(yAngle);
-        //cos(alpha)=cos(360-alpha): xAngle value is [0;180].
-        // Depending on the x-axis difference we should use xAngle or (360-xAngle) [+90 degrees offset]
-        if (eye[2] < this.absPosition[2]) {
-            xAngle = xAngle + 90;
-        } else {
-            xAngle = 90 - xAngle;
-        }
-        //cos(alpha)=cos(360-alpha): yAngle value is [0;180].
-        // Depending on the y-axis difference we should use yAngle or (360-yAngle)
-        if (eye[1] < this.absPosition[1]) {
-            yAngle = yAngle + 90;
-        } else {
-            yAngle = 90 - yAngle;
-        }
-
-        this.matrix = mat4.multiply(this.matrix, glm.rotateY(xAngle), glm.rotateX(yAngle));
-
-        super.render(context);
-    }
-
-    setPosition(x, y, z) {
-        this.absPosition = [x, y, z];
-    }
-
 }
 
 function convertDegreeToRadians(degree) {

@@ -6,12 +6,13 @@ var quadVertices = new Float32Array([
     1.0, 0,-1.0,
     1.0,0, 1.0]);
 var quadTextures = new Float32Array([
-    -1.0,-1.0,
-    1.0, -1.0,
-    -1.0, 1.0,
-    -1.0, 1.0,
-    1.0, -1.0,
+    0.0,0.0,
+    1.0, 0.0,
+    0.0, 1.0,
+    0.0, 1.0,
+    1.0, 0.0,
     1.0, 1.0]);
+
 
 var quadNormals = new Float32Array([
     0,1,0,
