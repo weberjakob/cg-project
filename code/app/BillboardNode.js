@@ -1,10 +1,11 @@
 class BillboardNode extends TransformationSGNode {
 
-    constructor() {
+    constructor(xScale) {
         super();
         this.alpha = 1;
         var quadRenderNode = new QuadRenderNode();
-        this.append(quadRenderNode);
+        var scaleNode = new TransformationSGNode(glm.scale(xScale, 1, 1), quadRenderNode);
+        this.append(scaleNode);
         this.absPosition = [1, 0, 1];
     }
 

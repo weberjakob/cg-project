@@ -9,13 +9,13 @@ var aspectRatio = canvasWidth / canvasHeight;
 
 //rendering context
 var context;
+var rootNode, mainShaderRootNode, simpleShaderRootNode;
 
 //camera and projection settings
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
 var miniMapEye = vec3.create();
-var renderCount = 0; //only for debuging
 const miniMapYHeight = 20;
 var center = vec3.create();
 var up = vec3.create();
@@ -54,7 +54,7 @@ function oneSecondSinceLastRendering() {
 }*/
 
 var tram;
-var persons;
+var persons, billboardPersons;
 var personParent = "Station";
 var tram, tram2;
 
@@ -73,7 +73,6 @@ var quadColors = new Float32Array([
     0, 0, 1, 1,
     1, 1, 0, 1,
     0, 1, 0, 1]);
-
 
 
 //used for tram
@@ -135,6 +134,10 @@ loadResources({
     cement: 'models/cement.jpg',
     orange: 'models/orange.jpg',
     red: 'models/red.jpg',
+    staticcolorvs: 'shader/static_color.vs.glsl',
+    person1: 'models/person1.png',
+    person2: 'models/person2.png',
+    person3: 'models/person3.png',
     staticcolour_vs: 'shader/static_color.vs.glsl',
     staticcolour_fs: 'shader/static_color.fs.glsl'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
@@ -172,6 +175,7 @@ function init(resources) {
     createBridge(resources);
     createPrism(resources);
     createPerson(resources);
+    createBillboardedPeople(resources);
     createBillBoards(resources);
     createTram(resources);
     createTestCube(resources);
@@ -298,11 +302,25 @@ function createTram(resources) {
     rootNode.append(tramPosition);
 }
 
-function createPerson(resources) {
+function createPerson() {
     persons = new Array(1, 2, 3);
     for (i = 0; i < persons.length; i++) {
         persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
         rootNode.append(persons[i]);
+    }
+}
+
+function createBillboardedPeople(resources) {
+    billboardPersons = [1,2,3];
+    var textures = [resources.person1, resources.person2, resources.person3];
+    for (i = 0; i < billboardPersons.length; i++) {
+        var quadRenderNode = new BillboardNode(0.6);
+        quadRenderNode.setPosition(0.8+i/2.5, 0.1, 0.5);
+        var textureNode = new AdvancedTextureSGNode(textures[i], quadRenderNode);
+        var transformationMatrix = mat4.multiply(mat4.create(), glm.translate(0.8, 0.1, 0.5), glm.translate(i / 2.5, 0, 0));
+        transformationMatrix = mat4.multiply(transformationMatrix, transformationMatrix, glm.scale(0.04, 0.04, 0.04));
+        billboardPersons[i] = new TransformationSGNode(transformationMatrix, textureNode);
+        rootNode.append(billboardPersons[i]);
     }
 }
 
@@ -341,13 +359,13 @@ function createRails(resources) {
 
 function createStation(resources) {
     var station = new Station();
-    var textureStation = new AdvancedTextureSGNode(resources.sun, [station]);
+    var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
 }
 
 function createBillBoards(resources) {
-    var billboard1 = new BillboardNode();
+    var billboard1 = new BillboardNode(1);
     billboard1.setPosition(30, 2, -2);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
     var billboardPos = new TransformationSGNode(glm.translate(30, 2, -2), textureBillboardNode);
@@ -514,7 +532,6 @@ function render(timeInMilliseconds) {
 
     renderMainView();
     renderMiniMap(timeInMilliseconds);
-    renderCount++;
     //request another render call as soon as possible
     requestAnimationFrame(render);
 }
@@ -765,7 +782,6 @@ class Station extends SceneGraphNode {
         this.append(display);
     }
 }
-
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
