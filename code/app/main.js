@@ -408,15 +408,17 @@ function initBuffer() {
  */
 function render(timeInMilliseconds) {
 
-    //set background color to light gray
-    gl.clearColor(0.9, 0.9, 0.9, 1.0);
-    //clear the buffer
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    //enable depth test to let objects in front occluse objects further away
-    //set viewport back to original size
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
     gl.enable(gl.DEPTH_TEST);
     gl.disable(gl.SCISSOR_TEST);
+    //clear the buffer
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //set background color to light gray
+    gl.clearColor(0.9, 0.9, 0.9, 1);
+
+    //enable depth test to let objects in front occluse objects further away
+    //set viewport back to original size
+
     //TASK 1-1
     gl.enable(gl.BLEND);
     //TASK 1-2
@@ -491,8 +493,8 @@ function render(timeInMilliseconds) {
     gl.scissor(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
     gl.enable(gl.SCISSOR_TEST);
 
-    gl.clearColor(0.3, 0.3, 0.3, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clearColor(0.1, 0.1, 0.1, 1);
 
     var minimapViewMatrix = mat4.create();
     var minimapEye = vec3.fromValues(eye[0], minimapYHeight, eye[2]);
@@ -505,11 +507,6 @@ function render(timeInMilliseconds) {
     //restore viewMatrix
     context.viewMatrix = previous;
 
-    //request another render call as soon as possible
-    requestAnimationFrame(render);
-
-    //animate based on elapsed time
-    animatedAngle = timeInMilliseconds / 10;
     //project lasts for 30 seconds
     var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
     projectTimeInMilliSeconds = timeInMilliseconds % 30000;
@@ -517,11 +514,15 @@ function render(timeInMilliseconds) {
     if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
         resetPositions();
     }
+
     //0 to 5: scene
     // 5 to 25: scene 2
     //26 to 30: scene 3
     sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
     //sceneIndex = 3;
+
+    //request another render call as soon as possible
+    requestAnimationFrame(render);
 }
 
 //called to restart after 30 seconds
