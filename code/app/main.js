@@ -9,6 +9,7 @@ var aspectRatio = canvasWidth / canvasHeight;
 
 //rendering context
 var context;
+var rootNode, mainShaderRootNode, simpleShaderRootNode;
 
 //camera and projection settings
 var animatedAngle = 0;
@@ -44,7 +45,7 @@ var animationRepeatedCount = 0;   //tells us how often our scene was already rep
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 
 var tram;
-var persons;
+var persons, billboardPersons;
 var personParent = "Station";
 var tram, tram2;
 
@@ -122,7 +123,10 @@ loadResources({
     cement: 'models/cement.jpg',
     orange: 'models/orange.jpg',
     red: 'models/red.jpg',
-    staticcolorvs: 'shader/static_color.vs.glsl'
+    staticcolorvs: 'shader/static_color.vs.glsl',
+    person1: 'models/person1.png',
+    person2: 'models/person2.png',
+    person3: 'models/person3.png'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -156,6 +160,7 @@ function init(resources) {
     createBridge(resources);
     createPrism(resources);
     createPerson(resources);
+    createBillboardedPeople(resources);
     createBillBoards(resources);
     createTram(resources);
     createTestCube(resources);
@@ -282,11 +287,25 @@ function createTram(resources) {
     rootNode.append(tramPosition);
 }
 
-function createPerson(resources) {
+function createPerson() {
     persons = new Array(1, 2, 3);
     for (i = 0; i < persons.length; i++) {
         persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
         rootNode.append(persons[i]);
+    }
+}
+
+function createBillboardedPeople(resources) {
+    billboardPersons = [1,2,3];
+    var textures = [resources.person1, resources.person2, resources.person3];
+    for (i = 0; i < billboardPersons.length; i++) {
+        var quadRenderNode = new BillboardNode(0.6);
+        quadRenderNode.setPosition(0.8+i/2.5, 0.1, 0.5);
+        var textureNode = new AdvancedTextureSGNode(textures[i], quadRenderNode);
+        var transformationMatrix = mat4.multiply(mat4.create(), glm.translate(0.8, 0.1, 0.5), glm.translate(i / 2.5, 0, 0));
+        transformationMatrix = mat4.multiply(transformationMatrix, transformationMatrix, glm.scale(0.04, 0.04, 0.04));
+        billboardPersons[i] = new TransformationSGNode(transformationMatrix, textureNode);
+        rootNode.append(billboardPersons[i]);
     }
 }
 
@@ -325,13 +344,13 @@ function createRails(resources) {
 
 function createStation(resources) {
     var station = new Station();
-    var textureStation = new AdvancedTextureSGNode(resources.sun, [station]);
+    var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
 }
 
 function createBillBoards(resources) {
-    var billboard1 = new BillboardNode();
+    var billboard1 = new BillboardNode(1);
     billboard1.setPosition(30, 2, -2);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
     var billboardPos = new TransformationSGNode(glm.translate(30, 2, -2), textureBillboardNode);
@@ -443,24 +462,23 @@ function render(timeInMilliseconds) {
             else if (projectTimeInMilliSeconds < 8000) {
                 //FIXME tram.openDoors();
                 for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(1.25);
+                     persons[i].setSpeed(1.25);
                 }
             }
             else if (projectTimeInMilliSeconds < 10000) {
                 for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(0);
+                     persons[i].setSpeed(0);
                 }
             }
             else if (projectTimeInMilliSeconds < 11000) {
-                //FIXME tram.closeDoors();
+                 tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 12500) {
                 if (personParent == "Station") {
                     personParent = "Tram";
                     for (i = 0; i < 3; i++) {
-                        rootNode.remove(persons[i]);
-                        persons[i].rotateAndTranslate(-0.10, -0.005, -0.03);
-                        tram.append(persons[i]);
+                         rootNode.remove(persons[i]);
+                         tram.append(persons[i]);
                     }
                 }
                 tram.setSpeed(10);
@@ -540,6 +558,7 @@ function renderMiniMap() {
     rootNode.render(context);
     //restore viewMatrix
     context.viewMatrix = previous;
+
 }
 
 //called to restart after 30 seconds
