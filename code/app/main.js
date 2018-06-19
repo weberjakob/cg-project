@@ -14,7 +14,7 @@ var context;
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
-var minimapYHeight = 20;
+const miniMapYHeight = 20;
 var center = vec3.create();
 var up = vec3.create();
 const camera = {
@@ -158,7 +158,7 @@ function init(resources) {
     createPerson(resources);
     createBillBoards(resources);
     createTram(resources);
-
+    createTestCube(resources);
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -325,7 +325,7 @@ function createRails(resources) {
 
 function createStation(resources) {
     var station = new Station();
-    var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
+    var textureStation = new AdvancedTextureSGNode(resources.sun, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
 }
@@ -353,6 +353,14 @@ function createPrism(resources) {
     var prismTransformation2 = new TransformationSGNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)), [texturePrismNode2]);
     rootNode.append(prismTransformation2);
 }
+
+function createTestCube(resources) {
+    var testCube = new TransformationSGNode(glm.translate(3,4, 0) , [new CubeRenderNode()]);
+    var testCubeTextured = new AdvancedTextureSGNode(resources.cement, [testCube]);
+
+    rootNode.append(testCubeTextured);
+}
+
 
 function initBuffer() {
     //init quad buffer
@@ -408,29 +416,21 @@ function initBuffer() {
  */
 function render(timeInMilliseconds) {
 
-    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-    gl.enable(gl.DEPTH_TEST);
-    gl.disable(gl.SCISSOR_TEST);
-    //clear the buffer
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    //set background color to light gray
-    gl.clearColor(0.9, 0.9, 0.9, 1);
+    //project lasts for 30 seconds
+    var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
+    projectTimeInMilliSeconds = timeInMilliseconds % 30000;
+    //if animation gets repeated:
+    if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
+        resetPositions();
+    }
 
-    //enable depth test to let objects in front occluse objects further away
-    //set viewport back to original size
+    //0 to 5: scene
+    // 5 to 25: scene 2
+    //26 to 30: scene 3
+    sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
+    //sceneIndex = 3;
 
-    //TASK 1-1
-    gl.enable(gl.BLEND);
-    //TASK 1-2
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-    //activate this shader program
-    gl.useProgram(shaderProgram);
-
-    context = createSceneGraphContext(gl, shaderProgram);
-    displayText("c: User cam, f: front tram cam");
     //update tram transformation
-
     switch (sceneIndex) {
         case 1:
             if (projectTimeInMilliSeconds < 4000) {
@@ -482,47 +482,64 @@ function render(timeInMilliseconds) {
             }
             break;
     }
+
+    renderMainView();
+    renderMiniMap();
+    //request another render call as soon as possible
+    requestAnimationFrame(render);
+}
+
+function renderMainView() {
+    //set viewport back to original size
+    gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+    //enable depth test to let objects in front occluse objects further away
+    gl.enable(gl.DEPTH_TEST);
+    //disable scissor-test so the main view is not overdrawn by the miniMap
+    gl.disable(gl.SCISSOR_TEST);
+
+    //set background color to light gray
+    gl.clearColor(0.5, 0.5, 0.5, 1);
+    //clear the buffer
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    //activate shader program
+    gl.useProgram(shaderProgram);
+
+    context = createSceneGraphContext(gl, shaderProgram);
+    displayText("c: User cam, f: front tram cam");
     rootNode.render(context);
+}
+
+function renderMiniMap() {
 
     // draw mini map
-    const miniMapWidth = gl.canvas.width / 3 | 0;
-    const miniMapHeight = gl.canvas.height / 3 | 0;
+    const miniMapWidth = gl.canvas.width / 3;
+    const miniMapHeight = gl.canvas.height / 3;
     const miniMapX = gl.canvas.width - miniMapWidth;
     const miniMapY = gl.canvas.height - miniMapHeight;
     gl.viewport(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
+
+    //set a scissor, so that only the given bounds are rendered
     gl.scissor(miniMapX, miniMapY, miniMapWidth, miniMapHeight);
     gl.enable(gl.SCISSOR_TEST);
 
+    gl.clearColor(0.9, 0.9, 0.9, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    gl.clearColor(0.1, 0.1, 0.1, 1);
 
-    var minimapViewMatrix = mat4.create();
-    var minimapEye = vec3.fromValues(eye[0], minimapYHeight, eye[2]);
-    var minimapCenter = vec3.fromValues(center[0], 0, center[2]);
-    mat4.lookAt(minimapViewMatrix, minimapEye, minimapCenter, up);
+
+    var miniMapViewMatrix = mat4.create();
+    var miniMapEye = vec3.fromValues(eye[0], miniMapYHeight, eye[2]);
+    var miniMapCenter = vec3.fromValues(center[0], 0, center[2]);
+    mat4.lookAt(miniMapViewMatrix, miniMapEye, miniMapCenter, up);
     //save viewMatrix
     var previous = context.viewMatrix;
-    context.viewMatrix = minimapViewMatrix;
+    context.viewMatrix = miniMapViewMatrix;
     rootNode.render(context);
     //restore viewMatrix
     context.viewMatrix = previous;
-
-    //project lasts for 30 seconds
-    var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
-    projectTimeInMilliSeconds = timeInMilliseconds % 30000;
-    //if animation gets repeated:
-    if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
-        resetPositions();
-    }
-
-    //0 to 5: scene
-    // 5 to 25: scene 2
-    //26 to 30: scene 3
-    sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
-    //sceneIndex = 3;
-
-    //request another render call as soon as possible
-    requestAnimationFrame(render);
 }
 
 //called to restart after 30 seconds

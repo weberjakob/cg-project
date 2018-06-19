@@ -42,7 +42,7 @@ class PrismRenderNode extends SceneGraphNode {
             position: prismVertices,
             normal: prismNormals,
             texture: prismTextures,
-            indices: prismIndices
+            index: prismIndices
         });
     }
 
