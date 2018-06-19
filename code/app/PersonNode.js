@@ -1,19 +1,20 @@
-class PersonNode extends SceneGraphNode {
+class PersonNode extends MovingNode {
     constructor(initialPosition) {
-        super();
-        this.turned = false;
+        super(mat4.multiply(mat4.create(), initialPosition, glm.scale(7, 7, 7)));
+        /*this.turned = false;
         this.speed = 0;
-        this.legOffset = 0;
+        this.legOffset = 0;*/
         this.rigidBodyTransformationMatrix = mat4.create();
+        /*
         if (initialPosition == null) {
             this.initialPosition = glm.translate(0, 0, 0);
-
         }
         else {
             this.initialPosition = initialPosition;
         }
 
         this.resetPosition();
+        */
         var rigidBodyNode = new TransformationSGNode(this.rigidBodyTransformationMatrix);
         var body = new TransformationSGNode(glm.scale(0.01, 0.01, 0.01));
         var bodyTrans = new TransformationSGNode(glm.scale(0.6, 1, 0.4));
@@ -42,12 +43,13 @@ class PersonNode extends SceneGraphNode {
 
     }
 
+    /*
     rotateAndTranslate(a, b, c) {
         this.resetPosition();
         mat4.multiply(this.rigidBodyTransformationMatrix, glm.rotateY(-90), glm.translate(a, b, c));
         mat4.multiply(this.matrix, this.matrix, this.rigidBodyTransformationMatrix);
-    }
-
+    }*/
+/*
     closeDoors() {
         if (!this.turned) {
 
@@ -56,7 +58,8 @@ class PersonNode extends SceneGraphNode {
             this.turned = true;
         }
     }
-
+    */
+/*
     setSpeed(speed) {
         this.speed = speed;
     }
@@ -85,5 +88,5 @@ class PersonNode extends SceneGraphNode {
         super.render(context);
         context.sceneMatrix = previous;
     }
-
+*/
 }

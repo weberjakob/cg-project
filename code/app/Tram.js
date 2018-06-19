@@ -1,16 +1,8 @@
-class TramNode extends SceneGraphNode {
+class TramNode extends MovingNode {
 
     constructor(initialPosition, alphaOfFrontGlas) {
-        super();
-        if (initialPosition == null) {
-            this.initialPosition = mat4.create();
-        }
-        else {
-            this.initialPosition = initialPosition;
-        }
-        mat4.multiply(this.initialPosition, this.initialPosition, glm.scale(2, 0.3, 0.3));
-        this.speed = 0;
-        this.resetPosition();//sets offset and timeSinceLastSpeedSet to initial value
+        super(mat4.multiply(mat4.create(), initialPosition, glm.scale(2, 0.3, 0.3))); //the scaling here came from old code
+        //super(initialPosition);
         this.doors = [];
         this.doorsOpenIndex = 1;
 
@@ -48,49 +40,6 @@ class TramNode extends SceneGraphNode {
                 }
             }
         }
-    }
-
-    render(context) {
-        //backup previous one
-        var previous = context.sceneMatrix;
-
-        //set current world matrix by multiplying it
-        //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed / 1000, 0, 0));
-        this.matrix = this.getPositionMatrix();
-        //mat4.multiply(this.matrix, mat4.create(), glm.translate((this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 1000, 0, 0));
-
-        if (previous === null) {
-            context.sceneMatrix = mat4.clone(this.matrix);
-        }
-        else {
-            //context.sceneMatrix = mat4.multiply(mat4.create(), previous, mat4.multiply(mat4.create(), this.matrix, glm.translate(projectTimeInMilliSeconds * this.speed/10000, 0, 0)));
-            context.sceneMatrix = mat4.multiply(mat4.create(), previous, this.matrix);
-        }
-        //render children
-        super.render(context);
-
-        //restore backup
-        context.sceneMatrix = previous;
-        //this.lastRenderedTime = projectTimeInMilliSeconds;
-    }
-
-    setSpeed(speed) {
-        this.offset += this.speed * (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet);
-        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
-        this.speed = speed;
-    }
-
-    getPositionMatrix() {
-        return mat4.multiply(mat4.create(), glm.translate(this.getXPosition(), 0, 0), this.initialPosition);
-    }
-
-    getXPosition() {
-        return (this.offset + (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet) * this.speed) / 8000;
-    }
-
-    resetPosition() {
-        this.offset = 0;
-        this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
     }
 
     openDoors() {
@@ -153,7 +102,9 @@ class Tram extends SceneGraphNode {
         return this.children[0].getPosition();
     }
 
-    getXPosition() {
+    /*
+    getPosition() {
         return this.children[0].getXPosition();
     }
+    */
 }

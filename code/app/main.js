@@ -2,7 +2,7 @@
 var gl = null;
 //shader program
 var shaderProgram = null;
-
+var lineDrawProgram = null;
 var canvasWidth = 800;
 var canvasHeight = 800;
 var aspectRatio = canvasWidth / canvasHeight;
@@ -14,6 +14,8 @@ var context;
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
+var miniMapEye = vec3.create();
+var renderCount = 0; //only for debuging
 const miniMapYHeight = 20;
 var center = vec3.create();
 var up = vec3.create();
@@ -42,6 +44,14 @@ var churchTexture;
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
+/*var lastSecondRendered = 0;
+function oneSecondSinceLastRendering() {
+    if(projectTimeInMilliSeconds / 1000 > lastSecondRendered) {
+        lastSecondRendered++;
+        return true;
+    }
+    else return false;
+}*/
 
 var tram;
 var persons;
@@ -51,8 +61,10 @@ var tram, tram2;
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer, sunColorBuffer;
 var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, prismColorBuffer, cubeIndexBuffer,
-    personColorBuffer;
+    personColorBuffer, lineBuffer;
 
+//render Lines
+var linePositions = [];
 
 var quadColors = new Float32Array([
     1, 0, 0, 1,
@@ -61,6 +73,7 @@ var quadColors = new Float32Array([
     0, 0, 1, 1,
     1, 1, 0, 1,
     0, 1, 0, 1]);
+
 
 
 //used for tram
@@ -122,7 +135,8 @@ loadResources({
     cement: 'models/cement.jpg',
     orange: 'models/orange.jpg',
     red: 'models/red.jpg',
-    staticcolorvs: 'shader/static_color.vs.glsl'
+    staticcolour_vs: 'shader/static_color.vs.glsl',
+    staticcolour_fs: 'shader/static_color.fs.glsl'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -140,6 +154,8 @@ function init(resources) {
     //in WebGL / OpenGL3 we have to create and use our own shaders for the programmable pipeline
     //create the shader program
     shaderProgram = createProgram(gl, resources.texture_vs, resources.texture_fs);
+
+    lineDrawProgram = createProgram(gl, resources.staticcolour_vs, resources.staticcolour_fs);
 
     /*set buffers for cube*/
     initBuffer();
@@ -271,7 +287,7 @@ function createRiver(resources) {
 function createTram(resources) {
     tram = new Tram();
     var tramtextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
-    var tramPosition = new TransformationSGNode(glm.translate(-2, 0.1, 0.05), [tramtextureNode]);
+    var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramtextureNode]);
 
     //tram2 is driving in the opposite direction
     tram2 = new Tram();
@@ -408,6 +424,7 @@ function initBuffer() {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, cubeIndexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 
+    lineBuffer = gl.createBuffer();
 
 }
 
@@ -434,42 +451,54 @@ function render(timeInMilliseconds) {
     switch (sceneIndex) {
         case 1:
             if (projectTimeInMilliSeconds < 4000) {
-                tram.setSpeed(4);
-                tram2.setSpeed(4);
+                tram.setSpeed(vec3.fromValues(10,0,0));
+                tram2.setSpeed(vec3.fromValues(10,0,0));
             }
             else if (projectTimeInMilliSeconds < 5000) {
-                tram.setSpeed(0);
+                tram.setSpeed(vec3.create());
             }
             else if (projectTimeInMilliSeconds < 8000) {
                 //FIXME tram.openDoors();
-                for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(1.25);
-                }
+                persons.forEach(function(person) {
+                    person.setSpeed(vec3.fromValues(0,0,-1.5));
+                });
+                /*for (i = 0; i < 3; i++) {
+                    persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
+                }*/
             }
             else if (projectTimeInMilliSeconds < 10000) {
-                for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(0);
-                }
+                persons.forEach(function(person) {
+                   person.setSpeed(vec3.create());
+                });
+
             }
             else if (projectTimeInMilliSeconds < 11000) {
                 //FIXME tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 12500) {
+                /*
                 if (personParent == "Station") {
                     personParent = "Tram";
                     for (i = 0; i < 3; i++) {
-                        rootNode.remove(persons[i]);
+                        //rootNode.remove(persons[i]);
+                        persons[i]
                         persons[i].rotateAndTranslate(-0.10, -0.005, -0.03);
-                        tram.append(persons[i]);
+
+                        //tram.append(persons[i]);
                     }
                 }
-                tram.setSpeed(10);
+                */
+                persons.forEach(function(person) {
+                    person.setSpeed(vec3.fromValues(10,0,0));
+                });
+                tram.setSpeed(vec3.fromValues(10,0,0));
             }
             break;
         case 2:
             break;
         case 3:
             if (projectTimeInMilliSeconds > 29000) {
+                /*
                 if (personParent == "Tram") {
                     personParent = "Station";
                     for (i = 0; i < persons.length; i++) {
@@ -478,13 +507,14 @@ function render(timeInMilliseconds) {
                         rootNode.append(persons[i]);
 
                     }
-                }
+                }*/
             }
             break;
     }
 
     renderMainView();
-    renderMiniMap();
+    renderMiniMap(timeInMilliseconds);
+    renderCount++;
     //request another render call as soon as possible
     requestAnimationFrame(render);
 }
@@ -513,8 +543,7 @@ function renderMainView() {
     rootNode.render(context);
 }
 
-function renderMiniMap() {
-
+function renderMiniMap(timeInMilliseconds) {
     // draw mini map
     const miniMapWidth = gl.canvas.width / 3;
     const miniMapHeight = gl.canvas.height / 3;
@@ -531,21 +560,61 @@ function renderMiniMap() {
 
 
     var miniMapViewMatrix = mat4.create();
-    var miniMapEye = vec3.fromValues(eye[0], miniMapYHeight, eye[2]);
+    miniMapEye = vec3.fromValues(eye[0], miniMapYHeight, eye[2]);
     var miniMapCenter = vec3.fromValues(center[0], 0, center[2]);
     mat4.lookAt(miniMapViewMatrix, miniMapEye, miniMapCenter, up);
     //save viewMatrix
     var previous = context.viewMatrix;
     context.viewMatrix = miniMapViewMatrix;
     rootNode.render(context);
+    renderLine(timeInMilliseconds);
+
     //restore viewMatrix
     context.viewMatrix = previous;
+}
+
+function renderLine(timeInMilliseconds) {
+    //add/remove line points to the array
+    linePositions.push(miniMapEye[0]);
+    linePositions.push(6);
+    linePositions.push(miniMapEye[2]);
+    //if animation lasted more than 10 seconds start removing first elements
+    if(timeInMilliseconds > 10000) {
+        linePositions.shift();
+        linePositions.shift();
+        linePositions.shift();
+    }
+
+    //draw lines
+    gl.bindBuffer(gl.ARRAY_BUFFER, lineBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(linePositions), gl.STATIC_DRAW);
+    //use program with static shaders
+    gl.useProgram(lineDrawProgram);
+    const lineColor = { r: 1.0, g: 0.2, b: 0.0};
+    gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
+    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
+    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false,  context.projectionMatrix);
+    /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
+    gl.enableVertexAttribArray(colorLocation);
+    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+    gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 0);
+    */
+    var positionLoc = gl.getAttribLocation(lineDrawProgram, 'a_position');
+    gl.enableVertexAttribArray(positionLoc);
+    gl.bindBuffer(gl.ARRAY_BUFFER, lineBuffer);
+    gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
+    // Draw the triangle
+    gl.enable(gl.DEPTH_TEST);
+    gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length/3);
 }
 
 //called to restart after 30 seconds
 function resetPositions() {
     tram.resetPosition();
     tram2.resetPosition();
+    persons.forEach(function(person) {
+        person.resetPosition();
+    })
 }
 
 function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
@@ -578,7 +647,7 @@ function createSceneGraphContext(gl, shader) {
 var xPosition = 0;
 
 function calculateViewMatrix() {
-    xPosition = tram.getXPosition();
+    xPosition = tram.getPosition()[0];
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
@@ -696,6 +765,7 @@ class Station extends SceneGraphNode {
         this.append(display);
     }
 }
+
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
