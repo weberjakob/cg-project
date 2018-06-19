@@ -341,8 +341,8 @@ function createBillBoards(resources) {
 function createPrism(resources) {
     //prism before the bridge:
     var prism = new PrismRenderNode();
-    var prismTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateY(90), glm.scale(1.5, 0.3, 57));
-    mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.0, -0.3, 0));
+    var prismTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateY(90), glm.scale(1.9, 0.3, 57));
+    mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.04, -0.3, 0));
     var texturePrismNode = new AdvancedTextureSGNode(resources.cement, [prism]);
     var prismTransformation = new TransformationSGNode(prismTransformationMatrix, [texturePrismNode]);
     rootNode.append(prismTransformation);
