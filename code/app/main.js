@@ -475,8 +475,8 @@ function render(timeInMilliseconds) {
             else if (projectTimeInMilliSeconds < 5000) {
                 tram.setSpeed(vec3.create());
             }
-            else if (projectTimeInMilliSeconds < 8000) {
-                //FIXME tram.openDoors();
+            else if (projectTimeInMilliSeconds < 7000) {
+                tram.openDoors();
                 persons.forEach(function(person) {
                     person.setSpeed(vec3.fromValues(0,0,-1.5));
                 });
@@ -484,14 +484,13 @@ function render(timeInMilliseconds) {
                     persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
                 }*/
             }
-            else if (projectTimeInMilliSeconds < 10000) {
+            else if (projectTimeInMilliSeconds < 9000) {
                 persons.forEach(function(person) {
                    person.setSpeed(vec3.create());
                 });
-
             }
-            else if (projectTimeInMilliSeconds < 11000) {
-                //FIXME tram.closeDoors();
+            else if(projectTimeInMilliSeconds < 9500) {
+                tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 12500) {
                 /*

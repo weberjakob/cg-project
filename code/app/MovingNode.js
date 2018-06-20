@@ -20,6 +20,10 @@ class MovingNode extends SceneGraphNode {
 
         //set current world matrix by multiplying it
         //mat4.multiply(this.matrix, this.matrix, glm.translate(this.speed / 1000, 0, 0));
+        if(this.isMovingToSpecificPosition && this.timeToStopMoving < projectTimeInMilliSeconds) {
+            this.setSpeed([0,0,0]);
+            this.isMovingToSpecificPosition = false;
+        }
         this.matrix = this.getPositionMatrix();
         //mat4.multiply(this.matrix, mat4.create(), glm.translate((this.offset + (projectTimeInMilliSeconds-this.timeSinceLastSpeedSet) * this.speed) / 1000, 0, 0));
 
@@ -46,6 +50,14 @@ class MovingNode extends SceneGraphNode {
         //this.speed = speed;
     }
 
+    moveTo(position, timeToGetThereInMilliseconds) {
+        var difference = vec3.subtract(vec3.create(), position , this.getPosition());
+        var speed = vec3.scale(vec3.create(), difference, 1/(timeToGetThereInMilliseconds*slowDownFactor));
+        this.timeToStopMoving = projectTimeInMilliSeconds + timeToGetThereInMilliseconds;
+        this.isMovingToSpecificPosition = true;
+        this.setSpeed(speed);
+    }
+
     getPositionMatrix() {
         return mat4.multiply(mat4.create(), glm.translate(this.getPosition()[0], this.getPosition()[1], this.getPosition()[2]), this.initialPosition);
     }
@@ -62,5 +74,7 @@ class MovingNode extends SceneGraphNode {
         this.offset = vec3.create();
         this.speed = [0,0,0];
         this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
+        this.isMovingToSpecificPosition = false;
+        this.timeToStopMoving = 0;
     }
 }

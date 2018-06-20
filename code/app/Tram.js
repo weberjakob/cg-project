@@ -31,33 +31,44 @@ class TramNode extends MovingNode {
 
                 var cockpitSideGlassTransformation = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(-0.285 + i * 0.1 + 0.05, 0, -0.27 + j * 0.54), glm.scale(0.11, 1, 0.1)));
                 var cockpitSideGlass = new CubeRenderNode();
+
                 //FIXME cockpitSideGlass.setAlphaValue(i % 2 == 1 ? 0.3 : 0.1);
                 cockpitSideGlassTransformation.append(cockpitSideGlass);
-                this.append(cockpitSideGlassTransformation);
+                var door = new MovingNode();
+                door.append(cockpitSideGlassTransformation);
+                this.append(door);
 
                 if (j == 1 && i % 2 == 1) {
-                    this.doors.push(cockpitSideGlassTransformation);
+                    this.doors.push(door);
                 }
             }
         }
     }
 
     openDoors() {
+        this.doors.forEach(function (door, index) {
+            door.moveTo([-0.07,0,0], 900);
+        });
+        /*
         if (this.doorsOpenIndex > 0.25) {
             this.doorsOpenIndex -= 0.01;
             this.doors.forEach(function (door) {
                 door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(-0.01, 0, 0)));
             });
-        }
+        }*/
     }
 
     closeDoors() {
+        this.doors.forEach(function (door, index) {
+            door.moveTo([0,0,0], 900);
+        });
+        /*
         if (this.doorsOpenIndex < 1) {
             this.doorsOpenIndex += 0.01;
             this.doors.forEach(function (door) {
                 door.setMatrix(mat4.multiply(mat4.create(), door.matrix, glm.translate(0.01, 0, 0)));
             });
-        }
+        }*/
     }
 }
 
