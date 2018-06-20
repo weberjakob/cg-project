@@ -31,7 +31,7 @@ const camera = {
 var upButtonPressed = false;
 var downButtonPressed = false;
 var userCamera = false;
-var tramFrontCamera = true;
+var tramFrontCamera = false;
 var mouseButtonPressed = false;
 var mouseX = 0, mouseY = 0, mousePrevX = 0, mousePrevY = 0;
 var zoomspeed = 0.1;
@@ -140,7 +140,8 @@ loadResources({
     person2: 'models/person2.png',
     person3: 'models/person3.png',
     staticcolour_vs: 'shader/static_color.vs.glsl',
-    staticcolour_fs: 'shader/static_color.fs.glsl'
+    staticcolour_fs: 'shader/static_color.fs.glsl',
+    stopsign: 'models/stopsign.png'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -359,7 +360,7 @@ function createRails(resources) {
 }
 
 function createStation(resources) {
-    var station = new Station(resources.hbftexture);
+    var station = new Station(resources.hbftexture, resources.stopsign);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
@@ -769,27 +770,7 @@ class SceneGraphNode {
  */
 
 
-class Station extends SceneGraphNode {
-    constructor(stationNameTexture) {
-        super();
-        var platform = new TransformationSGNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)), new CubeRenderNode());
-        this.append(platform);
 
-        var column = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2, -0.2), glm.scale(0.02, 0.5, 0.02)), new CubeRenderNode());
-        this.append(column);
-
-        var display = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)), new CubeRenderNode());
-        this.append(display);
-
-        //set Station Name:
-        var billboard1 = new RotatingImage(1);
-        //billboard1.setPosition(0, 2, -2);
-        var textureBillboardNode = new AdvancedTextureSGNode(stationNameTexture, [billboard1]);
-        var billboardPos = new TransformationSGNode(glm.translate(0, 2, 0), textureBillboardNode);
-        this.append(billboardPos);
-    }
-
-}
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
