@@ -126,6 +126,7 @@ loadResources({
     phong_vs: 'shader/phong.vs.glsl',
     phong_fs: 'shader/phong.fs.glsl',
     churchtexture: 'models/neuerdom.jpg',
+    hbftexture: 'models/hbf.png',
     rivertexture: 'models/water.jpg',
     cobblestone: 'models/cobblestone.jpg',
     bridge_metal: 'models/metal.jpg',
@@ -171,12 +172,12 @@ function init(resources) {
     createLightNodes(resources);
     createRiver(resources);
     createRails(resources);
-    createStation(resources);
     createBridge(resources);
     createPrism(resources);
     createPerson(resources);
     createBillboardedPeople(resources);
     createBillBoards(resources);
+    createStation(resources);
     createTram(resources);
     createTestCube(resources);
 
@@ -358,7 +359,7 @@ function createRails(resources) {
 }
 
 function createStation(resources) {
-    var station = new Station();
+    var station = new Station(resources.hbftexture);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
@@ -769,7 +770,7 @@ class SceneGraphNode {
 
 
 class Station extends SceneGraphNode {
-    constructor() {
+    constructor(stationNameTexture) {
         super();
         var platform = new TransformationSGNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)), new CubeRenderNode());
         this.append(platform);
@@ -779,7 +780,15 @@ class Station extends SceneGraphNode {
 
         var display = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)), new CubeRenderNode());
         this.append(display);
+
+        //set Station Name:
+        var billboard1 = new RotatingImage(1);
+        //billboard1.setPosition(0, 2, -2);
+        var textureBillboardNode = new AdvancedTextureSGNode(stationNameTexture, [billboard1]);
+        var billboardPos = new TransformationSGNode(glm.translate(0, 2, 0), textureBillboardNode);
+        this.append(billboardPos);
     }
+
 }
 
 function convertDegreeToRadians(degree) {
