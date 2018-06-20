@@ -1,6 +1,8 @@
-class PersonNode extends MovingNode {
+class PersonNode extends SceneGraphNode {
     constructor(initialPosition) {
-        super(mat4.multiply(mat4.create(), initialPosition, glm.scale(7, 7, 7)));
+        super();
+
+        //super(mat4.multiply(mat4.create(), initialPosition, glm.scale(7, 7, 7)));
         /*this.turned = false;
         this.speed = 0;
         this.legOffset = 0;*/

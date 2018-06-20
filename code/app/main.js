@@ -271,7 +271,6 @@ function createRiver(resources) {
 
 function createTram(resources) {
     tram = new Tram();
-    //tram.children[0].append(new SpotLightNode([0,0,0], createLightSphere(resources), [0,1,0]));
     var tramtextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
     var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramtextureNode]);
 
@@ -285,9 +284,22 @@ function createTram(resources) {
 }
 
 function createPerson() {
-    persons = new Array(1, 2, 3);
-    for (i = 0; i < persons.length; i++) {
-        persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
+    persons = [];
+    for (i = 0; i < 3; i++) {
+
+        //persons[i] = new PersonNode();//mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
+        persons[i] = new MovingNode(); /*mat4.multiply(
+                                                            mat4.create(),
+            glm.scale(7,7,7),
+                                                            glm.translate(i / 2.5 + 0.9, 0.1, 0.5)
+                                                            ));
+        */
+
+        persons[i].append(new TransformationSGNode(mat4.multiply(
+            mat4.create(),
+            glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
+            glm.scale(7,7,7)),
+            [new PersonNode()]));//persons[i]);
         rootNode.append(persons[i]);
     }
 }
@@ -455,31 +467,34 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            if (projectTimeInMilliSeconds < 4000) {
-                tram.setSpeed(vec3.fromValues(10, 0, 0));
-                tram2.setSpeed(vec3.fromValues(10, 0, 0));
+            if(projectTimeInMilliSeconds < 2500) {
+
             }
             else if (projectTimeInMilliSeconds < 5000) {
+                tram.setSpeed(vec3.fromValues(15,0,0));
+                tram2.setSpeed(vec3.fromValues(15,0,0));
+            }
+            else if (projectTimeInMilliSeconds < 6000) {
                 tram.setSpeed(vec3.create());
             }
-            else if (projectTimeInMilliSeconds < 7000) {
+            else if (projectTimeInMilliSeconds < 8000) {
                 tram.openDoors();
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.fromValues(0, 0, -1.5));
+                persons.forEach(function(person) {
+                    person.setSpeed(vec3.fromValues(0,0,-1.5));
                 });
                 /*for (i = 0; i < 3; i++) {
                     persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
                 }*/
             }
-            else if (projectTimeInMilliSeconds < 9000) {
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.create());
+            else if (projectTimeInMilliSeconds < 10000) {
+                persons.forEach(function(person) {
+                   person.setSpeed(vec3.create());
                 });
             }
-            else if (projectTimeInMilliSeconds < 9500) {
+            else if(projectTimeInMilliSeconds < 10500) {
                 tram.closeDoors();
             }
-            else if (projectTimeInMilliSeconds < 12500) {
+            else if (projectTimeInMilliSeconds < 11500) {
                 /*
                 if (personParent == "Station") {
                     personParent = "Tram";
@@ -492,10 +507,10 @@ function render(timeInMilliseconds) {
                     }
                 }
                 */
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.fromValues(10, 0, 0));
+                persons.forEach(function(person) {
+                    person.setSpeed(vec3.fromValues(18,0,0));
                 });
-                tram.setSpeed(vec3.fromValues(10, 0, 0));
+                tram.setSpeed(vec3.fromValues(18,0,0));
             }
             break;
         case 2:
@@ -680,11 +695,12 @@ function calculateViewMatrix() {
             case 1:
                 if (projectTimeInMilliSeconds < 13000) {
                     eye = [7, 2.5, 5];
-                    center = [0, 0, 0];
+                    vec3.add(center, eye, [-1,-0.5,-1]);
                     up = [0, 1, 0];
                 } else {
                     eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                    center = [projectTimeInMilliSeconds / 13000 * 7 - 7, 0, 0];
+                    vec3.add(center, eye, [1,-0.5,-1]);
+                    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
                     up = [0, 1, 0];
                 }
                 break;
