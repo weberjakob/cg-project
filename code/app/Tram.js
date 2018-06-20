@@ -1,6 +1,9 @@
 class TramNode extends MovingNode {
 
     constructor(initialPosition, alphaOfFrontGlas) {
+        if(initialPosition == null) {
+            initialPosition = mat4.create();
+        }
         super(mat4.multiply(mat4.create(), initialPosition, glm.scale(2, 0.3, 0.3))); //the scaling here came from old code
         //super(initialPosition);
         this.doors = [];
@@ -46,7 +49,7 @@ class TramNode extends MovingNode {
     }
 
     openDoors() {
-        this.doors.forEach(function (door, index) {
+        this.doors.forEach(function (door) {
             door.moveTo([-0.07,0,0], 900);
         });
         /*
@@ -59,7 +62,7 @@ class TramNode extends MovingNode {
     }
 
     closeDoors() {
-        this.doors.forEach(function (door, index) {
+        this.doors.forEach(function (door) {
             door.moveTo([0,0,0], 900);
         });
         /*
@@ -79,43 +82,47 @@ class Tram extends SceneGraphNode {
 
     constructor() {
         super();
+        this.tramNodes = [];
         for (var i = 0; i < 3; i++) {
             var alphaOfFrontGlas = i == 2 ? 0.2 : 1;
-            super.append(new TramNode(glm.translate(i * 1.25, 0, 0), alphaOfFrontGlas));
+            var tramNode =  new TramNode(null, alphaOfFrontGlas);
+            this.tramNodes.push(tramNode);
+            super.append(new TransformationSGNode(glm.translate(i * 1.25, 0, 0), tramNode));
+            //new TramNode(glm.translate(i * 1.25, 0, 0), alphaOfFrontGlas));
         }
     }
 
     setSpeed(speed) {
-        this.children.forEach(function (child) {
+        this.tramNodes.forEach(function (child) {
             child.setSpeed(speed);
         })
     }
 
     resetPosition() {
-        this.children.forEach(function (child) {
+        this.tramNodes.forEach(function (child) {
             child.resetPosition();
         })
     }
 
     openDoors() {
-        this.children.forEach(function (child) {
+        this.tramNodes.forEach(function (child) {
             child.openDoors();
         })
     }
 
     closeDoors() {
-        this.children.forEach(function (child) {
+        this.tramNodes.forEach(function (child) {
             child.closeDoors();
         })
     }
 
     getPosition() {
-        return this.children[0].getPosition();
+        return this.tramNodes[0].getPosition();
     }
 
     /*
     getPosition() {
-        return this.children[0].getXPosition();
+        return this.tramNodes[0].getXPosition();
     }
     */
 }

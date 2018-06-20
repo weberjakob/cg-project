@@ -306,7 +306,14 @@ function createTram(resources) {
 function createPerson() {
     persons = new Array(1, 2, 3);
     for (i = 0; i < persons.length; i++) {
-        persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
+
+        //persons[i] = new PersonNode();//mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
+        persons[i] = new MovingNode(mat4.multiply(
+                                                            mat4.create(),
+                                                            glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
+                                                            glm.scale(7,7,7)));
+
+        persons[i].append(new PersonNode());//persons[i]);
         rootNode.append(persons[i]);
     }
 }
@@ -694,11 +701,12 @@ function calculateViewMatrix() {
             case 1:
                 if (projectTimeInMilliSeconds < 13000) {
                     eye = [7, 2.5, 5];
-                    center = [0, 0, 0];
+                    vec3.add(center, eye, [-1,-0.5,-1]);
                     up = [0, 1, 0];
                 } else {
                     eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                    center = [projectTimeInMilliSeconds / 13000 * 7 - 7, 0, 0];
+                    vec3.add(center, eye, [1,-0.5,-1]);
+                    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
                     up = [0, 1, 0];
                 }
                 break;
