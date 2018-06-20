@@ -127,6 +127,7 @@ loadResources({
     phong_fs: 'shader/phong.fs.glsl',
     churchtexture: 'models/neuerdom.jpg',
     hbftexture: 'models/hbf.png',
+    jkutexture: 'models/jku.png',
     rivertexture: 'models/water.jpg',
     cobblestone: 'models/cobblestone.jpg',
     bridge_metal: 'models/metal.jpg',
@@ -176,8 +177,9 @@ function init(resources) {
     createPerson(resources);
     createBillboardedPeople(resources);
     createBillBoards(resources);
-    createStation(resources);
+    createStations(resources);
     createTram(resources);
+    createEyePoint(resources);
     createTestCube(resources);
 
     //register keyboard events
@@ -277,7 +279,7 @@ function createTram(resources) {
     //tram2 is driving in the opposite direction
     tram2 = new Tram();
     var tram2textureNode = new AdvancedTextureSGNode(resources.red, [tram2]);
-    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)), [tram2textureNode]);
+    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(40, 0.1, -0.175), glm.rotateY(180)), [tram2textureNode]);
 
     rootNode.append(tramPosition2);
     rootNode.append(tramPosition);
@@ -356,10 +358,17 @@ function createRails(resources) {
     }
 }
 
-function createStation(resources) {
+function createStations(resources) {
+    //create hbf
     var station = new Station(resources.hbftexture, resources.stopsign);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
+    rootNode.append(stationPosition);
+
+    //create jku
+    var station = new Station(resources.jkutexture, resources.stopsign);
+    var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
+    var stationPosition = new TransformationSGNode(glm.translate(32, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
 }
 
@@ -461,74 +470,44 @@ function render(timeInMilliseconds) {
     //0 to 5: scene
     // 5 to 25: scene 2
     //26 to 30: scene 3
-    sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
+    //sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
     //sceneIndex = 3;
 
     //update tram transformation
-    switch (sceneIndex) {
-        case 1:
-            if(projectTimeInMilliSeconds < 2500) {
 
-            }
-            else if (projectTimeInMilliSeconds < 5000) {
-                tram.setSpeed(vec3.fromValues(15,0,0));
-                tram2.setSpeed(vec3.fromValues(15,0,0));
-            }
-            else if (projectTimeInMilliSeconds < 6000) {
-                tram.setSpeed(vec3.create());
-            }
-            else if (projectTimeInMilliSeconds < 8000) {
-                tram.openDoors();
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(0,0,-1.5));
-                });
-                /*for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
-                }*/
-            }
-            else if (projectTimeInMilliSeconds < 10000) {
-                persons.forEach(function(person) {
-                   person.setSpeed(vec3.create());
-                });
-            }
-            else if(projectTimeInMilliSeconds < 10500) {
-                tram.closeDoors();
-            }
-            else if (projectTimeInMilliSeconds < 11500) {
-                /*
-                if (personParent == "Station") {
-                    personParent = "Tram";
-                    for (i = 0; i < 3; i++) {
-                        //rootNode.remove(persons[i]);
-                        persons[i]
-                        persons[i].rotateAndTranslate(-0.10, -0.005, -0.03);
-
-                        //tram.append(persons[i]);
-                    }
-                }
-                */
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(18,0,0));
-                });
-                tram.setSpeed(vec3.fromValues(18,0,0));
-            }
-            break;
-        case 2:
-            break;
-        case 3:
-            if (projectTimeInMilliSeconds > 29000) {
-                /*
-                if (personParent == "Tram") {
-                    personParent = "Station";
-                    for (i = 0; i < persons.length; i++) {
-                        tram.remove(persons[i]);
-                        persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
-                        rootNode.append(persons[i]);
-
-                    }
-                }*/
-            }
-            break;
+    if       (projectTimeInMilliSeconds < 2500) {
+        sceneIndex = 1;
+    }
+    else if  (projectTimeInMilliSeconds < 5000) {
+        sceneIndex = 1;
+        tram.setSpeed(vec3.fromValues(15,0,0));
+        tram2.setSpeed(vec3.fromValues(10,0,0));
+    }
+    else if  (projectTimeInMilliSeconds < 6000) {
+        tram.setSpeed(vec3.create());
+    }
+    else if  (projectTimeInMilliSeconds < 8000) {
+        tram.openDoors();
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,-1.5));});
+    }
+    else if (projectTimeInMilliSeconds < 10000) {
+        persons.forEach(function(person) {person.setSpeed(vec3.create());});
+    }
+    else if (projectTimeInMilliSeconds < 10500) {
+        tram.closeDoors();
+    }
+    else if (projectTimeInMilliSeconds < 11500) {
+        sceneIndex = 2;
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(20,0,0));});
+        tram.setSpeed(vec3.fromValues(20,0,0));
+    }
+    else if (projectTimeInMilliSeconds < 26000) {
+    }
+    else if (projectTimeInMilliSeconds < 30000) {
+        sceneIndex = 3;
+        persons.forEach(function (person) {person.setSpeed(vec3.fromValues(0, 0, 0));});
+        tram.setSpeed(vec3.fromValues(0, 0, 0));
+        tram.openDoors();
     }
 
     renderMainView();
@@ -662,13 +641,20 @@ function createSceneGraphContext(gl, shader) {
     };
 }
 
-var xPosition = 0;
+//var xPosition = 0;
+var eyePoint;
+var centerPoint;
+function createEyePoint() {
+    eyePoint = new MovingPoint([9, 4, 7]);
+    centerPoint = new MovingPoint([7.8,3.5,6]);
+}
 
 function calculateViewMatrix() {
-    xPosition = tram.getPosition()[0];
+    //xPosition = tram.getPosition()[0];
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
+        eyePoint = null;
         //calculate lookat direction
         var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
         var dirY = -camera.rotation.y * Math.PI / 360;
@@ -681,32 +667,37 @@ function calculateViewMatrix() {
         var direction = [dirX, dirY, dirZ];
 
         //calculate new lookat vectors
-        eye = vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
-        center = vec3.add(center, eye, direction);
+        vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
+        vec3.add(center, eye, direction);
         up = [0, 1, 0];
     } else if (tramFrontCamera) {
-
-        eye = [xPosition, 0.1, 0.05];
-        center = [xPosition + 0.5, 0.1, 0.05];
+        eyePoint = null;
+        vec3.add(eye, tram.getPosition(), [1,0.1,0]);
+        vec3.add(center, tram.getPosition(), [1.1,0.1,0]);
         up = [0, 1, 0];
     }
     else {
-        switch (sceneIndex) {
+        eye = eyePoint.getPosition();
+        center = centerPoint.getPosition();
+        up = [0, 1, 0];
+        /*switch (sceneIndex) {
             case 1:
-                if (projectTimeInMilliSeconds < 13000) {
-                    eye = [7, 2.5, 5];
-                    vec3.add(center, eye, [-1,-0.5,-1]);
+                //if (projectTimeInMilliSeconds < 13000) {
+                    eye = eyePoint.getPosition();
+                    center = center.get
                     up = [0, 1, 0];
-                } else {
-                    eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                    vec3.add(center, eye, [1,-0.5,-1]);
-                    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
-                    up = [0, 1, 0];
-                }
+                //} else {
+                //    eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
+                //    vec3.add(center, eye, [1,-0.5,-1]);
+                //    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
+                //    up = [0, 1, 0];
+                //}
                 break;
             case 2:
                 eye = [projectTimeInMilliSeconds / 1500 - 8, 2, 3];
-                center = [30, 0, 0];
+                vec3.add(center, eye, [projectTimeInMilliSeconds / 3000,-0.5,-1]);
+
+//                center = [30, 0, 0];
                 up = [0, 1, 0];
                 break;
             case 3:
@@ -714,9 +705,23 @@ function calculateViewMatrix() {
                 center = [30, 0, 0];
                 up = [0, 1, 0];
                 break;
-        }
+        }*/
     }
 
+    switch (sceneIndex) {
+        case 1:
+            eyePoint.resetPosition();
+            centerPoint.resetPosition();
+            //eyePoint.setSpeed([0,0,0]);
+            break;
+        case 2:
+            eyePoint.setSpeed([10,-2,-5]);
+            centerPoint.setSpeed([13,-2,-5]);
+            break;
+        case 3:
+            eyePoint.setSpeed([0,0,0]);
+            centerPoint.setSpeed([0,0,0]);
+    }
     viewMatrix = mat4.lookAt(viewMatrix, eye, center, up);
     return viewMatrix;
 }
