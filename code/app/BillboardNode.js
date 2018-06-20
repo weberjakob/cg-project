@@ -10,6 +10,7 @@ class BillboardNode extends TransformationSGNode {
     }
 
     render(context) {
+        //this.computeLightPosition(context);
         var dir = vec3.create();
         vec3.sub(dir, eye, this.absPosition);
         vec3.scale(dir, dir, 1 / vec3.length(dir));
@@ -42,6 +43,13 @@ class BillboardNode extends TransformationSGNode {
 
     setPosition(x, y, z) {
         this.absPosition = [x, y, z];
+    }
+
+    computeLightPosition(context) {
+        //transform with the current model view matrix
+        const modelViewMatrix = mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix);
+        const position = vec4.transformMat4(vec4.create(), vec4.fromValues(0, 0, 0, 1), modelViewMatrix);
+        this.absPosition = position;
     }
 
 }

@@ -10,11 +10,15 @@ uniform mat4 u_projection;
 uniform mat4 u_invView;
 
 uniform vec3 u_lightPos;
+uniform vec3 u_lightTramPos;
+varying vec3 v_spotLightDirection;
 
 //output of this shader
 varying vec3 v_normalVec;
 varying vec3 v_eyeVec;
 varying vec3 v_lightVec;
+varying vec3 v_lightTramVec;
+
 
 //define output variable for texture coordinates
 varying vec2 v_texCoord;
@@ -26,6 +30,7 @@ void main() {
 
   v_eyeVec = -eyePosition.xyz;
 	v_lightVec = u_lightPos - eyePosition.xyz;
+	v_lightTramVec = u_lightTramPos -eyePosition.xyz;
 
 	//pass on texture coordinates to fragment shader
 	v_texCoord = a_texCoord;

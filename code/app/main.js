@@ -31,7 +31,7 @@ const camera = {
 var upButtonPressed = false;
 var downButtonPressed = false;
 var userCamera = false;
-var tramFrontCamera = true;
+var tramFrontCamera = false;
 var mouseButtonPressed = false;
 var mouseX = 0, mouseY = 0, mousePrevX = 0, mousePrevY = 0;
 var zoomspeed = 0.1;
@@ -42,7 +42,6 @@ var churchTexture;
 
 /*scene settings*/
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
-//var firstTimeRendering = true;
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 /*var lastSecondRendered = 0;
@@ -141,7 +140,8 @@ loadResources({
     person2: 'models/person2.png',
     person3: 'models/person3.png',
     staticcolour_vs: 'shader/static_color.vs.glsl',
-    staticcolour_fs: 'shader/static_color.fs.glsl'
+    staticcolour_fs: 'shader/static_color.fs.glsl',
+    stopsign: 'models/stopsign.png'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -165,8 +165,6 @@ function init(resources) {
     /*set buffers for cube*/
     initBuffer();
 
-    initTextures(resources);
-
     /*create scene graph*/
     rootNode = new ShaderSGNode(shaderProgram);
 
@@ -188,25 +186,6 @@ function init(resources) {
     window.addEventListener("mousemove", mouseMoved, false);
     window.addEventListener("mouseup", mouseUp, false);
     window.addEventListener("mousedown", mouseDown, false);
-}
-
-function initTextures(resources) {
-    //create texture object
-    waterTexture = gl.createTexture();
-    //select a texture unit
-    gl.activeTexture(gl.TEXTURE2);
-    //bind texture to active texture unit
-    gl.bindTexture(gl.TEXTURE_2D, waterTexture);
-    //set sampling parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    //change texture sampling behaviour
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    //upload texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, resources.rivertexture);
-    //clean up/unbind texture
-    gl.bindTexture(gl.TEXTURE_2D, null);
 }
 
 function keyUp(key) {
@@ -326,11 +305,11 @@ function createPerson() {
 }
 
 function createBillboardedPeople(resources) {
-    billboardPersons = [1,2,3];
+    billboardPersons = [1, 2, 3];
     var textures = [resources.person1, resources.person2, resources.person3];
     for (i = 0; i < billboardPersons.length; i++) {
         var quadRenderNode = new BillboardNode(0.6);
-        quadRenderNode.setPosition(0.8+i/2.5, 0.1, 0.5);
+        quadRenderNode.setPosition(0.8 + i / 2.5, 0.1, 0.5);
         var textureNode = new AdvancedTextureSGNode(textures[i], quadRenderNode);
         var transformationMatrix = mat4.multiply(mat4.create(), glm.translate(0.8, 0.1, 0.5), glm.translate(i / 2.5, 0, 0));
         transformationMatrix = mat4.multiply(transformationMatrix, transformationMatrix, glm.scale(0.04, 0.04, 0.04));
@@ -340,9 +319,14 @@ function createBillboardedPeople(resources) {
 }
 
 function createLightNodes(resources) {
+    //normal single point light
     let light = new LightSGNode([29, 2, -2], createLightSphere(resources));
     var transformationNode = new TransformationSGNode(glm.translate(0, 2, 1), [light]);
     rootNode.append(transformationNode);
+
+    //spot light
+    let spotLight = new SpotLightNode([21, 1, -0.1], createLightSphere(resources), [0, 1, 0]);
+    rootNode.append(spotLight);
 }
 
 function createLightSphere(resources) {
@@ -373,7 +357,7 @@ function createRails(resources) {
 }
 
 function createStation(resources) {
-    var station = new Station(resources.hbftexture);
+    var station = new Station(resources.hbftexture, resources.stopsign);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
     rootNode.append(stationPosition);
@@ -404,7 +388,7 @@ function createPrism(resources) {
 }
 
 function createTestCube(resources) {
-    var testCube = new TransformationSGNode(glm.translate(3,4, 0) , [new CubeRenderNode()]);
+    var testCube = new TransformationSGNode(glm.translate(3, 4, 0), [new CubeRenderNode()]);
     var testCubeTextured = new AdvancedTextureSGNode(resources.cement, [testCube]);
 
     rootNode.append(testCubeTextured);
@@ -470,12 +454,10 @@ function render(timeInMilliseconds) {
     var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
     projectTimeInMilliSeconds = timeInMilliseconds % 30000;
     //if animation gets repeated:
-    if ((projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds)) {
+    if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
         resetPositions();
-        console.log("first time rendered");
     }
-    displayText(Math.floor(projectTimeInMilliSeconds));
-    //console.log("rendered again");
+
     //0 to 5: scene
     // 5 to 25: scene 2
     //26 to 30: scene 3
@@ -575,7 +557,7 @@ function renderMainView() {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    //displayText("c: User cam, f: front tram cam");
+    displayText("c: User cam, f: front tram cam");
     rootNode.render(context);
 }
 
@@ -615,7 +597,7 @@ function renderLine(timeInMilliseconds) {
     linePositions.push(6);
     linePositions.push(miniMapEye[2]);
     //if animation lasted more than 10 seconds start removing first elements
-    if(timeInMilliseconds > 10000) {
+    if (timeInMilliseconds > 10000) {
         linePositions.shift();
         linePositions.shift();
         linePositions.shift();
@@ -626,10 +608,10 @@ function renderLine(timeInMilliseconds) {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(linePositions), gl.STATIC_DRAW);
     //use program with static shaders
     gl.useProgram(lineDrawProgram);
-    const lineColor = { r: 1.0, g: 0.2, b: 0.0};
+    const lineColor = {r: 1.0, g: 0.2, b: 0.0};
     gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
-    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false,  context.projectionMatrix);
+    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false, context.projectionMatrix);
     /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
     gl.enableVertexAttribArray(colorLocation);
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
@@ -641,14 +623,14 @@ function renderLine(timeInMilliseconds) {
     gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
     // Draw the triangle
     gl.enable(gl.DEPTH_TEST);
-    gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length/3);
+    gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length / 3);
 }
 
 //called to restart after 30 seconds
 function resetPositions() {
     tram.resetPosition();
     tram2.resetPosition();
-    persons.forEach(function(person) {
+    persons.forEach(function (person) {
         person.resetPosition();
     })
 }
@@ -789,27 +771,7 @@ class SceneGraphNode {
  */
 
 
-class Station extends SceneGraphNode {
-    constructor(stationNameTexture) {
-        super();
-        var platform = new TransformationSGNode(mat4.multiply(mat4.create(), mat4.create(), glm.scale(7, 0.1, 1.2)), new CubeRenderNode());
-        this.append(platform);
 
-        var column = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2, -0.2), glm.scale(0.02, 0.5, 0.02)), new CubeRenderNode());
-        this.append(column);
-
-        var display = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(1.5, 0.2 * 1.5, -0.2), glm.scale(0.02, 0.2, 0.2)), new CubeRenderNode());
-        this.append(display);
-
-        //set Station Name:
-        var billboard1 = new RotatingImage(1);
-        //billboard1.setPosition(0, 2, -2);
-        var textureBillboardNode = new AdvancedTextureSGNode(stationNameTexture, [billboard1]);
-        var billboardPos = new TransformationSGNode(glm.translate(0, 2, 0), textureBillboardNode);
-        this.append(billboardPos);
-    }
-
-}
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
