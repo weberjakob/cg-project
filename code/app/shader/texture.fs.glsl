@@ -75,7 +75,7 @@ vec4 calculateSpotLight(Light light, Material material, vec3 lightSpotVec, vec3 
 	spotDirectionVec = normalize(spotDirectionVec);
 	eyeVec = normalize(eyeVec);
 
-spotDirectionVec.xyz = vec3(0, 1, 0);
+    spotDirectionVec.xyz = vec3(0, 1, 0);
 	//compute diffuse term
 	float diffuse = max(dot(lightSpotVec,spotDirectionVec),0.0);
 	diffuse = diffuse < 0.9 ? 0.0 : 1.0;//diffuse==1 <=> fragment is lighted by spot
