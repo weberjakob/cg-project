@@ -165,8 +165,6 @@ function init(resources) {
     /*set buffers for cube*/
     initBuffer();
 
-    initTextures(resources);
-
     /*create scene graph*/
     rootNode = new ShaderSGNode(shaderProgram);
 
@@ -188,25 +186,6 @@ function init(resources) {
     window.addEventListener("mousemove", mouseMoved, false);
     window.addEventListener("mouseup", mouseUp, false);
     window.addEventListener("mousedown", mouseDown, false);
-}
-
-function initTextures(resources) {
-    //create texture object
-    waterTexture = gl.createTexture();
-    //select a texture unit
-    gl.activeTexture(gl.TEXTURE2);
-    //bind texture to active texture unit
-    gl.bindTexture(gl.TEXTURE_2D, waterTexture);
-    //set sampling parameters
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    //change texture sampling behaviour
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    //upload texture data
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, resources.rivertexture);
-    //clean up/unbind texture
-    gl.bindTexture(gl.TEXTURE_2D, null);
 }
 
 function keyUp(key) {
@@ -292,6 +271,7 @@ function createRiver(resources) {
 
 function createTram(resources) {
     tram = new Tram();
+    //tram.children[0].append(new SpotLightNode([0,0,0], createLightSphere(resources), [0,1,0]));
     var tramtextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
     var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramtextureNode]);
 
@@ -313,11 +293,11 @@ function createPerson() {
 }
 
 function createBillboardedPeople(resources) {
-    billboardPersons = [1,2,3];
+    billboardPersons = [1, 2, 3];
     var textures = [resources.person1, resources.person2, resources.person3];
     for (i = 0; i < billboardPersons.length; i++) {
         var quadRenderNode = new BillboardNode(0.6);
-        quadRenderNode.setPosition(0.8+i/2.5, 0.1, 0.5);
+        quadRenderNode.setPosition(0.8 + i / 2.5, 0.1, 0.5);
         var textureNode = new AdvancedTextureSGNode(textures[i], quadRenderNode);
         var transformationMatrix = mat4.multiply(mat4.create(), glm.translate(0.8, 0.1, 0.5), glm.translate(i / 2.5, 0, 0));
         transformationMatrix = mat4.multiply(transformationMatrix, transformationMatrix, glm.scale(0.04, 0.04, 0.04));
@@ -327,9 +307,14 @@ function createBillboardedPeople(resources) {
 }
 
 function createLightNodes(resources) {
+    //normal single point light
     let light = new LightSGNode([29, 2, -2], createLightSphere(resources));
     var transformationNode = new TransformationSGNode(glm.translate(0, 2, 1), [light]);
     rootNode.append(transformationNode);
+
+    //spot light
+    let spotLight = new SpotLightNode([21, 1, -0.1], createLightSphere(resources), [0, 1, 0]);
+    rootNode.append(spotLight);
 }
 
 function createLightSphere(resources) {
@@ -391,7 +376,7 @@ function createPrism(resources) {
 }
 
 function createTestCube(resources) {
-    var testCube = new TransformationSGNode(glm.translate(3,4, 0) , [new CubeRenderNode()]);
+    var testCube = new TransformationSGNode(glm.translate(3, 4, 0), [new CubeRenderNode()]);
     var testCubeTextured = new AdvancedTextureSGNode(resources.cement, [testCube]);
 
     rootNode.append(testCubeTextured);
@@ -471,27 +456,27 @@ function render(timeInMilliseconds) {
     switch (sceneIndex) {
         case 1:
             if (projectTimeInMilliSeconds < 4000) {
-                tram.setSpeed(vec3.fromValues(10,0,0));
-                tram2.setSpeed(vec3.fromValues(10,0,0));
+                tram.setSpeed(vec3.fromValues(10, 0, 0));
+                tram2.setSpeed(vec3.fromValues(10, 0, 0));
             }
             else if (projectTimeInMilliSeconds < 5000) {
                 tram.setSpeed(vec3.create());
             }
             else if (projectTimeInMilliSeconds < 7000) {
                 tram.openDoors();
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(0,0,-1.5));
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.fromValues(0, 0, -1.5));
                 });
                 /*for (i = 0; i < 3; i++) {
                     persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
                 }*/
             }
             else if (projectTimeInMilliSeconds < 9000) {
-                persons.forEach(function(person) {
-                   person.setSpeed(vec3.create());
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.create());
                 });
             }
-            else if(projectTimeInMilliSeconds < 9500) {
+            else if (projectTimeInMilliSeconds < 9500) {
                 tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 12500) {
@@ -507,10 +492,10 @@ function render(timeInMilliseconds) {
                     }
                 }
                 */
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(10,0,0));
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.fromValues(10, 0, 0));
                 });
-                tram.setSpeed(vec3.fromValues(10,0,0));
+                tram.setSpeed(vec3.fromValues(10, 0, 0));
             }
             break;
         case 2:
@@ -597,7 +582,7 @@ function renderLine(timeInMilliseconds) {
     linePositions.push(6);
     linePositions.push(miniMapEye[2]);
     //if animation lasted more than 10 seconds start removing first elements
-    if(timeInMilliseconds > 10000) {
+    if (timeInMilliseconds > 10000) {
         linePositions.shift();
         linePositions.shift();
         linePositions.shift();
@@ -608,10 +593,10 @@ function renderLine(timeInMilliseconds) {
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(linePositions), gl.STATIC_DRAW);
     //use program with static shaders
     gl.useProgram(lineDrawProgram);
-    const lineColor = { r: 1.0, g: 0.2, b: 0.0};
+    const lineColor = {r: 1.0, g: 0.2, b: 0.0};
     gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
-    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false,  context.projectionMatrix);
+    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false, context.projectionMatrix);
     /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
     gl.enableVertexAttribArray(colorLocation);
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
@@ -623,14 +608,14 @@ function renderLine(timeInMilliseconds) {
     gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
     // Draw the triangle
     gl.enable(gl.DEPTH_TEST);
-    gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length/3);
+    gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length / 3);
 }
 
 //called to restart after 30 seconds
 function resetPositions() {
     tram.resetPosition();
     tram2.resetPosition();
-    persons.forEach(function(person) {
+    persons.forEach(function (person) {
         person.resetPosition();
     })
 }

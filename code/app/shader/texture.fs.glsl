@@ -26,9 +26,12 @@ struct Light {
 //illumination related variables
 uniform Material u_material;
 uniform Light u_light;
+uniform Light u_lightTram;
+varying vec3 v_spotLightDirection;
 varying vec3 v_normalVec;
 varying vec3 v_eyeVec;
 varying vec3 v_lightVec;
+varying vec3 v_lightTramVec;
 
 //texture related variables
 uniform bool u_enableObjectTexture;
@@ -54,7 +57,40 @@ vec4 calculateSimplePointLight(Light light, Material material, vec3 lightVec, ve
     //TASK 2: replace diffuse and ambient material color with texture color
     material.diffuse = textureColor;
     material.ambient = textureColor;
-		//Note: an alternative to replacing the material color is to multiply it with the texture color
+	//Note: an alternative to replacing the material color is to multiply it with the texture color
+
+
+	vec4 c_amb  = clamp(light.ambient * material.ambient, 0.0, 1.0);
+	vec4 c_diff = clamp(diffuse * light.diffuse * material.diffuse, 0.0, 1.0);
+	vec4 c_spec = clamp(spec * light.specular * material.specular, 0.0, 1.0);
+	vec4 c_em   = material.emission;
+
+  return c_amb + c_diff + c_spec + c_em;
+}
+
+vec4 calculateSpotLight(Light light, Material material, vec3 lightSpotVec, vec3 normalVec, vec3 eyeVec, vec4 textureColor, vec3 spotDirectionVec) {
+    float lightObjectDistance = length(lightSpotVec);
+	lightSpotVec = normalize(lightSpotVec);
+	normalVec = normalize(normalVec);
+	spotDirectionVec = normalize(spotDirectionVec);
+	eyeVec = normalize(eyeVec);
+
+spotDirectionVec.xyz = vec3(0, 1, 0);
+	//compute diffuse term
+	float diffuse = max(dot(lightSpotVec,spotDirectionVec),0.0);
+	diffuse = diffuse < 0.9 ? 0.0 : 1.0;//diffuse==1 <=> fragment is lighted by spot
+    diffuse = diffuse/(lightObjectDistance);
+
+
+	//compute specular term
+	vec3 reflectVec = reflect(-lightSpotVec,normalVec);
+	float spec = pow( max( dot(reflectVec, eyeVec), 0.0) , material.shininess);
+
+
+    //TASK 2: replace diffuse and ambient material color with texture color
+    material.diffuse = textureColor;
+    material.ambient = textureColor;
+	//Note: an alternative to replacing the material color is to multiply it with the texture color
 
 
 	vec4 c_amb  = clamp(light.ambient * material.ambient, 0.0, 1.0);
@@ -68,7 +104,7 @@ vec4 calculateSimplePointLight(Light light, Material material, vec3 lightVec, ve
 void main (void) {
 
   vec4 textureColor =  texture2D(u_tex,v_texCoord);
-
-    gl_FragColor = calculateSimplePointLight(u_light, u_material, v_lightVec, v_normalVec, v_eyeVec, textureColor);
+  gl_FragColor = calculateSimplePointLight(u_light, u_material, v_lightVec, v_normalVec, v_eyeVec, textureColor)+
+                    calculateSpotLight(u_lightTram, u_material, v_lightTramVec, v_normalVec, v_eyeVec, textureColor, v_spotLightDirection);
 
 }
