@@ -16,7 +16,7 @@ var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
 var miniMapEye = vec3.create();
-const miniMapYHeight = 20;
+const miniMapYHeight = 30;
 var center = vec3.create();
 var up = vec3.create();
 const camera = {
@@ -249,8 +249,10 @@ function mouseMoved(event) {
         deltaY = mouseY - mousePrevY;
         camera.rotation.x += deltaX;
         camera.rotation.y += deltaY;
-        camera.rotation.y = Math.min(camera.rotation.y, 90);
-        camera.rotation.y = Math.max(camera.rotation.y, -90);
+        if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
+        else camera.rotation.y %= 100;
+        //camera.rotation.y = Math.min(camera.rotation.y, 90);
+        //camera.rotation.y = Math.max(camera.rotation.y, -90);
     } else {
         deltaX = 0;
         deltaY = 0;
@@ -496,15 +498,15 @@ function render(timeInMilliseconds) {
     else if (projectTimeInMilliSeconds < 10500) {
         tram.closeDoors();
     }
-    else if (projectTimeInMilliSeconds < 11500) {
+    else if (projectTimeInMilliSeconds < 24000) {
         sceneIndex = 2;
         persons.forEach(function(person) {person.setSpeed(vec3.fromValues(20,0,0));});
         tram.setSpeed(vec3.fromValues(20,0,0));
     }
     else if (projectTimeInMilliSeconds < 26000) {
+        sceneIndex = 3;
     }
     else if (projectTimeInMilliSeconds < 30000) {
-        sceneIndex = 3;
         persons.forEach(function (person) {person.setSpeed(vec3.fromValues(0, 0, 0));});
         tram.setSpeed(vec3.fromValues(0, 0, 0));
         tram.openDoors();
@@ -644,84 +646,112 @@ function createSceneGraphContext(gl, shader) {
 //var xPosition = 0;
 var eyePoint;
 var centerPoint;
+var jumpToUserCamera = true;
+
 function createEyePoint() {
-    eyePoint = new MovingPoint([9, 4, 7]);
-    centerPoint = new MovingPoint([7.8,3.5,6]);
+    eyePoint = new MovingPoint();
+    centerPoint = new MovingPoint();
 }
 
 function calculateViewMatrix() {
-    //xPosition = tram.getPosition()[0];
+    switch (sceneIndex) {
+        case 1:
+            eyePoint.setPosition([7.5, 1.8, 1.6]);
+            centerPoint.setPosition([6.3,1.6,1.3]);
+            //eyePoint.setSpeed([0,0,0]);
+            break;
+        case 2:
+            eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2,0.1,0.05]), 2000);
+            centerPoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [3,0.1,0.05]), 2000);
+            //eyePoint.setSpeed([10,-2,-5]);
+            //centerPoint.setSpeed([13,-2,-5]);
+            break;
+        case 3:
+            eyePoint.setPosition([40, 2, 0]);
+            centerPoint.setPosition([39, 1.9, 0]);
+    }
+
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
-        eyePoint = null;
-        //calculate lookat direction
-        var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-        var dirY = -camera.rotation.y * Math.PI / 360;
-        var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+        var direction;
+        if(jumpToUserCamera) {
+            direction = vec3.subtract(vec3.create(), center, eye);
+            direction[0] = Math.round(direction[0] * 1000000000) / 1000000000;
+            direction[1] = Math.round(direction[1] * 1000000000) / 1000000000;
+            direction[2] = Math.round(direction[2] * 1000000000) / 1000000000;
 
-        //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
-        dirX = Math.round(dirX * 1000000000) / 1000000000;
-        dirY = Math.round(dirY * 1000000000) / 1000000000;
-        dirZ = Math.round(dirZ * 1000000000) / 1000000000;
-        var direction = [dirX, dirY, dirZ];
+            camera.rotation.y = -direction[1] * 360 / Math.PI;
+            if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
+            else camera.rotation.y %= 100;
+            camera.rotation.y = Math.min(camera.rotation.y, 100);
+            camera.rotation.y = Math.max(camera.rotation.y, -100);
+
+            //camera.rotation.y = Math.round(camera.rotation.y * 1000000000) / 1000000000;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+
+            var acosParam = direction[0] / Math.cos(camera.rotation.y * Math.PI / 360);
+            if(acosParam < 0) acosParam = -1 * (-acosParam % 1);
+            else acosParam %= 1;
+
+            //acosParam = Math.min(acosParam, 1);
+            //acosParam = Math.max(acosParam, -1);
+            camera.rotation.x = Math.acos(acosParam) * 360 / Math.PI;
+            //camera.rotation.x %= 45;//Math.camera.rotation.x, 90);
+            //camera.rotation.x = Math.max(camera.rotation.x, -90);
+            console.log(camera.rotation.x);
+            //console.log("camera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+            //camera.rotation.x = Math.round(camera.rotation.x * 1000000000) / 1000000000;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+
+
+            camera.zoom = 0;
+            //jumpToUserCamera = false;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction);
+        }
+        //else {
+            //calculate lookat direction
+            var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+            var dirY = -camera.rotation.y * Math.PI / 360;
+            var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+
+            //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
+            dirX = Math.round(dirX * 1000000000) / 1000000000;
+            dirY = Math.round(dirY * 1000000000) / 1000000000;
+            dirZ = Math.round(dirZ * 1000000000) / 1000000000;
+            direction = [dirX, dirY, dirZ];
+
+
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.x=" + camera.rotation.x);
+        //}
 
         //calculate new lookat vectors
         vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
         vec3.add(center, eye, direction);
+        if(jumpToUserCamera) {
+            jumpToUserCamera = false;
+            console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+        }
         up = [0, 1, 0];
     } else if (tramFrontCamera) {
-        eyePoint = null;
-        vec3.add(eye, tram.getPosition(), [1,0.1,0]);
-        vec3.add(center, tram.getPosition(), [1.1,0.1,0]);
+
+
+        var tramPos = tram.getPosition();
+        vec3.add(eye, tramPos, [0,0.1,0.05]);
+        vec3.add(center, tramPos, [0.1,0.1,0.06]);
         up = [0, 1, 0];
+        if(!jumpToUserCamera) {
+            jumpToUserCamera = true;
+            console.log("jumped to front camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+        }
     }
     else {
+        jumpToUserCamera = true;
         eye = eyePoint.getPosition();
         center = centerPoint.getPosition();
         up = [0, 1, 0];
-        /*switch (sceneIndex) {
-            case 1:
-                //if (projectTimeInMilliSeconds < 13000) {
-                    eye = eyePoint.getPosition();
-                    center = center.get
-                    up = [0, 1, 0];
-                //} else {
-                //    eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                //    vec3.add(center, eye, [1,-0.5,-1]);
-                //    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
-                //    up = [0, 1, 0];
-                //}
-                break;
-            case 2:
-                eye = [projectTimeInMilliSeconds / 1500 - 8, 2, 3];
-                vec3.add(center, eye, [projectTimeInMilliSeconds / 3000,-0.5,-1]);
-
-//                center = [30, 0, 0];
-                up = [0, 1, 0];
-                break;
-            case 3:
-                eye = [projectTimeInMilliSeconds / 1500 - 8, 2, 3];
-                center = [30, 0, 0];
-                up = [0, 1, 0];
-                break;
-        }*/
     }
 
-    switch (sceneIndex) {
-        case 1:
-            eyePoint.resetPosition();
-            centerPoint.resetPosition();
-            //eyePoint.setSpeed([0,0,0]);
-            break;
-        case 2:
-            eyePoint.setSpeed([10,-2,-5]);
-            centerPoint.setSpeed([13,-2,-5]);
-            break;
-        case 3:
-            eyePoint.setSpeed([0,0,0]);
-            centerPoint.setSpeed([0,0,0]);
-    }
     viewMatrix = mat4.lookAt(viewMatrix, eye, center, up);
     return viewMatrix;
 }

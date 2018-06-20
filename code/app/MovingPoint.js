@@ -42,6 +42,11 @@ class MovingPoint {
         }
     }
 
+    setPosition(position) {
+        this.initialPosition = position;
+        this.resetPosition();
+    }
+
     resetPosition() {
         this.offset = vec3.create();//[0,0,0];
         vec3.copy(this.offset, this.initialPosition);
