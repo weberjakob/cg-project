@@ -42,6 +42,7 @@ var churchTexture;
 
 /*scene settings*/
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
+//var firstTimeRendering = true;
 var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
 /*var lastSecondRendered = 0;
@@ -304,16 +305,22 @@ function createTram(resources) {
 }
 
 function createPerson() {
-    persons = new Array(1, 2, 3);
-    for (i = 0; i < persons.length; i++) {
+    persons = [];
+    for (i = 0; i < 3; i++) {
 
         //persons[i] = new PersonNode();//mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
-        persons[i] = new MovingNode(mat4.multiply(
+        persons[i] = new MovingNode(); /*mat4.multiply(
                                                             mat4.create(),
-                                                            glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
-                                                            glm.scale(7,7,7)));
+            glm.scale(7,7,7),
+                                                            glm.translate(i / 2.5 + 0.9, 0.1, 0.5)
+                                                            ));
+        */
 
-        persons[i].append(new PersonNode());//persons[i]);
+        persons[i].append(new TransformationSGNode(mat4.multiply(
+            mat4.create(),
+            glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
+            glm.scale(7,7,7)),
+            [new PersonNode()]));//persons[i]);
         rootNode.append(persons[i]);
     }
 }
@@ -463,10 +470,12 @@ function render(timeInMilliseconds) {
     var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
     projectTimeInMilliSeconds = timeInMilliseconds % 30000;
     //if animation gets repeated:
-    if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
+    if ((projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds)) {
         resetPositions();
+        console.log("first time rendered");
     }
-
+    displayText(Math.floor(projectTimeInMilliSeconds));
+    //console.log("rendered again");
     //0 to 5: scene
     // 5 to 25: scene 2
     //26 to 30: scene 3
@@ -476,14 +485,17 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            if (projectTimeInMilliSeconds < 4000) {
-                tram.setSpeed(vec3.fromValues(10,0,0));
-                tram2.setSpeed(vec3.fromValues(10,0,0));
+            if(projectTimeInMilliSeconds < 2500) {
+
             }
             else if (projectTimeInMilliSeconds < 5000) {
+                tram.setSpeed(vec3.fromValues(15,0,0));
+                tram2.setSpeed(vec3.fromValues(15,0,0));
+            }
+            else if (projectTimeInMilliSeconds < 6000) {
                 tram.setSpeed(vec3.create());
             }
-            else if (projectTimeInMilliSeconds < 7000) {
+            else if (projectTimeInMilliSeconds < 8000) {
                 tram.openDoors();
                 persons.forEach(function(person) {
                     person.setSpeed(vec3.fromValues(0,0,-1.5));
@@ -492,15 +504,15 @@ function render(timeInMilliseconds) {
                     persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
                 }*/
             }
-            else if (projectTimeInMilliSeconds < 9000) {
+            else if (projectTimeInMilliSeconds < 10000) {
                 persons.forEach(function(person) {
                    person.setSpeed(vec3.create());
                 });
             }
-            else if(projectTimeInMilliSeconds < 9500) {
+            else if(projectTimeInMilliSeconds < 10500) {
                 tram.closeDoors();
             }
-            else if (projectTimeInMilliSeconds < 12500) {
+            else if (projectTimeInMilliSeconds < 11500) {
                 /*
                 if (personParent == "Station") {
                     personParent = "Tram";
@@ -514,9 +526,9 @@ function render(timeInMilliseconds) {
                 }
                 */
                 persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(10,0,0));
+                    person.setSpeed(vec3.fromValues(18,0,0));
                 });
-                tram.setSpeed(vec3.fromValues(10,0,0));
+                tram.setSpeed(vec3.fromValues(18,0,0));
             }
             break;
         case 2:
@@ -563,7 +575,7 @@ function renderMainView() {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    displayText("c: User cam, f: front tram cam");
+    //displayText("c: User cam, f: front tram cam");
     rootNode.render(context);
 }
 

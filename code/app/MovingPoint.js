@@ -43,8 +43,9 @@ class MovingPoint {
     }
 
     resetPosition() {
-        this.offset = this.initialPosition;
-        this.speed = vec3.fromValues(0,0,0);
+        this.offset = vec3.create();//[0,0,0];
+        vec3.copy(this.offset, this.initialPosition);
+        this.speed = vec3.create();//(0,0,0);
         this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
         this.isMovingToSpecificPosition = false;
         this.timeToStopMoving = 0;

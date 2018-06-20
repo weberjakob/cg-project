@@ -1,13 +1,11 @@
-class TramNode extends MovingNode {
+class TramNode extends SceneGraphNode {
 
-    constructor(initialPosition, alphaOfFrontGlas) {
-        if(initialPosition == null) {
-            initialPosition = mat4.create();
-        }
-        super(mat4.multiply(mat4.create(), initialPosition, glm.scale(2, 0.3, 0.3))); //the scaling here came from old code
+    constructor(alphaOfFrontGlas) {
+        super();
+
+        //super(mat4.multiply(mat4.create(), initialPosition, glm.scale(2, 0.3, 0.3))); //the scaling here came from old code
         //super(initialPosition);
         this.doors = [];
-        this.doorsOpenIndex = 1;
 
         //render all components of the tram
         //all the dimensions of these components are relative to the tram node
@@ -83,23 +81,30 @@ class Tram extends SceneGraphNode {
     constructor() {
         super();
         this.tramNodes = [];
+        this.movingNodes = [];
         for (var i = 0; i < 3; i++) {
             var alphaOfFrontGlas = i == 2 ? 0.2 : 1;
-            var tramNode =  new TramNode(null, alphaOfFrontGlas);
+
+            var tramNode = new TramNode(alphaOfFrontGlas);
+            var tramTransformationNode = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(i * 1.25, 0, 0), glm.scale(2, 0.3, 0.3)), tramNode);
+            var movingNode = new MovingNode();
+            movingNode.append(tramTransformationNode)
+
             this.tramNodes.push(tramNode);
-            super.append(new TransformationSGNode(glm.translate(i * 1.25, 0, 0), tramNode));
+            this.movingNodes.push(movingNode);
+            super.append(movingNode);
             //new TramNode(glm.translate(i * 1.25, 0, 0), alphaOfFrontGlas));
         }
     }
 
     setSpeed(speed) {
-        this.tramNodes.forEach(function (child) {
+        this.movingNodes.forEach(function (child) {
             child.setSpeed(speed);
         })
     }
 
     resetPosition() {
-        this.tramNodes.forEach(function (child) {
+        this.movingNodes.forEach(function (child) {
             child.resetPosition();
         })
     }
@@ -117,12 +122,12 @@ class Tram extends SceneGraphNode {
     }
 
     getPosition() {
-        return this.tramNodes[0].getPosition();
+        return this.movingNodes[0].getPosition();
     }
 
     /*
     getPosition() {
-        return this.tramNodes[0].getXPosition();
+        return this.movingNodes[0].getXPosition();
     }
     */
 }

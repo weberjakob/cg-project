@@ -9,14 +9,10 @@
       </changelist_data>
     </list>
     <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/code/app/MovingPoint.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/howto/howto.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/special_effect/special_effect.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/MovingNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/PersonNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/PersonNode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/app/MovingPoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingPoint.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/Tram.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Tram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,8 +30,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="310" column="23" selection-start-line="310" selection-start-column="23" selection-end-line="310" selection-end-column="23" />
+            <state relative-caret-position="603">
+              <caret line="530" column="48" selection-start-line="530" selection-start-column="48" selection-end-line="530" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -43,8 +39,8 @@
       <file leaf-file-name="PersonNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1218">
-              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+            <state relative-caret-position="1445">
+              <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
             </state>
           </provider>
         </entry>
@@ -52,17 +48,8 @@
       <file leaf-file-name="Tram.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="32" lean-forward="true" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+            <state relative-caret-position="765">
+              <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -70,8 +57,8 @@
       <file leaf-file-name="framework.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="795" column="31" lean-forward="true" selection-start-line="795" selection-start-column="31" selection-end-line="795" selection-end-column="31" />
+            <state relative-caret-position="373">
+              <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
               <folding>
                 <element signature="e#0#50#0" />
                 <element signature="n#!!doc;n#loadResources#0" />
@@ -227,35 +214,8 @@
       <file leaf-file-name="MovingNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-289">
-              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrismRenderNode.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RotatingImage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="50" selection-start-column="50" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuadRenderNode.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/QuadRenderNode.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+            <state relative-caret-position="567">
+              <caret line="78" column="34" lean-forward="true" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -263,8 +223,8 @@
       <file leaf-file-name="MovingPoint.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
+            <state relative-caret-position="636">
+              <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -280,36 +240,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>timeInMilliseconds</find>
-      <find>oneSecondSinceLastRendering</find>
-      <find>miniMapYHeight</find>
-      <find>lineP</find>
-      <find>renderCount</find>
-      <find>timeInMi</find>
-      <find>createTram</find>
-      <find>openD</find>
-      <find>sun</find>
-      <find>hbf</find>
-      <find>eye</find>
-      <find>createSta</find>
-      <find>Station</find>
-      <find>createH</find>
-      <find>minimap</find>
-      <find>minimapE</find>
-      <find>texture</find>
-      <find>minimape</find>
-      <find>miniMapEye</find>
-      <find>this.speed</find>
-      <find>Trans</find>
-      <find>createPer</find>
-      <find>person</find>
-      <find>rigidBodyNode</find>
-      <find>personNode</find>
       <find>Node</find>
-      <find>setSpeed</find>
       <find>this.center</find>
+      <find>initial</find>
+      <find>initialD</find>
+      <find>new Moving</find>
+      <find>resetPositions</find>
+      <find>tram</find>
+      <find>initialDimention</find>
+      <find>child</find>
+      <find>resetPos</find>
+      <find>setSpeed</find>
+      <find>move</find>
+      <find>moveTo</find>
+      <find>getPosition</find>
+      <find>this.initialPosition</find>
+      <find>new mOVINGnODE</find>
+      <find>timeIn</find>
+      <find>new Mo</find>
       <find>createPerson</find>
+      <find>createTr</find>
+      <find>create</find>
+      <find>is</find>
+      <find>firstTimeRendering</find>
+      <find>persons</find>
+      <find>init</find>
+      <find>project</find>
+      <find>rendered a</find>
       <find>initialPosition</find>
+      <find>projectTimeInMilliSeconds</find>
+      <find>displayText</find>
     </findStrings>
     <replaceStrings>
       <replace>doorsStratedOpening</replace>
@@ -318,6 +278,7 @@
       <replace />
       <replace>miniMap</replace>
       <replace>positionBuffer</replace>
+      <replace>initialPosition</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -352,11 +313,11 @@
         <option value="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" />
         <option value="$PROJECT_DIR$/code/app/RotatingImage.js" />
         <option value="$PROJECT_DIR$/code/app/index.html" />
+        <option value="$PROJECT_DIR$/code/app/PersonNode.js" />
+        <option value="$PROJECT_DIR$/code/app/MovingNode.js" />
         <option value="$PROJECT_DIR$/code/app/Tram.js" />
         <option value="$PROJECT_DIR$/code/app/MovingPoint.js" />
-        <option value="$PROJECT_DIR$/code/app/MovingNode.js" />
         <option value="$PROJECT_DIR$/code/app/main.js" />
-        <option value="$PROJECT_DIR$/code/app/PersonNode.js" />
       </list>
     </option>
   </component>
@@ -479,7 +440,7 @@
       <workItem from="1529413371524" duration="13680000" />
       <workItem from="1529432249333" duration="15368000" />
       <workItem from="1529475923419" duration="5621000" />
-      <workItem from="1529491157003" duration="7787000" />
+      <workItem from="1529491157003" duration="14673000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1524669569544</created>
@@ -719,11 +680,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529481359042</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added directory structure&#10;introduced MovingPoint (not fully working yet)">
+      <created>1529499012484</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1529499012484</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="149951000" />
+    <option name="totallyTimeSpent" value="156837000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -735,14 +703,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="741" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.24251497" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.17142858" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" weight="0.012387387" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.6365079" visible="true" weight="0.019097222" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32882884" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.6365079" weight="0.012387387" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" sideWeight="0.5032751" side_tool="true" weight="0.16519824" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49827468" weight="0.32995495" />
@@ -755,7 +724,6 @@
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49965495" weight="0.32995495" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32969433" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -801,7 +769,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&#10;blajgopiajfahn" />
     <MESSAGE value="created tramNode that is itself responsible for its translation&#10;and removed not needed methods" />
     <MESSAGE value="modelled tram with transparent windows" />
     <MESSAGE value="initial model for eisenbahn-bridge" />
@@ -826,7 +793,8 @@
     <MESSAGE value="path for minimap implemented" />
     <MESSAGE value="doors can now open and close" />
     <MESSAGE value="stations can have a name that is displayed above them" />
-    <option name="LAST_COMMIT_MESSAGE" value="stations can have a name that is displayed above them" />
+    <MESSAGE value="added directory structure&#10;introduced MovingPoint (not fully working yet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="added directory structure&#10;introduced MovingPoint (not fully working yet)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1070,10 +1038,38 @@
     <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/QuadRenderNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="50" selection-start-column="50" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="795" column="31" lean-forward="true" selection-start-line="795" selection-start-column="31" selection-end-line="795" selection-end-column="31" />
+        <state relative-caret-position="373">
+          <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
           <folding>
             <element signature="e#0#50#0" />
             <element signature="n#!!doc;n#loadResources#0" />
@@ -1225,73 +1221,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+    <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="42" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        <state relative-caret-position="274">
+          <caret line="4696" column="4" selection-start-line="4696" selection-start-column="4" selection-end-line="4696" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="32" lean-forward="true" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" column="43" selection-start-line="46" selection-start-column="43" selection-end-line="46" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="3099" column="4" selection-start-line="3099" selection-start-column="4" selection-end-line="3099" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/QuadRenderNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="50" selection-start-column="50" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
-          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        <state relative-caret-position="765">
+          <caret line="45" column="9" lean-forward="true" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1218">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        <state relative-caret-position="1445">
+          <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="78" column="34" lean-forward="true" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="636">
+          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="310" column="23" selection-start-line="310" selection-start-column="23" selection-end-line="310" selection-end-column="23" />
+        <state relative-caret-position="603">
+          <caret line="530" column="48" selection-start-line="530" selection-start-column="48" selection-end-line="530" selection-end-column="48" />
         </state>
       </provider>
     </entry>

@@ -2,15 +2,12 @@
 
 class MovingNode extends SceneGraphNode {
 
-    constructor(initialDimention) {
+    constructor(initialPosition) {
         super();
-        if (initialDimention == null) {
-            this.initialDimention = mat4.create();
+        if (initialPosition == null) {
+            initialPosition = vec3.create();
         }
-        else {
-            this.initialDimention = initialDimention;
-        }
-        this.centerPosition = new MovingPoint(new mat4.getTranslation(vec3.create(), this.initialDimention));
+        this.centerPosition = new MovingPoint(initialPosition);
         //this.speed = vec3.create();
         //this.resetPosition();//sets offset and timeSinceLastSpeedSet to initial value
     }
