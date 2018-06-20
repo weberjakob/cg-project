@@ -10,6 +10,7 @@ var aspectRatio = canvasWidth / canvasHeight;
 //rendering context
 var context;
 var rootNode, mainShaderRootNode, simpleShaderRootNode;
+var movePointNode;
 
 //camera and projection settings
 var animatedAngle = 0;
@@ -259,11 +260,15 @@ function createRiver(resources) {
 
     var riverBase = new QuadRenderNode();
     var riverTexture = new AdvancedTextureSGNode(resources.rivertexture, [riverBase]);
-
+    var riverMaterial = new MaterialSGNode(riverTexture);
+    riverMaterial.ambient = [0.2, 0.2, 0.2, 1];
+    riverMaterial.diffuse = [0.8, 0.8, 0.8, 1];
+    riverMaterial.specular = [0.2, 0.2, 0.2, 1];
+    riverMaterial.shininess = 50;
     var quadTransformationMatrix = mat4.multiply(mat4.create(), glm.translate(21, -0.5, 0.2), glm.rotateY(90));
     quadTransformationMatrix = mat4.multiply(quadTransformationMatrix, quadTransformationMatrix, glm.scale(100, 0, 3.9));
 
-    var transformationNode = new TransformationSGNode(quadTransformationMatrix, [riverTexture]);
+    var transformationNode = new TransformationSGNode(quadTransformationMatrix, [riverMaterial]);
     rootNode.append(transformationNode);
 
 }
@@ -271,13 +276,23 @@ function createRiver(resources) {
 
 function createTram(resources) {
     tram = new Tram();
-    var tramtextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
-    var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramtextureNode]);
+    var tramTextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
+    var tramMaterialNode = new MaterialSGNode(tramTextureNode);
+    tramMaterialNode.ambient = [0.2, 0.2, 0.2,1 ];
+    tramMaterialNode.diffuse = [0.7, 0.6, 0.5, 1];
+    tramMaterialNode.specular = [0.1, 0.1, 0.1, 1];
+    tramMaterialNode.shininess = 50;
+    var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramMaterialNode]);
 
     //tram2 is driving in the opposite direction
     tram2 = new Tram();
     var tram2textureNode = new AdvancedTextureSGNode(resources.red, [tram2]);
-    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)), [tram2textureNode]);
+    var tram2materialNode = new MaterialSGNode(tram2textureNode);
+    tram2materialNode.ambient = [0.2, 0.2, 0.2,1 ];
+    tram2materialNode.diffuse = [0.7, 0.6, 0.5, 1];
+    tram2materialNode.specular = [0.1, 0.1, 0.1, 1];
+    tram2materialNode.shininess = 50;
+    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
 
     rootNode.append(tramPosition2);
     rootNode.append(tramPosition);
@@ -288,17 +303,18 @@ function createPerson() {
     for (i = 0; i < 3; i++) {
 
         //persons[i] = new PersonNode();//mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
-        persons[i] = new MovingNode(); /*mat4.multiply(
-                                                            mat4.create(),
-            glm.scale(7,7,7),
-                                                            glm.translate(i / 2.5 + 0.9, 0.1, 0.5)
-                                                            ));
-        */
+        persons[i] = new MovingNode();
+        /*mat4.multiply(
+                                                                   mat4.create(),
+                   glm.scale(7,7,7),
+                                                                   glm.translate(i / 2.5 + 0.9, 0.1, 0.5)
+                                                                   ));
+               */
 
         persons[i].append(new TransformationSGNode(mat4.multiply(
             mat4.create(),
             glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
-            glm.scale(7,7,7)),
+            glm.scale(7, 7, 7)),
             [new PersonNode()]));//persons[i]);
         rootNode.append(persons[i]);
     }
@@ -325,8 +341,11 @@ function createLightNodes(resources) {
     rootNode.append(transformationNode);
 
     //spot light
-    let spotLight = new SpotLightNode([21, 1, -0.1], createLightSphere(resources), [0, 1, 0]);
-    rootNode.append(spotLight);
+    let spotLight = new SpotLightNode([0, 0, 0], createLightSphere(resources), [0, 1, 0]);
+    movePointNode = new MovingNode([10, 1, -0.1]);
+    movePointNode.append(spotLight);
+    movePointNode.moveTo([20, 2, -0.1], 20000);
+    rootNode.append(movePointNode);
 }
 
 function createLightSphere(resources) {
@@ -338,8 +357,12 @@ function createLightSphere(resources) {
 function createBridge(resources) {
     var bridge = new Bridge();
     var bridgeTexture = new AdvancedTextureSGNode(resources.bridge_metal, [bridge]);
-    var bridgePosition = new TransformationSGNode(glm.translate(20, -0.05, -0.32), [bridgeTexture]);
-
+    var bridgeMaterial = new MaterialSGNode(bridgeTexture);
+    bridgeMaterial.ambient = [0.10, 0.25, 0.054, 1];
+    bridgeMaterial.diffuse = [0.30, 0.75, 0.18144, 1];
+    bridgeMaterial.specular = [0.1, 0.5, 0.1, 1];
+    bridgeMaterial.shininess = 0.2;
+    var bridgePosition = new TransformationSGNode(glm.translate(20, -0.05, -0.32), [bridgeMaterial]);
     rootNode.append(bridgePosition);
 }
 
@@ -350,7 +373,12 @@ function createRails(resources) {
             var rail = new CubeRenderNode();
             var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2 - secondLine * 4.5));
             var railTextureNode = new AdvancedTextureSGNode(resources.traintracks, [rail])
-            var railTransformationNode = new TransformationSGNode(railAxeTransformationMatrix, [railTextureNode]);
+            var railMaterialNode = new MaterialSGNode(railTextureNode);
+            railMaterialNode.ambient = [0.0,0.0,0.0,1];
+            railMaterialNode.diffuse = [0.4,0.2,0.2,1];
+            railMaterialNode.specular = [0.4,0.1,0.1,1];
+            railMaterialNode.shininess = 10;
+            var railTransformationNode = new TransformationSGNode(railAxeTransformationMatrix, [railMaterialNode]);
             rootNode.append(railTransformationNode);
         }
     }
@@ -359,7 +387,12 @@ function createRails(resources) {
 function createStation(resources) {
     var station = new Station(resources.hbftexture, resources.stopsign);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
-    var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [textureStation]);
+    var materialStation = new MaterialSGNode([textureStation]);
+    materialStation.ambient = [0.1, 0.1, 0.1, 1];
+    materialStation.diffuse = [0.1, 0.1, 0.1, 1];
+    materialStation.specular = [0.1, 0.1, 0.1, 1];
+    materialStation.shininess = 20;
+    var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [materialStation]);
     rootNode.append(stationPosition);
 }
 
@@ -367,7 +400,9 @@ function createBillBoards(resources) {
     var billboard1 = new BillboardNode(1);
     billboard1.setPosition(30, 2, -2);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
-    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -2), textureBillboardNode);
+    var materialBillboardNode = new MaterialSGNode(textureBillboardNode);
+    materialBillboardNode.emission=[0.1, 0.1, 0.1, 1];
+    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -2), materialBillboardNode);
     rootNode.append(billboardPos);
 }
 
@@ -377,13 +412,23 @@ function createPrism(resources) {
     var prismTransformationMatrix = mat4.multiply(mat4.create(), glm.rotateY(90), glm.scale(1.9, 0.3, 57));
     mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.04, -0.3, 0));
     var texturePrismNode = new AdvancedTextureSGNode(resources.cement, [prism]);
-    var prismTransformation = new TransformationSGNode(prismTransformationMatrix, [texturePrismNode]);
+    var materialPrismNode = new MaterialSGNode(texturePrismNode);
+    materialPrismNode.ambient = [0.1,0.1,0.1,1];
+    materialPrismNode.diffuse = [0.7, 0.7, 0.7,1];
+    materialPrismNode.specular = [0.2,0.2,0.2,1];
+    materialPrismNode.shininess = 0.2;
+    var prismTransformation = new TransformationSGNode(prismTransformationMatrix, [materialPrismNode]);
     rootNode.append(prismTransformation);
 
     //prism after the bridge
     var prism2 = new PrismRenderNode();
     var texturePrismNode2 = new AdvancedTextureSGNode(resources.cement, [prism2]);
-    var prismTransformation2 = new TransformationSGNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)), [texturePrismNode2]);
+    var materialPrismNode2 = new MaterialSGNode(texturePrismNode2);
+    materialPrismNode2.ambient = [0.1,0.1,0.1,1];
+    materialPrismNode2.diffuse = [0.7, 0.7, 0.7,1];
+    materialPrismNode2.specular = [0.2,0.2,0.2,1];
+    materialPrismNode2.shininess = 0.2;
+    var prismTransformation2 = new TransformationSGNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)), [materialPrismNode2]);
     rootNode.append(prismTransformation2);
 }
 
@@ -456,6 +501,8 @@ function render(timeInMilliseconds) {
     //if animation gets repeated:
     if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
         resetPositions();
+        movePointNode.setPosition([10, 1, -0.1],0);
+        movePointNode.moveTo([20, 2, -0.1], 20000);
     }
 
     //0 to 5: scene
@@ -467,31 +514,31 @@ function render(timeInMilliseconds) {
     //update tram transformation
     switch (sceneIndex) {
         case 1:
-            if(projectTimeInMilliSeconds < 2500) {
+            if (projectTimeInMilliSeconds < 2500) {
 
             }
             else if (projectTimeInMilliSeconds < 5000) {
-                tram.setSpeed(vec3.fromValues(15,0,0));
-                tram2.setSpeed(vec3.fromValues(15,0,0));
+                tram.setSpeed(vec3.fromValues(15, 0, 0));
+                tram2.setSpeed(vec3.fromValues(15, 0, 0));
             }
             else if (projectTimeInMilliSeconds < 6000) {
                 tram.setSpeed(vec3.create());
             }
             else if (projectTimeInMilliSeconds < 8000) {
                 tram.openDoors();
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(0,0,-1.5));
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.fromValues(0, 0, -1.5));
                 });
                 /*for (i = 0; i < 3; i++) {
                     persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
                 }*/
             }
             else if (projectTimeInMilliSeconds < 10000) {
-                persons.forEach(function(person) {
-                   person.setSpeed(vec3.create());
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.create());
                 });
             }
-            else if(projectTimeInMilliSeconds < 10500) {
+            else if (projectTimeInMilliSeconds < 10500) {
                 tram.closeDoors();
             }
             else if (projectTimeInMilliSeconds < 11500) {
@@ -507,10 +554,10 @@ function render(timeInMilliseconds) {
                     }
                 }
                 */
-                persons.forEach(function(person) {
-                    person.setSpeed(vec3.fromValues(18,0,0));
+                persons.forEach(function (person) {
+                    person.setSpeed(vec3.fromValues(18, 0, 0));
                 });
-                tram.setSpeed(vec3.fromValues(18,0,0));
+                tram.setSpeed(vec3.fromValues(18, 0, 0));
             }
             break;
         case 2:
@@ -611,6 +658,7 @@ function renderLine(timeInMilliseconds) {
     const lineColor = {r: 1.0, g: 0.2, b: 0.0};
     gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
+    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_model'), false, context.viewMatrix);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false, context.projectionMatrix);
     /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
     gl.enableVertexAttribArray(colorLocation);
@@ -695,11 +743,11 @@ function calculateViewMatrix() {
             case 1:
                 if (projectTimeInMilliSeconds < 13000) {
                     eye = [7, 2.5, 5];
-                    vec3.add(center, eye, [-1,-0.5,-1]);
+                    vec3.add(center, eye, [-1, -0.5, -1]);
                     up = [0, 1, 0];
                 } else {
                     eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                    vec3.add(center, eye, [1,-0.5,-1]);
+                    vec3.add(center, eye, [1, -0.5, -1]);
                     //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
                     up = [0, 1, 0];
                 }

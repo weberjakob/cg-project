@@ -26,12 +26,14 @@ struct Light {
 //illumination related variables
 uniform Material u_material;
 uniform Light u_light;
-uniform Light u_lightTram;
+uniform Light u_lightSpot;
 varying vec3 v_spotLightDirection;
 varying vec3 v_normalVec;
 varying vec3 v_eyeVec;
 varying vec3 v_lightVec;
-varying vec3 v_lightTramVec;
+varying vec3 v_normalSpotVec;
+varying vec3 v_eyeSpotVec;
+varying vec3 v_lightSpotVec;
 
 //texture related variables
 uniform bool u_enableObjectTexture;
@@ -105,6 +107,6 @@ void main (void) {
 
   vec4 textureColor =  texture2D(u_tex,v_texCoord);
   gl_FragColor = calculateSimplePointLight(u_light, u_material, v_lightVec, v_normalVec, v_eyeVec, textureColor)+
-                    calculateSpotLight(u_lightTram, u_material, v_lightTramVec, v_normalVec, v_eyeVec, textureColor, v_spotLightDirection);
+                    calculateSpotLight(u_lightSpot, u_material, v_lightSpotVec, v_normalSpotVec, v_eyeSpotVec, textureColor, v_spotLightDirection);
 
 }

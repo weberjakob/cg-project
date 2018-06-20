@@ -8,7 +8,7 @@ class SpotLightNode extends TransformationSGNode {
         this.diffuse = [1, 1, 1, 1];
         this.specular = [1, 1, 1, 1];
         //uniform name
-        this.uniform = 'u_lightTram';
+        this.uniform = 'u_lightSpot';
         this.directionUniform = 'v_spotLightDirection';
         this._worldPosition = null;
     }
