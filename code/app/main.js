@@ -16,7 +16,7 @@ var movePointNode;
 var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
-var miniMapEye = vec3.create();
+//var miniMapEye = vec3.create();
 const miniMapYHeight = 30;
 var center = vec3.create();
 var up = vec3.create();
@@ -612,24 +612,30 @@ function renderMiniMap(timeInMilliseconds) {
 
 
     var miniMapViewMatrix = mat4.create();
-    miniMapEye = vec3.fromValues(eye[0], miniMapYHeight, eye[2]);
-    var miniMapCenter = vec3.fromValues(center[0], 0, center[2]);
-    mat4.lookAt(miniMapViewMatrix, miniMapEye, miniMapCenter, up);
+    var savedEye = eye;
+    var savedCenter = center;
+
+    eye = vec3.fromValues(eye[0], miniMapYHeight, eye[2]);
+    center = vec3.fromValues(center[0], 0, center[2]);
+    mat4.lookAt(miniMapViewMatrix, eye, center, up);
     //save viewMatrix
     var previous = context.viewMatrix;
     context.viewMatrix = miniMapViewMatrix;
     rootNode.render(context);
     renderLine(timeInMilliseconds);
 
+    //restore eye
+    eye = savedEye;
+    center = savedCenter;
     //restore viewMatrix
     context.viewMatrix = previous;
 }
 
 function renderLine(timeInMilliseconds) {
     //add/remove line points to the array
-    linePositions.push(miniMapEye[0]);
+    linePositions.push(eye[0]);
     linePositions.push(6);
-    linePositions.push(miniMapEye[2]);
+    linePositions.push(eye[2]);
     //if animation lasted more than 10 seconds start removing first elements
     if (timeInMilliseconds > 10000) {
         linePositions.shift();
