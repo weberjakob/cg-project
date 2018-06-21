@@ -17,7 +17,7 @@ var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
 var miniMapEye = vec3.create();
-const miniMapYHeight = 20;
+const miniMapYHeight = 30;
 var center = vec3.create();
 var up = vec3.create();
 const camera = {
@@ -128,6 +128,7 @@ loadResources({
     phong_fs: 'shader/phong.fs.glsl',
     churchtexture: 'models/neuerdom.jpg',
     hbftexture: 'models/hbf.png',
+    jkutexture: 'models/jku.png',
     rivertexture: 'models/water.jpg',
     cobblestone: 'models/cobblestone.jpg',
     bridge_metal: 'models/metal.jpg',
@@ -177,8 +178,9 @@ function init(resources) {
     createPerson(resources);
     createBillboardedPeople(resources);
     createBillBoards(resources);
-    createStation(resources);
+    createStations(resources);
     createTram(resources);
+    createEyePoint(resources);
     createTestCube(resources);
 
     //register keyboard events
@@ -248,8 +250,10 @@ function mouseMoved(event) {
         deltaY = mouseY - mousePrevY;
         camera.rotation.x += deltaX;
         camera.rotation.y += deltaY;
-        camera.rotation.y = Math.min(camera.rotation.y, 90);
-        camera.rotation.y = Math.max(camera.rotation.y, -90);
+        if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
+        else camera.rotation.y %= 100;
+        //camera.rotation.y = Math.min(camera.rotation.y, 90);
+        //camera.rotation.y = Math.max(camera.rotation.y, -90);
     } else {
         deltaX = 0;
         deltaY = 0;
@@ -292,7 +296,7 @@ function createTram(resources) {
     tram2materialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tram2materialNode.specular = [0.1, 0.1, 0.1, 1];
     tram2materialNode.shininess = 50;
-    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(20, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
+    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(40, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
 
     rootNode.append(tramPosition2);
     rootNode.append(tramPosition);
@@ -384,7 +388,8 @@ function createRails(resources) {
     }
 }
 
-function createStation(resources) {
+function createStations(resources) {
+    //create hbf
     var station = new Station(resources.hbftexture, resources.stopsign);
     var textureStation = new AdvancedTextureSGNode(resources.cobblestone, [station]);
     var materialStation = new MaterialSGNode([textureStation]);
@@ -393,6 +398,17 @@ function createStation(resources) {
     materialStation.specular = [0.1, 0.1, 0.1, 1];
     materialStation.shininess = 20;
     var stationPosition = new TransformationSGNode(glm.translate(1, 0, 0.51), [materialStation]);
+    rootNode.append(stationPosition);
+
+    //create jku
+    var jkustation = new Station(resources.jkutexture, resources.stopsign);
+    var textureJKUStation = new AdvancedTextureSGNode(resources.cobblestone, [jkustation]);
+    var materialJKUStation = new MaterialSGNode([textureJKUStation]);
+    materialJKUStation.ambient = [0.1, 0.1, 0.1, 1];
+    materialJKUStation.diffuse = [0.1, 0.1, 0.1, 1];
+    materialJKUStation.specular = [0.1, 0.1, 0.1, 1];
+    materialJKUStation.shininess = 20;
+    var stationPosition = new TransformationSGNode(glm.translate(32, 0, 0.51), [materialJKUStation]);
     rootNode.append(stationPosition);
 }
 
@@ -508,74 +524,44 @@ function render(timeInMilliseconds) {
     //0 to 5: scene
     // 5 to 25: scene 2
     //26 to 30: scene 3
-    sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
+    //sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
     //sceneIndex = 3;
 
     //update tram transformation
-    switch (sceneIndex) {
-        case 1:
-            if (projectTimeInMilliSeconds < 2500) {
 
-            }
-            else if (projectTimeInMilliSeconds < 5000) {
-                tram.setSpeed(vec3.fromValues(15, 0, 0));
-                tram2.setSpeed(vec3.fromValues(15, 0, 0));
-            }
-            else if (projectTimeInMilliSeconds < 6000) {
-                tram.setSpeed(vec3.create());
-            }
-            else if (projectTimeInMilliSeconds < 8000) {
-                tram.openDoors();
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.fromValues(0, 0, -1.5));
-                });
-                /*for (i = 0; i < 3; i++) {
-                    persons[i].setSpeed(vec3.fromValues(0,0,-1.5));
-                }*/
-            }
-            else if (projectTimeInMilliSeconds < 10000) {
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.create());
-                });
-            }
-            else if (projectTimeInMilliSeconds < 10500) {
-                tram.closeDoors();
-            }
-            else if (projectTimeInMilliSeconds < 11500) {
-                /*
-                if (personParent == "Station") {
-                    personParent = "Tram";
-                    for (i = 0; i < 3; i++) {
-                        //rootNode.remove(persons[i]);
-                        persons[i]
-                        persons[i].rotateAndTranslate(-0.10, -0.005, -0.03);
-
-                        //tram.append(persons[i]);
-                    }
-                }
-                */
-                persons.forEach(function (person) {
-                    person.setSpeed(vec3.fromValues(18, 0, 0));
-                });
-                tram.setSpeed(vec3.fromValues(18, 0, 0));
-            }
-            break;
-        case 2:
-            break;
-        case 3:
-            if (projectTimeInMilliSeconds > 29000) {
-                /*
-                if (personParent == "Tram") {
-                    personParent = "Station";
-                    for (i = 0; i < persons.length; i++) {
-                        tram.remove(persons[i]);
-                        persons[i] = new PersonNode(mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
-                        rootNode.append(persons[i]);
-
-                    }
-                }*/
-            }
-            break;
+    if       (projectTimeInMilliSeconds < 2500) {
+        sceneIndex = 1;
+    }
+    else if  (projectTimeInMilliSeconds < 5000) {
+        sceneIndex = 1;
+        tram.setSpeed(vec3.fromValues(15,0,0));
+        tram2.setSpeed(vec3.fromValues(10,0,0));
+    }
+    else if  (projectTimeInMilliSeconds < 6000) {
+        tram.setSpeed(vec3.create());
+    }
+    else if  (projectTimeInMilliSeconds < 8000) {
+        tram.openDoors();
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,-1.5));});
+    }
+    else if (projectTimeInMilliSeconds < 10000) {
+        persons.forEach(function(person) {person.setSpeed(vec3.create());});
+    }
+    else if (projectTimeInMilliSeconds < 10500) {
+        tram.closeDoors();
+    }
+    else if (projectTimeInMilliSeconds < 24000) {
+        sceneIndex = 2;
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(20,0,0));});
+        tram.setSpeed(vec3.fromValues(20,0,0));
+    }
+    else if (projectTimeInMilliSeconds < 26000) {
+        sceneIndex = 3;
+    }
+    else if (projectTimeInMilliSeconds < 30000) {
+        persons.forEach(function (person) {person.setSpeed(vec3.fromValues(0, 0, 0));});
+        tram.setSpeed(vec3.fromValues(0, 0, 0));
+        tram.openDoors();
     }
 
     renderMainView();
@@ -710,33 +696,107 @@ function createSceneGraphContext(gl, shader) {
     };
 }
 
-var xPosition = 0;
+//var xPosition = 0;
+var eyePoint;
+var centerPoint;
+var jumpToUserCamera = true;
+
+function createEyePoint() {
+    eyePoint = new MovingPoint();
+    centerPoint = new MovingPoint();
+}
 
 function calculateViewMatrix() {
-    xPosition = tram.getPosition()[0];
+    switch (sceneIndex) {
+        case 1:
+            eyePoint.setPosition([7.5, 1.8, 1.6]);
+            centerPoint.setPosition([6.3,1.6,1.3]);
+            //eyePoint.setSpeed([0,0,0]);
+            break;
+        case 2:
+            eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2,0.1,0.05]), 2000);
+            centerPoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [3,0.1,0.05]), 2000);
+            //eyePoint.setSpeed([10,-2,-5]);
+            //centerPoint.setSpeed([13,-2,-5]);
+            break;
+        case 3:
+            eyePoint.setPosition([40, 2, 0]);
+            centerPoint.setPosition([39, 1.9, 0]);
+    }
+
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
-        //calculate lookat direction
-        var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-        var dirY = -camera.rotation.y * Math.PI / 360;
-        var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+        var direction;
+        if(jumpToUserCamera) {
+            direction = vec3.subtract(vec3.create(), center, eye);
+            direction[0] = Math.round(direction[0] * 1000000000) / 1000000000;
+            direction[1] = Math.round(direction[1] * 1000000000) / 1000000000;
+            direction[2] = Math.round(direction[2] * 1000000000) / 1000000000;
 
-        //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
-        dirX = Math.round(dirX * 1000000000) / 1000000000;
-        dirY = Math.round(dirY * 1000000000) / 1000000000;
-        dirZ = Math.round(dirZ * 1000000000) / 1000000000;
-        var direction = [dirX, dirY, dirZ];
+            camera.rotation.y = -direction[1] * 360 / Math.PI;
+            if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
+            else camera.rotation.y %= 100;
+            camera.rotation.y = Math.min(camera.rotation.y, 100);
+            camera.rotation.y = Math.max(camera.rotation.y, -100);
+
+            //camera.rotation.y = Math.round(camera.rotation.y * 1000000000) / 1000000000;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+
+            var acosParam = direction[0] / Math.cos(camera.rotation.y * Math.PI / 360);
+            if(acosParam < 0) acosParam = -1 * (-acosParam % 1);
+            else acosParam %= 1;
+
+            //acosParam = Math.min(acosParam, 1);
+            //acosParam = Math.max(acosParam, -1);
+            camera.rotation.x = Math.acos(acosParam) * 360 / Math.PI;
+            //camera.rotation.x %= 45;//Math.camera.rotation.x, 90);
+            //camera.rotation.x = Math.max(camera.rotation.x, -90);
+            console.log(camera.rotation.x);
+            //console.log("camera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+            //camera.rotation.x = Math.round(camera.rotation.x * 1000000000) / 1000000000;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+
+
+            camera.zoom = 0;
+            //jumpToUserCamera = false;
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction);
+        }
+        //else {
+            //calculate lookat direction
+            var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+            var dirY = -camera.rotation.y * Math.PI / 360;
+            var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+
+            //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
+            dirX = Math.round(dirX * 1000000000) / 1000000000;
+            dirY = Math.round(dirY * 1000000000) / 1000000000;
+            dirZ = Math.round(dirZ * 1000000000) / 1000000000;
+            direction = [dirX, dirY, dirZ];
+
+
+            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.x=" + camera.rotation.x);
+        //}
 
         //calculate new lookat vectors
-        eye = vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
-        center = vec3.add(center, eye, direction);
+        vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
+        vec3.add(center, eye, direction);
+        if(jumpToUserCamera) {
+            jumpToUserCamera = false;
+            console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+        }
         up = [0, 1, 0];
     } else if (tramFrontCamera) {
 
-        eye = [xPosition, 0.1, 0.05];
-        center = [xPosition + 0.5, 0.1, 0.05];
+
+        var tramPos = tram.getPosition();
+        vec3.add(eye, tramPos, [0,0.1,0.05]);
+        vec3.add(center, tramPos, [0.1,0.1,0.06]);
         up = [0, 1, 0];
+        if(!jumpToUserCamera) {
+            jumpToUserCamera = true;
+            console.log("jumped to front camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
+        }
     }
     else {
         switch (sceneIndex) {
@@ -763,6 +823,10 @@ function calculateViewMatrix() {
                 up = [0, 1, 0];
                 break;
         }
+        jumpToUserCamera = true;
+        eye = eyePoint.getPosition();
+        center = centerPoint.getPosition();
+        up = [0, 1, 0];
     }
 
     viewMatrix = mat4.lookAt(viewMatrix, eye, center, up);
