@@ -107,6 +107,6 @@ void main (void) {
 
   vec4 textureColor =  texture2D(u_tex,v_texCoord);
   gl_FragColor = calculateSimplePointLight(u_light, u_material, v_lightVec, v_normalVec, v_eyeVec, textureColor)+
-                    calculateSpotLight(u_lightSpot, u_material, v_lightSpotVec, v_normalSpotVec, v_eyeSpotVec, textureColor, v_spotLightDirection);
+                    calculateSpotLight(u_lightSpot, u_material, v_lightSpotVec, v_normalSpotVec, v_eyeVec, textureColor, v_spotLightDirection);
 
 }

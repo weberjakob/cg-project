@@ -24,7 +24,7 @@ class Station extends SceneGraphNode {
         materialBillboardNode.diffuse = [0,0,0,0];
         materialBillboardNode.specular = [0,0,0,0];
         materialBillboardNode.emission = [0,0,0,0];
-        materialBillboardNode.shininess=0,1;
+        materialBillboardNode.shininess=0;
         var billboardPos = new TransformationSGNode(glm.translate(0, 2, 0), materialBillboardNode);
         this.append(billboardPos);
     }
