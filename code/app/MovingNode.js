@@ -75,6 +75,10 @@ class MovingNode extends SceneGraphNode {
                     */
     }
 
+    setPosition(position) {
+        this.centerPosition.setPosition(position);
+    }
+
     resetPosition() {
         this.centerPosition.resetPosition();
         /*

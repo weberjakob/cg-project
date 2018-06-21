@@ -250,10 +250,11 @@ function mouseMoved(event) {
         deltaY = mouseY - mousePrevY;
         camera.rotation.x += deltaX;
         camera.rotation.y += deltaY;
-        if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
-        else camera.rotation.y %= 100;
-        //camera.rotation.y = Math.min(camera.rotation.y, 90);
-        //camera.rotation.y = Math.max(camera.rotation.y, -90);
+        camera.rotation.z += deltaX;
+        //if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
+        //else camera.rotation.y %= 100;
+        camera.rotation.y = Math.min(camera.rotation.y, 90);
+        camera.rotation.y = Math.max(camera.rotation.y, -90);
     } else {
         deltaX = 0;
         deltaY = 0;
@@ -517,7 +518,7 @@ function render(timeInMilliseconds) {
     //if animation gets repeated:
     if (projectTimeInMilliSeconds < oldProjectTimeInMilliSeconds) {
         resetPositions();
-        movePointNode.setPosition([10, 1, -0.1],0);
+        movePointNode.setPosition([10, 1, -0.1]);
         movePointNode.moveTo([20, 2, -0.1], 20000);
     }
 
@@ -700,6 +701,7 @@ function createSceneGraphContext(gl, shader) {
 var eyePoint;
 var centerPoint;
 var jumpToUserCamera = true;
+var dirZOffset;
 
 function createEyePoint() {
     eyePoint = new MovingPoint();
@@ -733,7 +735,7 @@ function calculateViewMatrix() {
             direction[0] = Math.round(direction[0] * 1000000000) / 1000000000;
             direction[1] = Math.round(direction[1] * 1000000000) / 1000000000;
             direction[2] = Math.round(direction[2] * 1000000000) / 1000000000;
-
+            dirZOffset = direction[2];
             camera.rotation.y = -direction[1] * 360 / Math.PI;
             if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
             else camera.rotation.y %= 100;
@@ -746,13 +748,27 @@ function calculateViewMatrix() {
             var acosParam = direction[0] / Math.cos(camera.rotation.y * Math.PI / 360);
             if(acosParam < 0) acosParam = -1 * (-acosParam % 1);
             else acosParam %= 1;
+            console.log("acosParam direction[0]=" + acosParam);
+
 
             //acosParam = Math.min(acosParam, 1);
             //acosParam = Math.max(acosParam, -1);
             camera.rotation.x = Math.acos(acosParam) * 360 / Math.PI;
+
+            var acosParam = direction[2] / Math.cos(camera.rotation.y * Math.PI / 360);
+            if(acosParam < 0) acosParam = -1 * (-acosParam % 1);
+            else acosParam %= 1;
+            console.log("acosParam direction[2]=" + acosParam);
+
+            camera.rotation.z = Math.asin(acosParam) * 360 / Math.PI;
+            dirZOffset = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+            //camera.rotation.z = camera.rotation.x;
             //camera.rotation.x %= 45;//Math.camera.rotation.x, 90);
             //camera.rotation.x = Math.max(camera.rotation.x, -90);
-            console.log(camera.rotation.x);
+            console.log("camera.rotation.x=" + camera.rotation.x);
+            console.log("otherX=" + camera.rotation.z);
+            console.log("dirZOffset=" + dirZOffset + "direction[2]=" + direction[2]);
+
             //console.log("camera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
             //camera.rotation.x = Math.round(camera.rotation.x * 1000000000) / 1000000000;
             //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
@@ -766,7 +782,7 @@ function calculateViewMatrix() {
             //calculate lookat direction
             var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
             var dirY = -camera.rotation.y * Math.PI / 360;
-            var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+            var dirZ = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360) - dirZOffset;
 
             //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
             dirX = Math.round(dirX * 1000000000) / 1000000000;
@@ -780,7 +796,9 @@ function calculateViewMatrix() {
 
         //calculate new lookat vectors
         vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
+        //direction[2] += camera.rotation.z;
         vec3.add(center, eye, direction);
+        //center[2] -= camera.rotation.z;
         if(jumpToUserCamera) {
             jumpToUserCamera = false;
             console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
