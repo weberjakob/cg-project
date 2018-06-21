@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/MovingNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
-    </list>
     <list id="ceb2163f-a745-4f72-8f85-0329291cfc93" name="camera can now zoom(up down) if 'c' is pressed and go left/right" comment="i have no idea what i am doing right now">
       <changelist_data name="pichristoph" email="pichler.christoph@outlook.com" date="1525642172000">
         <option name="date" value="1525642172000" />
         <option name="email" value="pichler.christoph@outlook.com" />
         <option name="name" value="pichristoph" />
       </changelist_data>
+    </list>
+    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="camera movement fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -28,8 +27,17 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="767" column="66" lean-forward="true" selection-start-line="767" selection-start-column="66" selection-end-line="767" selection-end-column="66" />
+            <state relative-caret-position="343">
+              <caret line="731" column="21" lean-forward="true" selection-start-line="731" selection-start-column="21" selection-end-line="731" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RotatingImage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="50" selection-start-column="50" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -46,7 +54,7 @@
       <file leaf-file-name="Station.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/Station.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="510">
               <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
@@ -239,8 +247,8 @@
       <file leaf-file-name="MovingNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
+            <state relative-caret-position="898">
+              <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -248,8 +256,8 @@
       <file leaf-file-name="MovingPoint.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
-              <caret line="38" column="39" lean-forward="true" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+            <state relative-caret-position="338">
+              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -265,10 +273,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>project</find>
-      <find>rendered a</find>
-      <find>initialPosition</find>
-      <find>displayText</find>
       <find>createStation</find>
       <find>createStations</find>
       <find>dir</find>
@@ -282,19 +286,23 @@
       <find>projectTimeInMilliSeconds</find>
       <find>eyePoin</find>
       <find>createEyePoint</find>
-      <find>eyePoint</find>
       <find>camera.r</find>
       <find>zoom</find>
       <find>center</find>
       <find>camera.rot</find>
-      <find>camera.rotation.x</find>
       <find>camera.rotation.y</find>
       <find>movePointNode</find>
-      <find>eye</find>
-      <find>direction</find>
       <find>rotation.y</find>
       <find>rotation.x</find>
       <find>rotation.z</find>
+      <find>setSpeed</find>
+      <find>createP</find>
+      <find>eye</find>
+      <find>eyePoint</find>
+      <find>camera.rotation.x</find>
+      <find>vec3.subtract(vec3.create(), center, eye);</find>
+      <find>directionOffset</find>
+      <find>direction</find>
     </findStrings>
     <replaceStrings>
       <replace>doorsStratedOpening</replace>
@@ -305,6 +313,7 @@
       <replace>positionBuffer</replace>
       <replace>initialPosition</replace>
       <replace>camera.rotation.z</replace>
+      <replace>directionOffset</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -356,9 +365,9 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="4">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1305" />
-    <option name="height" value="741" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -384,6 +393,13 @@
               <item name="code" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git_project" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="shader" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -402,121 +418,6 @@
       <recent name="$PROJECT_DIR$/code/app" />
       <recent name="$PROJECT_DIR$/code/app/shader" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/SpotLightNode.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/Station.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/main.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/shader/texture.fs.glsl</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/shader/texture.vs.glsl</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -583,6 +484,7 @@
       <workItem from="1529491157003" duration="19865000" />
       <workItem from="1529524288916" duration="10385000" />
       <workItem from="1529557744880" duration="2793000" />
+      <workItem from="1529568346203" duration="6892000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1524669569544</created>
@@ -850,11 +752,25 @@
       <option name="project" value="LOCAL" />
       <updated>1529534638022</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fixed MovingNode.setPosition()-bug">
+      <created>1529568432807</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1529568432807</updated>
+    </task>
+    <task id="LOCAL-00040" summary="camera movement fixed">
+      <created>1529570373409</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1529570373409</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175207000" />
+    <option name="totallyTimeSpent" value="182099000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -866,12 +782,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1313" height="1053" extended-state="4" />
+    <frame x="0" y="0" width="1305" height="1053" extended-state="4" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.11007026" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.20659858" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" visible="true" weight="0.007882883" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" visible="true" weight="0.0045045046" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.6365079" weight="0.012387387" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" sideWeight="0.5032751" side_tool="true" weight="0.16519824" />
@@ -931,8 +848,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="the tram now gets reseted to it's initial position, and increasing the speed of the tram doesn't lead to a jump anymore" />
-    <MESSAGE value="tram stops at tram station and opens/closes the doors" />
     <MESSAGE value="inserted this comment to check if commit was succsessfull" />
     <MESSAGE value="i have no idea what i am doing right now" />
     <MESSAGE value="uncommented createBridge" />
@@ -956,7 +871,9 @@
     <MESSAGE value="MovingPoint is now working" />
     <MESSAGE value="adjusted camera flight" />
     <MESSAGE value="i tried to get the jump to the user camera valid but this fucking shit don't want to work!" />
-    <option name="LAST_COMMIT_MESSAGE" value="i tried to get the jump to the user camera valid but this fucking shit don't want to work!" />
+    <MESSAGE value="fixed MovingNode.setPosition()-bug" />
+    <MESSAGE value="camera movement fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="camera movement fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1096,17 +1013,17 @@
     <entry file="file://$PROJECT_DIR$/code/.idea/workspace.xml" />
     <entry file="file://$PROJECT_DIR$/code/.idea/workspace.xml" />
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="51">
             <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
@@ -1204,13 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="50" selection-start-column="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -1378,7 +1288,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Station.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
+        <state relative-caret-position="510">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
         </state>
       </provider>
@@ -1406,22 +1316,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="38" column="39" lean-forward="true" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
+        <state relative-caret-position="338">
+          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-end-line="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="898">
+          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="50" selection-start-column="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="767" column="66" lean-forward="true" selection-start-line="767" selection-start-column="66" selection-end-line="767" selection-end-column="66" />
+        <state relative-caret-position="343">
+          <caret line="731" column="21" lean-forward="true" selection-start-line="731" selection-start-column="21" selection-end-line="731" selection-end-column="21" />
         </state>
       </provider>
     </entry>
