@@ -143,7 +143,8 @@ loadResources({
     person3: 'models/person3.png',
     staticcolour_vs: 'shader/static_color.vs.glsl',
     staticcolour_fs: 'shader/static_color.fs.glsl',
-    stopsign: 'models/stopsign.png'
+    stopsign: 'models/stopsign.png',
+    blank: 'models/blank.png'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -171,6 +172,7 @@ function init(resources) {
     rootNode = new ShaderSGNode(shaderProgram);
 
     createLightNodes(resources);
+    createLandScape(resources);
     createRiver(resources);
     createRails(resources);
     createBridge(resources);
@@ -181,7 +183,7 @@ function init(resources) {
     createStations(resources);
     createTram(resources);
     createEyePoint(resources);
-    createTestCube(resources);
+    //createTestCube(resources);
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -261,6 +263,10 @@ function mouseMoved(event) {
     }
 }
 
+function createLandScape(resources) {
+   //create billboard trees
+}
+
 function createRiver(resources) {
 
     var riverBase = new QuadRenderNode();
@@ -280,7 +286,7 @@ function createRiver(resources) {
 
 
 function createTram(resources) {
-    tram = new Tram();
+    tram = new Tram(resources);
     var tramTextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
     var tramMaterialNode = new MaterialSGNode(tramTextureNode);
     tramMaterialNode.ambient = [0.2, 0.2, 0.2,1 ];
@@ -290,7 +296,7 @@ function createTram(resources) {
     var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramMaterialNode]);
 
     //tram2 is driving in the opposite direction
-    tram2 = new Tram();
+    tram2 = new Tram(resources);
     var tram2textureNode = new AdvancedTextureSGNode(resources.red, [tram2]);
     var tram2materialNode = new MaterialSGNode(tram2textureNode);
     tram2materialNode.ambient = [0.2, 0.2, 0.2,1 ];
@@ -341,7 +347,7 @@ function createBillboardedPeople(resources) {
 
 function createLightNodes(resources) {
     //normal single point light
-    let light = new LightSGNode([29, 2, -2], createLightSphere(resources));
+    let light = new LightSGNode([29, 2, -3], createLightSphere(resources));
     var transformationNode = new TransformationSGNode(glm.translate(0, 2, 1), [light]);
     rootNode.append(transformationNode);
 
@@ -415,11 +421,15 @@ function createStations(resources) {
 
 function createBillBoards(resources) {
     var billboard1 = new BillboardNode(1);
-    billboard1.setPosition(30, 2, -2);
+    billboard1.setPosition(30, 2, -4);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
     var materialBillboardNode = new MaterialSGNode(textureBillboardNode);
-    materialBillboardNode.emission=[0.1, 0.1, 0.1, 1];
-    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -2), materialBillboardNode);
+    materialBillboardNode.ambient=[0, 0, 0, 0];
+    materialBillboardNode.diffuse=[0, 0, 0, 0];
+    materialBillboardNode.specular=[0, 0, 0, 0];
+    materialBillboardNode.emission=[0, 0, 0, 0];
+    materialBillboardNode.shininess=0;
+    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -4), materialBillboardNode);
     rootNode.append(billboardPos);
 }
 
@@ -591,6 +601,8 @@ function renderMainView() {
 
     context = createSceneGraphContext(gl, shaderProgram);
     displayText("c: User cam, f: front tram cam");
+    gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_model'), false, context.sceneMatrix);
+    //console.log(context.sceneMatrix);
     rootNode.render(context);
 }
 
@@ -644,7 +656,6 @@ function renderLine(timeInMilliseconds) {
     const lineColor = {r: 1.0, g: 0.2, b: 0.0};
     gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
-    gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_model'), false, context.viewMatrix);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false, context.projectionMatrix);
     /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
     gl.enableVertexAttribArray(colorLocation);
@@ -672,6 +683,7 @@ function resetPositions() {
 function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
     var modelViewMatrix = mat4.multiply(mat4.create(), viewMatrix, sceneMatrix);
     gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_modelView'), false, modelViewMatrix);
+    gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_model'), false, sceneMatrix);
 }
 
 /**
