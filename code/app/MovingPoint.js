@@ -27,6 +27,10 @@ class MovingPoint {
         this.setSpeed(speed);
     }
 
+    moveToRelativPosition(position, timeToGetThereInMilliseconds) {
+        this.moveTo(vec3.add(vec3.create(), position, this.getPosition()), timeToGetThereInMilliseconds);
+    }
+
     getPosition() {
         //return (this.offset + (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet) * this.speed) / 8000;
         return vec3.add(

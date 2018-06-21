@@ -250,7 +250,7 @@ function mouseMoved(event) {
         deltaY = mouseY - mousePrevY;
         camera.rotation.x += deltaX;
         camera.rotation.y += deltaY;
-        camera.rotation.z += deltaX;
+        //camera.rotation.z += deltaX;
         //if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
         //else camera.rotation.y %= 100;
         camera.rotation.y = Math.min(camera.rotation.y, 90);
@@ -318,7 +318,7 @@ function createPerson() {
 
         persons[i].append(new TransformationSGNode(mat4.multiply(
             mat4.create(),
-            glm.translate(i / 2.5 + 0.9, 0.1, 0.5),
+            glm.translate(i / 2.5 + 1.95, 0.1, 0.5),
             glm.scale(7, 7, 7)),
             [new PersonNode()]));//persons[i]);
         rootNode.append(persons[i]);
@@ -534,7 +534,6 @@ function render(timeInMilliseconds) {
         sceneIndex = 1;
     }
     else if  (projectTimeInMilliSeconds < 5000) {
-        sceneIndex = 1;
         tram.setSpeed(vec3.fromValues(15,0,0));
         tram2.setSpeed(vec3.fromValues(10,0,0));
     }
@@ -543,7 +542,7 @@ function render(timeInMilliseconds) {
     }
     else if  (projectTimeInMilliSeconds < 8000) {
         tram.openDoors();
-        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,-1.5));});
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,-2.2));});
     }
     else if (projectTimeInMilliSeconds < 10000) {
         persons.forEach(function(person) {person.setSpeed(vec3.create());});
@@ -560,7 +559,7 @@ function render(timeInMilliseconds) {
         sceneIndex = 3;
     }
     else if (projectTimeInMilliSeconds < 30000) {
-        persons.forEach(function (person) {person.setSpeed(vec3.fromValues(0, 0, 0));});
+        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,1));});
         tram.setSpeed(vec3.fromValues(0, 0, 0));
         tram.openDoors();
     }
@@ -729,13 +728,13 @@ function calculateViewMatrix() {
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
-        var direction;
+        /*var direction;
         if(jumpToUserCamera) {
             direction = vec3.subtract(vec3.create(), center, eye);
             direction[0] = Math.round(direction[0] * 1000000000) / 1000000000;
             direction[1] = Math.round(direction[1] * 1000000000) / 1000000000;
             direction[2] = Math.round(direction[2] * 1000000000) / 1000000000;
-            dirZOffset = direction[2];
+            //dirZOffset = direction[2];
             camera.rotation.y = -direction[1] * 360 / Math.PI;
             if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
             else camera.rotation.y %= 100;
@@ -803,10 +802,24 @@ function calculateViewMatrix() {
             jumpToUserCamera = false;
             console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
         }
+        up = [0, 1, 0];*/
+        //calculate lookat direction
+        var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+        var dirY = -camera.rotation.y * Math.PI / 360;
+        var dirZ = Math.sin(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
+
+        //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
+        dirX = Math.round(dirX * 1000000000) / 1000000000;
+        dirY = Math.round(dirY * 1000000000) / 1000000000;
+        dirZ = Math.round(dirZ * 1000000000) / 1000000000;
+        var direction = [dirX, dirY, dirZ];
+
+        //calculate new lookat vectors
+        vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
+        vec3.add(center, eye, direction);
         up = [0, 1, 0];
-    } else if (tramFrontCamera) {
-
-
+    }
+    else if (tramFrontCamera) {
         var tramPos = tram.getPosition();
         vec3.add(eye, tramPos, [0,0.1,0.05]);
         vec3.add(center, tramPos, [0.1,0.1,0.06]);

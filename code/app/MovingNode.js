@@ -59,7 +59,11 @@ class MovingNode extends SceneGraphNode {
         */
     }
 
-    getPositionMatrix() {
+    moveToRelativPosition(position, timeToGetThereInMilliseconds) {
+        this.centerPosition.moveToRelativPosition(position, timeToGetThereInMilliseconds);
+    }
+
+        getPositionMatrix() {
         //return mat4.multiply(mat4.create(), glm.translate(this.getPosition()[0], this.getPosition()[1], this.getPosition()[2]), this.initialPosition);
         //return mat4.multiply(mat4.create(), this.initialDimention, mat4.fromTranslation(mat4.create(), this.getPosition()));
         return mat4.fromTranslation(mat4.create(), this.getPosition());
