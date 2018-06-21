@@ -772,8 +772,8 @@ function calculateViewMatrix() {
     else if (tramFrontCamera) {
         //direction have to be normalized so that the jump to the user camera works
         var tramPos = tram.getPosition();
-        vec3.add(eye, tramPos, [0,0.1,0.05]);
-        setCenterPosition(vec3.add(center, tramPos, [0.1,0.1,0.05]));
+        vec3.add(eye, tramPos, [-1.8,0.1,0.03]);
+        setCenterPosition(vec3.add(center, tramPos, [-1.7,0.1,0.03]));
         up = [0, 1, 0];
     }
     else {

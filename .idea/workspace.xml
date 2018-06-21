@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8272483e-32c0-4f2c-94c5-1c34d54095de" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/code/app/models/blank.png" afterDir="false" />
+    <list id="ceb2163f-a745-4f72-8f85-0329291cfc93" name="camera can now zoom(up down) if 'c' is pressed and go left/right" comment="i have no idea what i am doing right now">
+      <changelist_data name="pichristoph" email="pichler.christoph@outlook.com" date="1525642172000">
+        <option name="date" value="1525642172000" />
+        <option name="email" value="pichler.christoph@outlook.com" />
+        <option name="name" value="pichristoph" />
+      </changelist_data>
+    </list>
+    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/Station.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Station.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/Tram.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Tram.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/models/sun.png" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/models/sun.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,12 +24,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="185" column="6" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
+            <state relative-caret-position="499">
+              <caret line="773" column="41" lean-forward="true" selection-start-line="773" selection-start-column="41" selection-end-line="773" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RotatingImage.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="50" selection-start-column="50" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gl-matrix.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="3733" column="4" selection-start-line="3733" selection-start-column="4" selection-end-line="3733" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -34,26 +55,35 @@
       <file leaf-file-name="Station.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/Station.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+            <state relative-caret-position="510">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BillboardNode.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+            <state relative-caret-position="374">
+              <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Tram.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PersonNode.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1445">
+              <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Tram.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-214">
-              <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+            <state relative-caret-position="325">
+              <caret line="128" column="16" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -61,8 +91,156 @@
       <file leaf-file-name="framework.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13719">
-              <caret line="807" column="62" selection-start-line="807" selection-start-column="55" selection-end-line="807" selection-end-column="62" />
+            <state relative-caret-position="2839">
+              <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
+              <folding>
+                <element signature="e#0#50#0" />
+                <element signature="n#!!doc;n#loadResources#0" />
+                <element signature="n#!!doc;n#isImageUrl#0;n#!!block;n#loadResources#0" />
+                <element signature="n#!!block;n#isImageUrl#0;n#!!block;n#loadResources#0" />
+                <element signature="n#!!doc;n#isModelUrl#0;n#!!block;n#loadResources#0" />
+                <element signature="n#!!block;n#isModelUrl#0;n#!!block;n#loadResources#0" />
+                <element signature="n#!!block;n#isObjUrl#0;n#!!block;n#loadResources#0" />
+                <element signature="e#831#2149#0" />
+                <element signature="e#916#1049#0" />
+                <element signature="e#971#1009#0" />
+                <element signature="e#1083#1240#0" />
+                <element signature="e#1138#1234#0" />
+                <element signature="e#1162#1201#0" />
+                <element signature="e#1283#1485#0" />
+                <element signature="e#1388#1456#0" />
+                <element signature="e#1510#1950#0" />
+                <element signature="e#1575#1737#0" />
+                <element signature="e#1678#1728#0" />
+                <element signature="e#1772#1819#0" />
+                <element signature="e#1846#1895#0" />
+                <element signature="e#1901#1944#0" />
+                <element signature="e#2020#2120#0" />
+                <element signature="e#2042#2077#0" />
+                <element signature="n#!!doc;n#displayText#0" />
+                <element signature="n#!!doc;n#clearText#0" />
+                <element signature="n#!!block;n#clearText#0" />
+                <element signature="n#!!doc;n#createHtmlText#0" />
+                <element signature="n#!!block;n#createHtmlText#0" />
+                <element signature="n#!!doc;n#createShader#0" />
+                <element signature="n#!!block;n#createShader#0" />
+                <element signature="e#3872#4100#0" />
+                <element signature="n#!!doc;n#createProgram#0" />
+                <element signature="e#4739#4945#0" />
+                <element signature="n#!!doc;n#checkForWindowResize#0" />
+                <element signature="n#!!block;n#checkForWindowResize#0" />
+                <element signature="e#5238#5303#0" />
+                <element signature="n#!!doc;n#isValidAttributeLocation#0" />
+                <element signature="n#!!block;n#isValidAttributeLocation#0" />
+                <element signature="n#!!doc;n#isValidUniformLocation#0" />
+                <element signature="n#!!block;n#isValidUniformLocation#0" />
+                <element signature="n#!!doc;n#hex2rgba#0" />
+                <element signature="n#!!block;n#hex2rgba#0" />
+                <element signature="e#5955#6020#0" />
+                <element signature="e#6162#7387#0" />
+                <element signature="e#6220#6297#0" />
+                <element signature="e#6329#6397#0" />
+                <element signature="e#6430#6506#0" />
+                <element signature="e#6539#6615#0" />
+                <element signature="e#6648#6724#0" />
+                <element signature="e#6762#7383#0" />
+                <element signature="e#6824#6888#0" />
+                <element signature="e#6918#6987#0" />
+                <element signature="e#7017#7086#0" />
+                <element signature="e#7116#7185#0" />
+                <element signature="e#7213#7361#0" />
+                <element signature="n#!!doc;n#makeSphere#0" />
+                <element signature="n#!!block;n#makeSphere#0" />
+                <element signature="e#7942#8737#0" />
+                <element signature="e#8142#8733#0" />
+                <element signature="e#8826#9214#0" />
+                <element signature="e#8900#9210#0" />
+                <element signature="e#9224#9343#0" />
+                <element signature="e#13414#17578#0" />
+                <element signature="e#13547#13624#0" />
+                <element signature="e#13656#13752#0" />
+                <element signature="e#13785#13869#0" />
+                <element signature="e#13899#17574#0" />
+                <element signature="e#13934#14114#0" />
+                <element signature="e#14203#17568#0" />
+                <element signature="e#14215#14237#0" />
+                <element signature="e#14475#14599#0" />
+                <element signature="e#14649#14734#0" />
+                <element signature="e#14749#17387#0" />
+                <element signature="e#14765#15392#0" />
+                <element signature="e#15462#16384#0" />
+                <element signature="e#16690#16859#0" />
+                <element signature="e#17418#17560#0" />
+                <element signature="e#17588#17827#0" />
+                <element signature="n#!!block;n#parseMtlFile#0" />
+                <element signature="e#18177#19265#0" />
+                <element signature="e#18312#18573#0" />
+                <element signature="e#18331#18528#0" />
+                <element signature="e#18601#18657#0" />
+                <element signature="e#18685#18789#0" />
+                <element signature="e#18817#18921#0" />
+                <element signature="e#18949#19054#0" />
+                <element signature="e#19082#19187#0" />
+                <element signature="e#19219#19261#0" />
+                <element signature="n#!!doc;n#makeRect#0" />
+                <element signature="n#!!block;n#makeRect#0" />
+                <element signature="e#19671#19675#0" />
+                <element signature="e#19682#19686#0" />
+                <element signature="e#19693#19697#0" />
+                <element signature="e#19749#19837#0" />
+                <element signature="n#!!doc;n#SGNode#0" />
+                <element signature="n#SGNode#0" />
+                <element signature="n#!!doc;n#constructor#0;n#SGNode#0" />
+                <element signature="n#!!block;n#constructor#0;n#SGNode#0" />
+                <element signature="n#!!doc;n#append#0;n#SGNode#0" />
+                <element signature="n#!!block;n#append#0;n#SGNode#0" />
+                <element signature="n#!!doc;n#push#0;n#SGNode#0" />
+                <element signature="n#!!block;n#push#0;n#SGNode#0" />
+                <element signature="n#!!doc;n#remove#0;n#SGNode#0" />
+                <element signature="n#!!block;n#remove#0;n#SGNode#0" />
+                <element signature="e#20818#20859#0" />
+                <element signature="n#!!doc;n#render#0;n#SGNode#0" />
+                <element signature="n#!!block;n#render#0;n#SGNode#0" />
+                <element signature="e#21046#21085#0" />
+                <element signature="n#!!doc;n#TransformationSGNode#0" />
+                <element signature="n#!!doc;n#constructor#0;n#TransformationSGNode#0" />
+                <element signature="n#!!block;n#render#0;n#TransformationSGNode#0" />
+                <element signature="e#21587#21647#0" />
+                <element signature="e#21657#21745#0" />
+                <element signature="n#!!doc;n#ShaderSGNode#0" />
+                <element signature="n#ShaderSGNode#0" />
+                <element signature="n#!!doc;n#constructor#0;n#ShaderSGNode#0" />
+                <element signature="n#!!block;n#constructor#0;n#ShaderSGNode#0" />
+                <element signature="n#!!block;n#render#0;n#ShaderSGNode#0" />
+                <element signature="e#22534#22578#0" />
+                <element signature="n#!!doc;n#SetUniformSGNode#0" />
+                <element signature="n#SetUniformSGNode#0" />
+                <element signature="n#!!block;n#constructor#0;n#SetUniformSGNode#0" />
+                <element signature="e#22851#22896#0" />
+                <element signature="n#!!block;n#setUniforms#0;n#SetUniformSGNode#0" />
+                <element signature="e#23061#23485#0" />
+                <element signature="e#23194#23237#0" />
+                <element signature="e#23275#23326#0" />
+                <element signature="e#23358#23479#0" />
+                <element signature="n#!!block;n#render#0;n#SetUniformSGNode#0" />
+                <element signature="e#23537#23577#0" />
+                <element signature="n#!!doc;n#modelRenderer#0" />
+                <element signature="n#!!doc;n#MaterialSGNode#0" />
+                <element signature="n#MaterialSGNode#0" />
+                <element signature="n#!!block;n#constructor#0;n#MaterialSGNode#0" />
+                <element signature="n#!!block;n#setMaterialUniforms#0;n#MaterialSGNode#0" />
+                <element signature="n#!!block;n#render#0;n#MaterialSGNode#0" />
+                <element signature="n#!!doc;n#LightSGNode#0" />
+                <element signature="n#LightSGNode#0" />
+                <element signature="n#!!block;n#constructor#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#setLightUniforms#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#setLightPosition#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#computeLightPosition#0;n#LightSGNode#0" />
+                <element signature="n#!!doc;n#setLight#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#setLight#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#render#0;n#LightSGNode#0" />
+                <element signature="n#!!block;n#createSGContext#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,44 +248,17 @@
       <file leaf-file-name="MovingNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+            <state relative-caret-position="898">
+              <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bridge.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/Bridge.js">
+      <file leaf-file-name="MovingPoint.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpotLightNode.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/SpotLightNode.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="texture.fs.glsl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1904">
-              <caret line="112" selection-start-line="112" selection-end-line="112" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="texture.vs.glsl" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
+            <state relative-caret-position="338">
+              <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -123,72 +274,86 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>-1</find>
-      <find>station</find>
-      <find>createbillb</find>
-      <find>displayt</find>
-      <find>setpos</find>
-      <find>lightsgnod</find>
-      <find>spotli</find>
-      <find>materialsgn</find>
-      <find>material</find>
-      <find>v_lighttram</find>
-      <find>createlig</find>
-      <find>v_li</find>
-      <find>u_ligh</find>
-      <find>createrive</find>
-      <find>u_lighttram</find>
-      <find>model</find>
-      <find>movingno</find>
-      <find>reset</find>
-      <find>jku</find>
-      <find>GL_SRC</find>
-      <find>rootnode</find>
-      <find>u_mod</find>
+      <find>dir</find>
+      <find>sceneIndex</find>
+      <find>tram2</find>
+      <find>createStat</find>
+      <find>viewMatrix</find>
+      <find>xPosition</find>
+      <find>create</find>
+      <find>createEy</find>
+      <find>projectTimeInMilliSeconds</find>
+      <find>eyePoin</find>
+      <find>createEyePoint</find>
+      <find>camera.r</find>
+      <find>zoom</find>
+      <find>center</find>
+      <find>camera.rot</find>
+      <find>camera.rotation.y</find>
+      <find>movePointNode</find>
+      <find>rotation.y</find>
+      <find>rotation.x</find>
+      <find>rotation.z</find>
+      <find>setSpeed</find>
+      <find>createP</find>
       <find>eye</find>
-      <find>u_model</find>
-      <find>loadres</find>
-      <find>new Tram</find>
-      <find>rotationx</find>
-      <find>river</find>
-      <find>landsc</find>
-      <find>createli</find>
+      <find>eyePoint</find>
+      <find>camera.rotation.x</find>
+      <find>vec3.subtract(vec3.create(), center, eye);</find>
+      <find>direction</find>
+      <find>directionOffset</find>
+      <find>miniMapEye</find>
+      <find>tra</find>
     </findStrings>
     <replaceStrings>
-      <replace>t</replace>
-      <replace>1</replace>
-      <replace>s</replace>
-      <replace>0</replace>
-      <replace>grass</replace>
+      <replace>doorsStratedOpening</replace>
+      <replace>doorsStartedOpening</replace>
+      <replace>canvasMinimap</replace>
+      <replace />
+      <replace>miniMap</replace>
+      <replace>positionBuffer</replace>
+      <replace>initialPosition</replace>
+      <replace>camera.rotation.z</replace>
+      <replace>directionOffset</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="weberjakob &lt;36152341+weberjakob@users.noreply.github.com&gt;" />
+        <option value="pichristoph &lt;pichler.christoph@outlook.com&gt;" />
+        <option value="weberjakob &lt;weberjakob@gmx.at&gt;" />
+        <option value="we" />
+        <option value="jakob" />
+      </list>
+    </option>
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="minimalization" />
+      </map>
+    </option>
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" />
-        <option value="$PROJECT_DIR$/code/app/shader/phong.vs.glsl" />
-        <option value="$PROJECT_DIR$/code/app/shader/phong.fs.glsl" />
-        <option value="$PROJECT_DIR$/code/app/shader/red_color_location.vs.glsl" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/code/libs/framework.js" />
         <option value="$PROJECT_DIR$/code/app/PrismRenderNode.js" />
-        <option value="$PROJECT_DIR$/code/app/QuadRenderNode.js" />
-        <option value="$PROJECT_DIR$/code/app/PersonNode.js" />
+        <option value="$PROJECT_DIR$/code/app/Utils.js" />
         <option value="$PROJECT_DIR$/code/app/CubeRenderNode.js" />
+        <option value="$PROJECT_DIR$/code/app/shader/simple.fs.glsl" />
+        <option value="$PROJECT_DIR$/code/app/shader/static_color.fs.glsl" />
+        <option value="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" />
+        <option value="$PROJECT_DIR$/code/app/RotatingImage.js" />
         <option value="$PROJECT_DIR$/code/app/index.html" />
-        <option value="$PROJECT_DIR$/code/app/BillboardNode.js" />
-        <option value="$PROJECT_DIR$/code/app/Bridge.js" />
-        <option value="$PROJECT_DIR$/code/app/SpotLightNode.js" />
+        <option value="$PROJECT_DIR$/code/app/PersonNode.js" />
         <option value="$PROJECT_DIR$/code/app/MovingPoint.js" />
         <option value="$PROJECT_DIR$/code/app/MovingNode.js" />
-        <option value="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" />
-        <option value="$PROJECT_DIR$/code/app/shader/texture.vs.glsl" />
-        <option value="$PROJECT_DIR$/code/app/Station.js" />
-        <option value="$PROJECT_DIR$/code/app/main.js" />
         <option value="$PROJECT_DIR$/code/app/Tram.js" />
+        <option value="$PROJECT_DIR$/code/app/main.js" />
       </list>
     </option>
   </component>
@@ -202,59 +367,173 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1073" />
-    <option name="height" value="1047" />
+    <option name="width" value="1305" />
+    <option name="height" value="1053" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
+              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git_project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
+              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git_project" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
-              <item name="code" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
+              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git_project" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git_project" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="shader" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="node.js.detected.package.prettier" value="true" />
-    <property name="node.js.path.for.package.prettier" value="project" />
-    <property name="node.js.selected.package.prettier" value="" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../UE/Lesson3/cg_lab_2018-master/03_scenegraphs" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\webstormProjects\cg-project\code\app\shader" />
-      <recent name="D:\webstormProjects\cg-project\code\app\models" />
+      <recent name="$PROJECT_DIR$/code/app" />
+      <recent name="$PROJECT_DIR$/code/app/shader" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/Station.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/Tram.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/main.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/models/sun.png</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/shader/texture.fs.glsl</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -269,316 +548,408 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/cg-project/code/app/index.html" />
+    <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/git_project/code/app/index.html" />
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
   </component>
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>$USER_HOME$/.subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8272483e-32c0-4f2c-94c5-1c34d54095de" name="Default" comment="" />
-      <created>1524826222496</created>
+      <changelist id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="" />
+      <created>1524669384536</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1524826222496</updated>
-      <workItem from="1524826224853" duration="920000" />
-      <workItem from="1524827224498" duration="971000" />
-      <workItem from="1524829353545" duration="252000" />
-      <workItem from="1524950529348" duration="5647000" />
-      <workItem from="1524956487757" duration="144000" />
-      <workItem from="1525000698523" duration="47000" />
-      <workItem from="1525023806424" duration="570000" />
-      <workItem from="1525208176376" duration="822000" />
-      <workItem from="1525433584131" duration="54000" />
-      <workItem from="1525516961206" duration="387000" />
-      <workItem from="1525607824250" duration="688000" />
-      <workItem from="1525616787625" duration="1722000" />
-      <workItem from="1525625312975" duration="2000" />
-      <workItem from="1525627879203" duration="86000" />
-      <workItem from="1525634447632" duration="263000" />
-      <workItem from="1525634799667" duration="9691000" />
-      <workItem from="1525690805022" duration="20738000" />
-      <workItem from="1525718944866" duration="4500000" />
-      <workItem from="1525728148143" duration="2386000" />
-      <workItem from="1525784194508" duration="844000" />
-      <workItem from="1525785495863" duration="1313000" />
-      <workItem from="1525896459069" duration="174000" />
-      <workItem from="1526142821915" duration="14000" />
-      <workItem from="1526627784087" duration="462000" />
-      <workItem from="1527885068713" duration="11697000" />
-      <workItem from="1528023401927" duration="112000" />
-      <workItem from="1528711478153" duration="11128000" />
-      <workItem from="1529061447343" duration="12825000" />
-      <workItem from="1529085231887" duration="3841000" />
-      <workItem from="1529102632286" duration="2200000" />
-      <workItem from="1529142462193" duration="1159000" />
-      <workItem from="1529144101384" duration="978000" />
-      <workItem from="1529169693928" duration="1847000" />
-      <workItem from="1529174171776" duration="5083000" />
-      <workItem from="1529267419284" duration="9387000" />
-      <workItem from="1529279050743" duration="208000" />
-      <workItem from="1529309026237" duration="385000" />
-      <workItem from="1529328519135" duration="10154000" />
-      <workItem from="1529348373750" duration="4316000" />
-      <workItem from="1529352749223" duration="6030000" />
-      <workItem from="1529361994561" duration="456000" />
-      <workItem from="1529413680632" duration="1661000" />
-      <workItem from="1529436464401" duration="4174000" />
-      <workItem from="1529447683085" duration="1368000" />
-      <workItem from="1529491222158" duration="8151000" />
-      <workItem from="1529500641559" duration="7124000" />
-      <workItem from="1529507945181" duration="3856000" />
-      <workItem from="1529528262498" duration="4444000" />
-      <workItem from="1529535142939" duration="5337000" />
-      <workItem from="1529568330982" duration="5508000" />
-      <workItem from="1529589980774" duration="2681000" />
+      <updated>1524669384536</updated>
+      <workItem from="1524669385705" duration="488000" />
+      <workItem from="1524669923161" duration="474000" />
+      <workItem from="1524670461173" duration="294000" />
+      <workItem from="1524753002368" duration="2881000" />
+      <workItem from="1524826929846" duration="2747000" />
+      <workItem from="1525343497691" duration="3097000" />
+      <workItem from="1525353708791" duration="2726000" />
+      <workItem from="1525421157514" duration="9281000" />
+      <workItem from="1525430577338" duration="12000" />
+      <workItem from="1525437192429" duration="4665000" />
+      <workItem from="1525597803211" duration="313000" />
+      <workItem from="1525598158783" duration="5241000" />
+      <workItem from="1525605315642" duration="2838000" />
+      <workItem from="1525617769671" duration="19966000" />
+      <workItem from="1525645638375" duration="765000" />
+      <workItem from="1525691042836" duration="21652000" />
+      <workItem from="1525725169035" duration="2574000" />
+      <workItem from="1525773836064" duration="1397000" />
+      <workItem from="1525787732455" duration="203000" />
+      <workItem from="1525792563167" duration="27000" />
+      <workItem from="1525793137317" duration="1119000" />
+      <workItem from="1528711583950" duration="11035000" />
+      <workItem from="1528725956896" duration="13000" />
+      <workItem from="1528799560909" duration="348000" />
+      <workItem from="1529226083692" duration="14000" />
+      <workItem from="1529226123990" duration="12028000" />
+      <workItem from="1529312345710" duration="350000" />
+      <workItem from="1529399484392" duration="947000" />
+      <workItem from="1529413371524" duration="13680000" />
+      <workItem from="1529432249333" duration="15368000" />
+      <workItem from="1529475923419" duration="5621000" />
+      <workItem from="1529491157003" duration="19865000" />
+      <workItem from="1529524288916" duration="10385000" />
+      <workItem from="1529557744880" duration="2793000" />
+      <workItem from="1529568346203" duration="7647000" />
     </task>
-    <task id="LOCAL-00001" summary="changed color of quad">
-      <created>1524826283792</created>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1524669569544</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1524826283792</updated>
+      <updated>1524669569544</updated>
     </task>
-    <task id="LOCAL-00002" summary="added useless comment">
-      <created>1524827279999</created>
+    <task id="LOCAL-00002" summary="changed readme file to link to the official git-repository">
+      <created>1524670284295</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1524827279999</updated>
+      <updated>1524670284296</updated>
     </task>
-    <task id="LOCAL-00003" summary="added useless comment 2">
-      <created>1524827990651</created>
+    <task id="LOCAL-00003" summary="removed .idea in the code folder because the .idea file is already in the git_project folder because the whole project (with howtos, LICENZ etc.) is a webstormproject (not only the code folder)">
+      <created>1524670706451</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1524827990651</updated>
+      <updated>1524670706451</updated>
     </task>
-    <task id="LOCAL-00004" summary="added useless comment 2">
-      <created>1524829391627</created>
+    <task id="LOCAL-00004" summary="changed html title to &quot;Linz Tram&quot;">
+      <created>1524753210744</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1524829391627</updated>
+      <updated>1524753210744</updated>
     </task>
-    <task id="LOCAL-00005" summary="changed robot from lab to 1-segment-tram and expanded quad to a primitive danube. Basis for scene 2 (bridge)">
-      <created>1524956094951</created>
+    <task id="LOCAL-00005" summary="just a comment for test">
+      <created>1524753994006</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1524956094951</updated>
+      <updated>1524753994006</updated>
     </task>
-    <task id="LOCAL-00006" summary="expanded danube, added static camera movement">
-      <created>1525617710243</created>
+    <task id="LOCAL-00006" summary="added todo">
+      <created>1524827152597</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1525617710243</updated>
+      <updated>1524827152597</updated>
     </task>
-    <task id="LOCAL-00007" summary="camera can now zoom if 'c' is pressed">
-      <created>1525641076763</created>
+    <task id="LOCAL-00007" summary="added todo">
+      <created>1524827558609</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1525641076763</updated>
+      <updated>1524827558609</updated>
     </task>
-    <task id="LOCAL-00008" summary="camera can now zoom(up down) if 'c' is pressed and go left/right">
-      <created>1525642172633</created>
+    <task id="LOCAL-00008" summary="blabla">
+      <created>1524827887158</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1525642172633</updated>
+      <updated>1524827887158</updated>
     </task>
-    <task id="LOCAL-00009" summary="mouseX Action implemented">
-      <created>1525695300754</created>
+    <task id="LOCAL-00009" summary="blabla">
+      <created>1524828000090</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1525695300754</updated>
+      <updated>1524828000090</updated>
     </task>
-    <task id="LOCAL-00010" summary="mouseX and Y Action implemented">
-      <created>1525700604938</created>
+    <task id="LOCAL-00010" summary="blabla">
+      <created>1524828412882</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1525700604938</updated>
+      <updated>1524828412882</updated>
     </task>
-    <task id="LOCAL-00011" summary="adding passengers">
-      <created>1525722502798</created>
+    <task id="LOCAL-00011" summary="&#10;blajgopiajfahn">
+      <created>1524829204896</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1525722502798</updated>
+      <updated>1524829204896</updated>
     </task>
-    <task id="LOCAL-00012" summary="merged branches">
-      <created>1525722902966</created>
+    <task id="LOCAL-00012" summary="created tramNode that is itself responsible for its translation&#10;and removed not needed methods">
+      <created>1525441179277</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1525722902966</updated>
+      <updated>1525441179277</updated>
     </task>
-    <task id="LOCAL-00013" summary="remove persons from tram at the end of the 30s">
-      <created>1525723385743</created>
+    <task id="LOCAL-00013" summary="modelled tram with transparent windows">
+      <created>1525608115067</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1525723385743</updated>
+      <updated>1525608115067</updated>
     </task>
-    <task id="LOCAL-00014" summary="use f to use tramFrontCamera">
-      <created>1525728727869</created>
+    <task id="LOCAL-00014" summary="initial model for eisenbahn-bridge">
+      <created>1525633607582</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1525728727869</updated>
+      <updated>1525633607582</updated>
     </task>
-    <task id="LOCAL-00015" summary="set automatic static camera flight at scenes 2 and 3">
-      <created>1525730028116</created>
+    <task id="LOCAL-00015" summary="the tram now gets reseted to it's initial position, and increasing the speed of the tram doesn't lead to a jump anymore">
+      <created>1525636797340</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1525730028116</updated>
+      <updated>1525636797340</updated>
     </task>
-    <task id="LOCAL-00016" summary="1) simplified, improved and corrected (user's) camera movement with mouse&#10;2) disabled camera movement with RIGHT/LEFT (use mouse instead - now better anyway)&#10;3) (auto-)formatted code [Strg+Shift+Alt+L]">
-      <created>1527898240184</created>
+    <task id="LOCAL-00016" summary="tram stops at tram station and opens/closes the doors">
+      <created>1525643938851</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1527898240184</updated>
+      <updated>1525643938851</updated>
     </task>
-    <task id="LOCAL-00017" summary="added (simple incorrect) Billboarding">
-      <created>1528722530620</created>
+    <task id="LOCAL-00017" summary="inserted this comment to check if commit was succsessfull">
+      <created>1525645327982</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1528722530620</updated>
+      <updated>1525645327982</updated>
     </task>
-    <task id="LOCAL-00018" summary="added texture shaders (VS, FS)&#10;removed debugging label">
-      <created>1528723658232</created>
+    <task id="LOCAL-00018" summary="uncommented createBridge">
+      <created>1525691267635</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1528723658232</updated>
+      <updated>1525691267635</updated>
     </task>
-    <task id="LOCAL-00019" summary="added models folder including 'neuerdom'">
-      <created>1528724148467</created>
+    <task id="LOCAL-00019" summary="implemented doors open/stop again and tram is moving on rails noww">
+      <created>1525692772177</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1528724148467</updated>
+      <updated>1525692772177</updated>
     </task>
-    <task id="LOCAL-00020" summary="added river texture file to 'models'&#10;simplified and corrected user key navigation (camera 'c'/'f')">
-      <created>1529062266605</created>
+    <task id="LOCAL-00020" summary="bridge is green now">
+      <created>1525695345615</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1529062266605</updated>
+      <updated>1525695345615</updated>
     </task>
-    <task id="LOCAL-00021" summary="Included: minimap&#10;texturing, materials/phong shader (current not-working solution commented out with OPTION 1/2 such that previous state is working)">
-      <created>1529270336863</created>
+    <task id="LOCAL-00021" summary="trams start and stop at the station">
+      <created>1525702107440</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1529270336863</updated>
+      <updated>1525702107440</updated>
     </task>
-    <task id="LOCAL-00022" summary="Billboard error corrected">
-      <created>1529279212228</created>
+    <task id="LOCAL-00022" summary="inserted prism and river and placed the bridge into the world">
+      <created>1525713547930</created>
       <option name="number" value="00022" />
       <option name="presentableId" value="LOCAL-00022" />
       <option name="project" value="LOCAL" />
-      <updated>1529279212228</updated>
+      <updated>1525713547931</updated>
     </task>
-    <task id="LOCAL-00023" summary="Started concrete (=visible) texturing and shading&#10;currently &quot;removed&quot;: prism (track ground), colors of tracks and tram [will be added in a few hours]">
-      <created>1529353738435</created>
+    <task id="LOCAL-00023" summary="implemented tramFrontCamera">
+      <created>1525727665108</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1529353738435</updated>
+      <updated>1525727665108</updated>
     </task>
-    <task id="LOCAL-00024" summary="Prism, trams and billboard textured&#10;Missing: Trams open doors, alpha values&#10;Current error: Cube indices!">
-      <created>1529358660200</created>
+    <task id="LOCAL-00024" summary="tramspeed now in relation to time and not rendering&#10;Created Methods in Tram:&#10;-&gt;getXPosition&#10;-&gt;getPosition&#10;&#10;changed order of creating to render first tram as latest (for alpha blending)">
+      <created>1528724152278</created>
       <option name="number" value="00024" />
       <option name="presentableId" value="LOCAL-00024" />
       <option name="project" value="LOCAL" />
-      <updated>1529358660200</updated>
+      <updated>1528724152279</updated>
     </task>
-    <task id="LOCAL-00025" summary="added billboarded people">
-      <created>1529440617892</created>
+    <task id="LOCAL-00025" summary="set alpha-blending of frontGlas of second and third TramNode to 1">
+      <created>1528725750579</created>
       <option name="number" value="00025" />
       <option name="presentableId" value="LOCAL-00025" />
       <option name="project" value="LOCAL" />
-      <updated>1529440617892</updated>
+      <updated>1528725750579</updated>
     </task>
-    <task id="LOCAL-00026" summary="corrected cube texture Indices&#10;added stopsign texture to station sign">
-      <created>1529493885820</created>
+    <task id="LOCAL-00026" summary="changed zFar from the projection matrix from 20 to 200, know the whole world is always rendered">
+      <created>1529228054175</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1529493885820</updated>
+      <updated>1529228054175</updated>
     </task>
-    <task id="LOCAL-00027" summary="added (incorrect) spotlight to scene">
-      <created>1529506759257</created>
+    <task id="LOCAL-00027" summary="changed render order of the tram node so that the transparent glass is rendered as last">
+      <created>1529228230769</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1529506759257</updated>
+      <updated>1529228230769</updated>
     </task>
-    <task id="LOCAL-00028" summary="workspace.xml needless">
-      <created>1529507979184</created>
+    <task id="LOCAL-00028" summary="implemented minimap :)">
+      <created>1529240907289</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1529507979184</updated>
+      <updated>1529240907289</updated>
     </task>
-    <task id="LOCAL-00029" summary="workspace.xml needless">
-      <created>1529508389766</created>
+    <task id="LOCAL-00029" summary="changed background color">
+      <created>1529415311891</created>
       <option name="number" value="00029" />
       <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1529508389766</updated>
+      <updated>1529415311892</updated>
     </task>
-    <task id="LOCAL-00030" summary="Added Spot and materials&#10;fixed 'HBF' and 'JKU' text">
-      <created>1529539098860</created>
+    <task id="LOCAL-00030" summary="fixed bug in cube render node (changed indices to index)">
+      <created>1529422575729</created>
       <option name="number" value="00030" />
       <option name="presentableId" value="LOCAL-00030" />
       <option name="project" value="LOCAL" />
-      <updated>1529539098860</updated>
+      <updated>1529422575729</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="translated and scaled the prism a bit so that it fits with to the eisenbahnbrücke">
+      <created>1529422978679</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1529422978679</updated>
+    </task>
+    <task id="LOCAL-00032" summary="path for minimap implemented">
+      <created>1529446380134</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1529446380134</updated>
+    </task>
+    <task id="LOCAL-00033" summary="doors can now open and close">
+      <created>1529479271227</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1529479271227</updated>
+    </task>
+    <task id="LOCAL-00034" summary="stations can have a name that is displayed above them">
+      <created>1529481359042</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1529481359042</updated>
+    </task>
+    <task id="LOCAL-00035" summary="added directory structure&#10;introduced MovingPoint (not fully working yet)">
+      <created>1529499012484</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1529499012484</updated>
+    </task>
+    <task id="LOCAL-00036" summary="MovingPoint is now working">
+      <created>1529506822414</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1529506822414</updated>
+    </task>
+    <task id="LOCAL-00037" summary="adjusted camera flight">
+      <created>1529511888872</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1529511888872</updated>
+    </task>
+    <task id="LOCAL-00038" summary="i tried to get the jump to the user camera valid but this fucking shit don't want to work!">
+      <created>1529534638022</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1529534638022</updated>
+    </task>
+    <task id="LOCAL-00039" summary="fixed MovingNode.setPosition()-bug">
+      <created>1529568432807</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1529568432807</updated>
+    </task>
+    <task id="LOCAL-00040" summary="camera movement fixed">
+      <created>1529570373409</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1529570373409</updated>
+    </task>
+    <task id="LOCAL-00041" summary="changing to user camera doesn't change the direction anymore :)">
+      <created>1529591994116</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1529591994116</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="178807000" />
+    <option name="totallyTimeSpent" value="183447000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11666667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.2730159" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50572914" side_tool="true" visible="true" weight="0.20274551" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4875" weight="0.3305174" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" visible="true" weight="0.0045045046" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.6365079" weight="0.012387387" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Structure" order="1" sideWeight="0.5032751" side_tool="true" weight="0.16519824" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49827468" weight="0.32995495" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4984375" weight="0.39915523" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.13915344" />
+      <window_info id="Structure" order="1" sideWeight="0.5032751" side_tool="true" weight="0.16519824" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.6365079" weight="0.012387387" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49965495" weight="0.32995495" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" visible="true" weight="0.0045045046" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49427083" visible="true" weight="0.20274551" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32882884" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49827468" weight="0.32995495" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -610,390 +981,497 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed robot from lab to 1-segment-tram and expanded quad to a primitive danube. Basis for scene 2 (bridge)" />
-    <MESSAGE value="expanded danube, added static camera movement" />
-    <MESSAGE value="camera can now zoom if 'c' is pressed" />
-    <MESSAGE value="camera can now zoom(up down) if 'c' is pressed and go left/right" />
-    <MESSAGE value="mouseX Action implemented" />
-    <MESSAGE value="mouseX and Y Action implemented" />
-    <MESSAGE value="adding passengers" />
-    <MESSAGE value="merged branches" />
-    <MESSAGE value="remove persons from tram at the end of the 30s" />
-    <MESSAGE value="use f to use tramFrontCamera" />
-    <MESSAGE value="set automatic static camera flight at scenes 2 and 3" />
-    <MESSAGE value="1) simplified, improved and corrected (user's) camera movement with mouse&#10;2) disabled camera movement with RIGHT/LEFT (use mouse instead - now better anyway)&#10;3) (auto-)formatted code [Strg+Shift+Alt+L]" />
-    <MESSAGE value="added (simple incorrect) Billboarding" />
-    <MESSAGE value="added texture shaders (VS, FS)&#10;removed debugging label" />
-    <MESSAGE value="added models folder including 'neuerdom'" />
-    <MESSAGE value="added river texture file to 'models'&#10;simplified and corrected user key navigation (camera 'c'/'f')" />
-    <MESSAGE value="Included: minimap&#10;texturing, materials/phong shader (current not-working solution commented out with OPTION 1/2 such that previous state is working)" />
-    <MESSAGE value="Billboard error corrected" />
-    <MESSAGE value="Started concrete (=visible) texturing and shading&#10;currently &quot;removed&quot;: prism (track ground), colors of tracks and tram [will be added in a few hours]" />
-    <MESSAGE value="Prism, trams and billboard textured&#10;Missing: Trams open doors, alpha values&#10;Current error: Cube indices!" />
-    <MESSAGE value="added billboarded people" />
-    <MESSAGE value="corrected cube texture Indices&#10;added stopsign texture to station sign" />
-    <MESSAGE value="added (incorrect) spotlight to scene" />
-    <MESSAGE value="workspace.xml needless" />
-    <MESSAGE value="Added Spot and materials&#10;fixed 'HBF' and 'JKU' text" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Spot and materials&#10;fixed 'HBF' and 'JKU' text" />
+    <MESSAGE value="i have no idea what i am doing right now" />
+    <MESSAGE value="uncommented createBridge" />
+    <MESSAGE value="implemented doors open/stop again and tram is moving on rails noww" />
+    <MESSAGE value="bridge is green now" />
+    <MESSAGE value="trams start and stop at the station" />
+    <MESSAGE value="inserted prism and river and placed the bridge into the world" />
+    <MESSAGE value="implemented tramFrontCamera" />
+    <MESSAGE value="tramspeed now in relation to time and not rendering&#10;Created Methods in Tram:&#10;-&gt;getXPosition&#10;-&gt;getPosition&#10;&#10;changed order of creating to render first tram as latest (for alpha blending)" />
+    <MESSAGE value="set alpha-blending of frontGlas of second and third TramNode to 1" />
+    <MESSAGE value="changed zFar from the projection matrix from 20 to 200, know the whole world is always rendered" />
+    <MESSAGE value="changed render order of the tram node so that the transparent glass is rendered as last" />
+    <MESSAGE value="implemented minimap :)" />
+    <MESSAGE value="changed background color" />
+    <MESSAGE value="fixed bug in cube render node (changed indices to index)" />
+    <MESSAGE value="translated and scaled the prism a bit so that it fits with to the eisenbahnbrücke" />
+    <MESSAGE value="path for minimap implemented" />
+    <MESSAGE value="doors can now open and close" />
+    <MESSAGE value="stations can have a name that is displayed above them" />
+    <MESSAGE value="added directory structure&#10;introduced MovingPoint (not fully working yet)" />
+    <MESSAGE value="MovingPoint is now working" />
+    <MESSAGE value="adjusted camera flight" />
+    <MESSAGE value="i tried to get the jump to the user camera valid but this fucking shit don't want to work!" />
+    <MESSAGE value="fixed MovingNode.setPosition()-bug" />
+    <MESSAGE value="camera movement fixed" />
+    <MESSAGE value="changing to user camera doesn't change the direction anymore :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing to user camera doesn't change the direction anymore :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="41" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="48" selection-start-line="56" selection-start-column="48" selection-end-line="56" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5151">
-          <caret line="303" column="96" selection-start-line="303" selection-start-column="96" selection-end-line="303" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4845">
-          <caret line="285" column="96" selection-start-line="285" selection-start-column="96" selection-end-line="285" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4845">
-          <caret line="285" column="96" selection-start-line="285" selection-start-column="96" selection-end-line="285" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4845">
-          <caret line="285" column="96" selection-start-line="285" selection-start-column="96" selection-end-line="285" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" column="26" selection-start-line="145" selection-start-column="26" selection-end-line="145" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2941">
-          <caret line="5341" column="4" selection-start-line="5341" selection-start-column="4" selection-end-line="5341" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="32402">
+          <caret line="1906" column="4" selection-start-line="1906" selection-start-column="4" selection-end-line="1906" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/simple.fs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/phong.fs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/red_color_location.vs.glsl" />
-    <entry file="file://$PROJECT_DIR$/code/app/shader/phong.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="4" lean-forward="true" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="35" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/QuadRenderNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/CubeRenderNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="13983" column="4" selection-start-line="13983" selection-start-column="4" selection-end-line="13983" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/SpotLightNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/Bridge.js">
+    <entry file="file://$PROJECT_DIR$/code/app/shader/simple.vs.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13719">
-          <caret line="807" column="62" selection-start-line="807" selection-start-column="55" selection-end-line="807" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/Station.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="50" lean-forward="true" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="185" column="6" selection-start-line="185" selection-start-column="6" selection-end-line="185" selection-end-column="6" />
+        <state relative-caret-position="8398">
+          <caret line="494" lean-forward="true" selection-start-line="494" selection-end-line="494" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2193">
+          <caret line="129" lean-forward="true" selection-start-line="129" selection-end-line="129" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3638">
+          <caret line="214" column="17" selection-start-line="214" selection-start-column="2" selection-end-line="214" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4556">
+          <caret line="268" column="10" lean-forward="true" selection-start-line="268" selection-start-column="10" selection-end-line="268" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/.idea/workspace.xml" />
+    <entry file="file://$PROJECT_DIR$/code/.idea/workspace.xml" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/river-water-texture.jpg" />
+    <entry file="file://$PROJECT_DIR$/code/app/models/neuer_dom.jpg" />
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-44">
+          <caret line="13862" column="4" selection-start-line="13862" selection-start-column="4" selection-end-line="13862" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/Utils.js" />
+    <entry file="file://$PROJECT_DIR$/code/app/CubeRenderNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/Bridge.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/simple.vs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.fs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/simple.fs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/sun.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/orange.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/cobblestone.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/person2.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/neuerdom.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/models/person1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="49" column="51" lean-forward="true" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="36" column="46" lean-forward="true" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/QuadRenderNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="29" lean-forward="true" selection-start-line="39" selection-start-column="29" selection-end-line="39" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2839">
+          <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#50#0" />
+            <element signature="n#!!doc;n#loadResources#0" />
+            <element signature="n#!!doc;n#isImageUrl#0;n#!!block;n#loadResources#0" />
+            <element signature="n#!!block;n#isImageUrl#0;n#!!block;n#loadResources#0" />
+            <element signature="n#!!doc;n#isModelUrl#0;n#!!block;n#loadResources#0" />
+            <element signature="n#!!block;n#isModelUrl#0;n#!!block;n#loadResources#0" />
+            <element signature="n#!!block;n#isObjUrl#0;n#!!block;n#loadResources#0" />
+            <element signature="e#831#2149#0" />
+            <element signature="e#916#1049#0" />
+            <element signature="e#971#1009#0" />
+            <element signature="e#1083#1240#0" />
+            <element signature="e#1138#1234#0" />
+            <element signature="e#1162#1201#0" />
+            <element signature="e#1283#1485#0" />
+            <element signature="e#1388#1456#0" />
+            <element signature="e#1510#1950#0" />
+            <element signature="e#1575#1737#0" />
+            <element signature="e#1678#1728#0" />
+            <element signature="e#1772#1819#0" />
+            <element signature="e#1846#1895#0" />
+            <element signature="e#1901#1944#0" />
+            <element signature="e#2020#2120#0" />
+            <element signature="e#2042#2077#0" />
+            <element signature="n#!!doc;n#displayText#0" />
+            <element signature="n#!!doc;n#clearText#0" />
+            <element signature="n#!!block;n#clearText#0" />
+            <element signature="n#!!doc;n#createHtmlText#0" />
+            <element signature="n#!!block;n#createHtmlText#0" />
+            <element signature="n#!!doc;n#createShader#0" />
+            <element signature="n#!!block;n#createShader#0" />
+            <element signature="e#3872#4100#0" />
+            <element signature="n#!!doc;n#createProgram#0" />
+            <element signature="e#4739#4945#0" />
+            <element signature="n#!!doc;n#checkForWindowResize#0" />
+            <element signature="n#!!block;n#checkForWindowResize#0" />
+            <element signature="e#5238#5303#0" />
+            <element signature="n#!!doc;n#isValidAttributeLocation#0" />
+            <element signature="n#!!block;n#isValidAttributeLocation#0" />
+            <element signature="n#!!doc;n#isValidUniformLocation#0" />
+            <element signature="n#!!block;n#isValidUniformLocation#0" />
+            <element signature="n#!!doc;n#hex2rgba#0" />
+            <element signature="n#!!block;n#hex2rgba#0" />
+            <element signature="e#5955#6020#0" />
+            <element signature="e#6162#7387#0" />
+            <element signature="e#6220#6297#0" />
+            <element signature="e#6329#6397#0" />
+            <element signature="e#6430#6506#0" />
+            <element signature="e#6539#6615#0" />
+            <element signature="e#6648#6724#0" />
+            <element signature="e#6762#7383#0" />
+            <element signature="e#6824#6888#0" />
+            <element signature="e#6918#6987#0" />
+            <element signature="e#7017#7086#0" />
+            <element signature="e#7116#7185#0" />
+            <element signature="e#7213#7361#0" />
+            <element signature="n#!!doc;n#makeSphere#0" />
+            <element signature="n#!!block;n#makeSphere#0" />
+            <element signature="e#7942#8737#0" />
+            <element signature="e#8142#8733#0" />
+            <element signature="e#8826#9214#0" />
+            <element signature="e#8900#9210#0" />
+            <element signature="e#9224#9343#0" />
+            <element signature="e#13414#17578#0" />
+            <element signature="e#13547#13624#0" />
+            <element signature="e#13656#13752#0" />
+            <element signature="e#13785#13869#0" />
+            <element signature="e#13899#17574#0" />
+            <element signature="e#13934#14114#0" />
+            <element signature="e#14203#17568#0" />
+            <element signature="e#14215#14237#0" />
+            <element signature="e#14475#14599#0" />
+            <element signature="e#14649#14734#0" />
+            <element signature="e#14749#17387#0" />
+            <element signature="e#14765#15392#0" />
+            <element signature="e#15462#16384#0" />
+            <element signature="e#16690#16859#0" />
+            <element signature="e#17418#17560#0" />
+            <element signature="e#17588#17827#0" />
+            <element signature="n#!!block;n#parseMtlFile#0" />
+            <element signature="e#18177#19265#0" />
+            <element signature="e#18312#18573#0" />
+            <element signature="e#18331#18528#0" />
+            <element signature="e#18601#18657#0" />
+            <element signature="e#18685#18789#0" />
+            <element signature="e#18817#18921#0" />
+            <element signature="e#18949#19054#0" />
+            <element signature="e#19082#19187#0" />
+            <element signature="e#19219#19261#0" />
+            <element signature="n#!!doc;n#makeRect#0" />
+            <element signature="n#!!block;n#makeRect#0" />
+            <element signature="e#19671#19675#0" />
+            <element signature="e#19682#19686#0" />
+            <element signature="e#19693#19697#0" />
+            <element signature="e#19749#19837#0" />
+            <element signature="n#!!doc;n#SGNode#0" />
+            <element signature="n#SGNode#0" />
+            <element signature="n#!!doc;n#constructor#0;n#SGNode#0" />
+            <element signature="n#!!block;n#constructor#0;n#SGNode#0" />
+            <element signature="n#!!doc;n#append#0;n#SGNode#0" />
+            <element signature="n#!!block;n#append#0;n#SGNode#0" />
+            <element signature="n#!!doc;n#push#0;n#SGNode#0" />
+            <element signature="n#!!block;n#push#0;n#SGNode#0" />
+            <element signature="n#!!doc;n#remove#0;n#SGNode#0" />
+            <element signature="n#!!block;n#remove#0;n#SGNode#0" />
+            <element signature="e#20818#20859#0" />
+            <element signature="n#!!doc;n#render#0;n#SGNode#0" />
+            <element signature="n#!!block;n#render#0;n#SGNode#0" />
+            <element signature="e#21046#21085#0" />
+            <element signature="n#!!doc;n#TransformationSGNode#0" />
+            <element signature="n#!!doc;n#constructor#0;n#TransformationSGNode#0" />
+            <element signature="n#!!block;n#render#0;n#TransformationSGNode#0" />
+            <element signature="e#21587#21647#0" />
+            <element signature="e#21657#21745#0" />
+            <element signature="n#!!doc;n#ShaderSGNode#0" />
+            <element signature="n#ShaderSGNode#0" />
+            <element signature="n#!!doc;n#constructor#0;n#ShaderSGNode#0" />
+            <element signature="n#!!block;n#constructor#0;n#ShaderSGNode#0" />
+            <element signature="n#!!block;n#render#0;n#ShaderSGNode#0" />
+            <element signature="e#22534#22578#0" />
+            <element signature="n#!!doc;n#SetUniformSGNode#0" />
+            <element signature="n#SetUniformSGNode#0" />
+            <element signature="n#!!block;n#constructor#0;n#SetUniformSGNode#0" />
+            <element signature="e#22851#22896#0" />
+            <element signature="n#!!block;n#setUniforms#0;n#SetUniformSGNode#0" />
+            <element signature="e#23061#23485#0" />
+            <element signature="e#23194#23237#0" />
+            <element signature="e#23275#23326#0" />
+            <element signature="e#23358#23479#0" />
+            <element signature="n#!!block;n#render#0;n#SetUniformSGNode#0" />
+            <element signature="e#23537#23577#0" />
+            <element signature="n#!!doc;n#modelRenderer#0" />
+            <element signature="n#!!doc;n#MaterialSGNode#0" />
+            <element signature="n#MaterialSGNode#0" />
+            <element signature="n#!!block;n#constructor#0;n#MaterialSGNode#0" />
+            <element signature="n#!!block;n#setMaterialUniforms#0;n#MaterialSGNode#0" />
+            <element signature="n#!!block;n#render#0;n#MaterialSGNode#0" />
+            <element signature="n#!!doc;n#LightSGNode#0" />
+            <element signature="n#LightSGNode#0" />
+            <element signature="n#!!block;n#constructor#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#setLightUniforms#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#setLightPosition#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#computeLightPosition#0;n#LightSGNode#0" />
+            <element signature="n#!!doc;n#setLight#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#setLight#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#render#0;n#LightSGNode#0" />
+            <element signature="n#!!block;n#createSGContext#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1445">
+          <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/Station.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="38" lean-forward="true" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3733" column="4" selection-start-line="3733" selection-start-column="4" selection-end-line="3733" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="898">
+          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="50" selection-start-column="50" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-214">
-          <caret line="33" column="55" selection-start-line="33" selection-start-column="55" selection-end-line="33" selection-end-column="55" />
+        <state relative-caret-position="325">
+          <caret line="128" column="16" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="773" column="41" lean-forward="true" selection-start-line="773" selection-start-column="41" selection-end-line="773" selection-end-column="41" />
         </state>
       </provider>
     </entry>

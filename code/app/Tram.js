@@ -30,7 +30,8 @@ class TramNode extends SceneGraphNode {
                 var cockpitSideGlass = new CubeRenderNode();
 
                 let alphaOfSideGlass = i % 2 == 1 ? 0.3 : 0.1;
-                var cockpitSideGlassMaterial = new MaterialSGNode(cockpitSideGlass);
+                var cockpitSideGlassTexture = new AdvancedTextureSGNode(resources.blank, cockpitSideGlass);
+                var cockpitSideGlassMaterial = new MaterialSGNode(cockpitSideGlassTexture);
                 cockpitSideGlassMaterial.ambient = [0.3, 0.3, 0.4, 0.5];
                 cockpitSideGlassMaterial.diffuse = [0.8, 0.8, 0.8, 0.5];
                 cockpitSideGlassMaterial.specular = [0.5, 0.5, 0.5, 0.5];
@@ -97,7 +98,7 @@ class Tram extends SceneGraphNode {
         super();
         this.tramNodes = [];
         this.movingNodes = [];
-        for (var i = 0; i < 3; i++) {
+        for (var i = 2; i >= 0; i--) {
             var alphaOfFrontGlas = i == 2 ? 0.2 : 1;
 
             var tramNode = new TramNode(alphaOfFrontGlas, resources);
