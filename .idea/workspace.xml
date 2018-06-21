@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
+    </list>
     <list id="ceb2163f-a745-4f72-8f85-0329291cfc93" name="camera can now zoom(up down) if 'c' is pressed and go left/right" comment="i have no idea what i am doing right now">
       <changelist_data name="pichristoph" email="pichler.christoph@outlook.com" date="1525642172000">
         <option name="date" value="1525642172000" />
         <option name="email" value="pichler.christoph@outlook.com" />
         <option name="name" value="pichristoph" />
       </changelist_data>
-    </list>
-    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="camera movement fixed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,8 +27,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="731" column="21" lean-forward="true" selection-start-line="731" selection-start-column="21" selection-end-line="731" selection-end-column="21" />
+            <state relative-caret-position="289">
+              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -301,8 +301,8 @@
       <find>eyePoint</find>
       <find>camera.rotation.x</find>
       <find>vec3.subtract(vec3.create(), center, eye);</find>
-      <find>directionOffset</find>
       <find>direction</find>
+      <find>directionOffset</find>
     </findStrings>
     <replaceStrings>
       <replace>doorsStratedOpening</replace>
@@ -484,7 +484,7 @@
       <workItem from="1529491157003" duration="19865000" />
       <workItem from="1529524288916" duration="10385000" />
       <workItem from="1529557744880" duration="2793000" />
-      <workItem from="1529568346203" duration="6892000" />
+      <workItem from="1529568346203" duration="7647000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1524669569544</created>
@@ -766,11 +766,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529570373409</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="changing to user camera doesn't change the direction anymore :)">
+      <created>1529591994116</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1529591994116</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182099000" />
+    <option name="totallyTimeSpent" value="182854000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -782,10 +789,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1305" height="1053" extended-state="4" />
+    <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.20659858" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.13915344" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.36349207" side_tool="true" visible="true" weight="0.0045045046" />
@@ -848,7 +855,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="inserted this comment to check if commit was succsessfull" />
     <MESSAGE value="i have no idea what i am doing right now" />
     <MESSAGE value="uncommented createBridge" />
     <MESSAGE value="implemented doors open/stop again and tram is moving on rails noww" />
@@ -873,7 +879,8 @@
     <MESSAGE value="i tried to get the jump to the user camera valid but this fucking shit don't want to work!" />
     <MESSAGE value="fixed MovingNode.setPosition()-bug" />
     <MESSAGE value="camera movement fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="camera movement fixed" />
+    <MESSAGE value="changing to user camera doesn't change the direction anymore :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing to user camera doesn't change the direction anymore :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1337,8 +1344,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="731" column="21" lean-forward="true" selection-start-line="731" selection-start-column="21" selection-end-line="731" selection-end-column="21" />
+        <state relative-caret-position="289">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
         </state>
       </provider>
     </entry>

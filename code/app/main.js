@@ -697,12 +697,9 @@ function createSceneGraphContext(gl, shader) {
     };
 }
 
-//var xPosition = 0;
 var eyePoint;
 var centerPoint;
 var jumpToUserCamera = true;
-var dirZOffset;
-var directionOffset;
 
 function createEyePoint() {
     eyePoint = new MovingPoint();
@@ -710,17 +707,15 @@ function createEyePoint() {
 }
 
 function calculateViewMatrix() {
+    //always calculate the position of the animated flight, but only show it if the user selected it
     switch (sceneIndex) {
         case 1:
             eyePoint.setPosition([7.5, 1.8, 1.6]);
             centerPoint.setPosition([6.3,1.6,1.3]);
-            //eyePoint.setSpeed([0,0,0]);
             break;
         case 2:
             eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2,0.1,0.05]), 2000);
             centerPoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [3,0.1,0.05]), 2000);
-            //eyePoint.setSpeed([10,-2,-5]);
-            //centerPoint.setSpeed([13,-2,-5]);
             break;
         case 3:
             eyePoint.setPosition([40, 2, 0]);
@@ -730,82 +725,16 @@ function calculateViewMatrix() {
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
-        directionOffset;
         if(jumpToUserCamera) {
-            directionOffset = vec3.normalize(vec3.create(), vec3.subtract(vec3.create(), center, eye));
-            //directionOffset[0] = Math.round(directionOffset[0] * 1000000000) / 1000000000;
-            //directionOffset[1] = Math.round(directionOffset[1] * 1000000000) / 1000000000;
-            //directionOffset[2] = Math.round(directionOffset[2] * 1000000000) / 1000000000;
-            //dirZOffset = directionOffset[2];
+            //calculate direction
+            let directionOffset = vec3.normalize(vec3.create(), vec3.subtract(vec3.create(), center, eye));
             camera.rotation.y = -directionOffset[1] * 360 / Math.PI;
-            //if(camera.rotation.y < 0) camera.rotation.y = -1 * (-camera.rotation.y % 100);
-            //else camera.rotation.y %= 100;
-            //camera.rotation.y = Math.min(camera.rotation.y, 100);
-            //camera.rotation.y = Math.max(camera.rotation.y, -100);
-
-            //camera.rotation.y = Math.round(camera.rotation.y * 1000000000) / 1000000000;
-            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirectionOffset=" + directionOffset + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-            console.log("directionOffset=" + directionOffset);
-
-            var acosParam = directionOffset[0] / Math.cos(camera.rotation.y * Math.PI / 360);
-            //if(acosParam < 0) acosParam = -1 * ((-acosParam) % 1);
-            //else acosParam %= 1;
-            console.log("acosParam directionOffset[0]=" + acosParam);
-
-
-            //acosParam = Math.min(acosParam, 1);
-            //acosParam = Math.max(acosParam, -1);
+            let acosParam = directionOffset[0] / Math.cos(camera.rotation.y * Math.PI / 360);
             camera.rotation.x = Math.acos(acosParam) * 360 / Math.PI;
-            camera.rotation.z = - camera.rotation.x;
-            //var acosParam = directionOffset[2] / Math.cos(camera.rotation.y * Math.PI / 360);
-            //if(acosParam < 0) acosParam = -1 * (-acosParam % 1);
-            //else acosParam %= 1;
-            //console.log("acosParam directionOffset[2]=" + acosParam);
-
-            //camera.rotation.z = Math.asin(acosParam) * 360 / Math.PI;
-            //dirZOffset = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-            //camera.rotation.z = camera.rotation.x;
-            //camera.rotation.x %= 45;//Math.camera.rotation.x, 90);
-            //camera.rotation.x = Math.max(camera.rotation.x, -90);
-            //console.log("camera.rotation.x=" + camera.rotation.x);
-            //console.log("otherX=" + camera.rotation.z);
-            //console.log("dirZOffset=" + dirZOffset + "directionOffset[2]=" + directionOffset[2]);
-
-            //console.log("camera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-            //camera.rotation.x = Math.round(camera.rotation.x * 1000000000) / 1000000000;
-            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirectionOffset=" + directionOffset + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-
-
+            camera.rotation.z = -camera.rotation.x;
             camera.zoom = 0;
-            //jumpToUserCamera = false;
-            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirectionOffset=" + directionOffset);
-        }/*
-        //else {
-            //calculate lookat directionOffset
-            var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-            var dirY = -camera.rotation.y * Math.PI / 360;
-            var dirZ = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360) - dirZOffset;
-
-            //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
-            dirX = Math.round(dirX * 1000000000) / 1000000000;
-            dirY = Math.round(dirY * 1000000000) / 1000000000;
-            dirZ = Math.round(dirZ * 1000000000) / 1000000000;
-            directionOffset = [dirX, dirY, dirZ];
-
-
-            //console.log("jumped to camera\neye=" + eye + "\ncenter=" + center +"\ndirectionOffset=" + directionOffset + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.x=" + camera.rotation.x);
-        //}
-
-        //calculate new lookat vectors
-        vec3.add(eye, eye, vec3.scale(vec3.create(), directionOffset, camera.zoom * zoomspeed));
-        //directionOffset[2] += camera.rotation.z;
-        vec3.add(center, eye, directionOffset);
-        //center[2] -= camera.rotation.z;
-        if(jumpToUserCamera) {
             jumpToUserCamera = false;
-            console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirectionOffset=" + directionOffset + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
         }
-        up = [0, 1, 0];*/
         //calculate lookat direction
         var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
         var dirY = -camera.rotation.y * Math.PI / 360;
@@ -817,17 +746,10 @@ function calculateViewMatrix() {
         dirZ = Math.round(dirZ * 1000000000) / 1000000000;
         var direction = [dirX, dirY, dirZ];
 
-
         //calculate new lookat vectors
         vec3.add(eye, eye, vec3.scale(vec3.create(), direction, camera.zoom * zoomspeed));
-        //vec3.add(direction, directionOffset, direction);
         vec3.add(center, eye, direction);
         up = [0, 1, 0];
-        if(jumpToUserCamera) {
-            console.log("direction after calculation=" + direction);
-            console.log("jumped to user camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-            jumpToUserCamera = false;
-        }
     }
     else if (tramFrontCamera) {
         //direction have to be normalized so that the jump to the user camera works
@@ -835,56 +757,21 @@ function calculateViewMatrix() {
         vec3.add(eye, tramPos, [0,0.1,0.05]);
         setCenterPosition(vec3.add(center, tramPos, [0.1,0.1,0.05]));
         up = [0, 1, 0];
-        if(!jumpToUserCamera) {
-            jumpToUserCamera = true;
-            console.log("jumped to front camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-        }
     }
     else {
-        /*
-        switch (sceneIndex) {
-            case 1:
-                if (projectTimeInMilliSeconds < 13000) {
-                    eye = [7, 2.5, 5];
-                    vec3.add(center, eye, [-1, -0.5, -1]);
-                    up = [0, 1, 0];
-                } else {
-                    eye = [projectTimeInMilliSeconds / 13000 * 7, 2.5, 5];
-                    vec3.add(center, eye, [1, -0.5, -1]);
-                    //center = [eye[0] - 1, eye[1] - 1, eye[2] -1];
-                    up = [0, 1, 0];
-                }
-                break;
-            case 2:
-                eye = [projectTimeInMilliSeconds / 1500 - 8, 2, 3];
-                center = [30, 0, 0];
-                up = [0, 1, 0];
-                break;
-            case 3:
-                eye = [projectTimeInMilliSeconds / 1500 - 8, 2, 3];
-                center = [30, 0, 0];
-                up = [0, 1, 0];
-                break;
-        }*/
-        //direction = vec3.subtract(vec3.create(), center, eye);
-        //direction[0] = Math.round(direction[0] * 1000000000) / 1000000000;
-        //direction[1] = Math.round(direction[1] * 1000000000) / 1000000000;
-        //direction[2] = Math.round(direction[2] * 1000000000) / 1000000000;
-
+        //direction have to be normalized so that the jump to the user camera works
         eye = eyePoint.getPosition();
         setCenterPosition(centerPoint.getPosition());
         up = [0, 1, 0];
-
-        if(!jumpToUserCamera) {
-            jumpToUserCamera = true;
-            console.log("jumped to animated camera\neye=" + eye + "\ncenter=" + center +"\ndirection=" + direction + "\ncamera.rotation.x=" + camera.rotation.x + "\ncamera.rotation.y=" + camera.rotation.y);
-        }
     }
 
     viewMatrix = mat4.lookAt(viewMatrix, eye, center, up);
     return viewMatrix;
 }
 
+/**
+ *  sets the the center Position with a normalized direction vector
+ * */
 function setCenterPosition(centerPos) {
     let direction = vec3.subtract(vec3.create(), centerPos, eye);
     vec3.normalize(direction, direction);
