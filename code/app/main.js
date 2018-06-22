@@ -546,18 +546,17 @@ function renderMainView() {
 
 function getDistance(position) {
     let vector = vec3.sub(vec3.create(), eye, position);
-    vector[1] = 0;
     return Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
 }
 
 function getDisplayedText() {
     let sceneText = "";
     if (userCamera || tramFrontCamera) {
-        if (getDistance([0, 0, 0]) < 5) {
+        if (getDistance([0, 0, 0]) < 7) {
             sceneText = "Linz HBF|";
-        } else if (getDistance([20, 0, 0]) < 5) {
+        } else if (getDistance([20, 0, 0]) < 6) {
             sceneText = "Danube Bridge|";
-        } else if (getDistance([34, 0, 0]) < 4) {
+        } else if (getDistance([34, 0, 0]) < 7) {
             sceneText = "Linz JKU|";
         }
     } else {
@@ -728,7 +727,7 @@ function calculateViewMatrix() {
         }
         //calculate lookat direction
         var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-        var dirY = -camera.rotation.y * Math.PI / 360;
+        var dirY = Math.sin(-camera.rotation.y * Math.PI / 360);
         var dirZ = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
         //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
         dirX = Math.round(dirX * 1000000000) / 1000000000;

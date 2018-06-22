@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/howto/User_Manuals.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/howto/User_Manuals.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/app/MovingPoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingPoint.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/special_effect/special_effect.txt" beforeDir="false" />
     </list>
     <list id="ceb2163f-a745-4f72-8f85-0329291cfc93" name="camera can now zoom(up down) if 'c' is pressed and go left/right" comment="i have no idea what i am doing right now">
       <changelist_data name="pichristoph" email="pichler.christoph@outlook.com" date="1525642172000">
@@ -25,29 +26,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="PersonNode.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="texture.vs.glsl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="710">
-              <caret line="801" selection-start-line="801" selection-end-line="801" />
+            <state relative-caret-position="316">
+              <caret line="746" column="37" selection-start-line="746" selection-start-column="37" selection-end-line="746" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -56,16 +48,16 @@
         <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.fs.glsl">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="static_color.vs.glsl" pinned="false" current-in-tab="true">
+      <file leaf-file-name="static_color.vs.glsl" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+            <state relative-caret-position="272">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -82,8 +74,20 @@
       <file leaf-file-name="MovingNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+            <state relative-caret-position="34">
+              <caret line="2" column="39" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MovingPoint.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-241">
+              <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+              <folding>
+                <element signature="n#!!block;n#moveToRelativPosition#0;n#MovingPoint#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,7 +114,7 @@
         <entry file="file://$PROJECT_DIR$/code/app/CubeRenderNode.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
-              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -126,10 +130,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jumpToUserCamera</find>
-      <find>personColors</find>
-      <find>context.</find>
-      <find>alpha</find>
       <find>setUpModelViewMatrix</find>
       <find>simple_vs</find>
       <find>simple_fs</find>
@@ -156,6 +156,10 @@
       <find>disable</find>
       <find>Line</find>
       <find>v_</find>
+      <find>vertex</find>
+      <find>calculateV</find>
+      <find>setRender</find>
+      <find>lookat</find>
     </findStrings>
     <replaceStrings>
       <replace>t</replace>
@@ -182,7 +186,6 @@
         <option value="$PROJECT_DIR$/code/app/shader/Colors.js" />
         <option value="$PROJECT_DIR$/code/app/Colors.js" />
         <option value="$PROJECT_DIR$/code/app/index.html" />
-        <option value="$PROJECT_DIR$/code/app/MovingPoint.js" />
         <option value="$PROJECT_DIR$/code/app/MovingNode.js" />
         <option value="$PROJECT_DIR$/code/app/PersonNode.js" />
         <option value="$PROJECT_DIR$/code/app/PrismRenderNode.js" />
@@ -197,8 +200,9 @@
         <option value="$PROJECT_DIR$/code/app/shader/static_color.fs.glsl" />
         <option value="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" />
         <option value="$PROJECT_DIR$/code/app/CubeRenderNode.js" />
-        <option value="$PROJECT_DIR$/code/app/main.js" />
         <option value="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" />
+        <option value="$PROJECT_DIR$/code/app/MovingPoint.js" />
+        <option value="$PROJECT_DIR$/code/app/main.js" />
       </list>
     </option>
   </component>
@@ -239,13 +243,6 @@
               <item name="git_project" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_project" type="462c0819:PsiDirectoryNode" />
-              <item name="code" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="shader" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -359,7 +356,7 @@
       <workItem from="1529659510348" duration="3190000" />
       <workItem from="1529681161029" duration="106000" />
       <workItem from="1529682752717" duration="4657000" />
-      <workItem from="1529690308789" duration="4016000" />
+      <workItem from="1529690308789" duration="8997000" />
     </task>
     <task id="LOCAL-00001" summary="changed color of quad">
       <created>1524826283792</created>
@@ -641,11 +638,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529686914578</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="removed a_color in static_color.vs.glsl because it is not needed">
+      <created>1529694772486</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1529694772486</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198986000" />
+    <option name="totallyTimeSpent" value="203967000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -713,7 +717,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="use f to use tramFrontCamera" />
     <MESSAGE value="set automatic static camera flight at scenes 2 and 3" />
     <MESSAGE value="1) simplified, improved and corrected (user's) camera movement with mouse&#10;2) disabled camera movement with RIGHT/LEFT (use mouse instead - now better anyway)&#10;3) (auto-)formatted code [Strg+Shift+Alt+L]" />
     <MESSAGE value="added (simple incorrect) Billboarding" />
@@ -738,11 +741,12 @@
     <MESSAGE value="changed canvas size" />
     <MESSAGE value="changed canvas size again to fit to the screen of the lab computers" />
     <MESSAGE value="persons are now only rendered if camera is near them" />
-    <option name="LAST_COMMIT_MESSAGE" value="persons are now only rendered if camera is near them" />
+    <MESSAGE value="removed a_color in static_color.vs.glsl because it is not needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed a_color in static_color.vs.glsl because it is not needed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="2" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -929,13 +933,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="30" column="5" lean-forward="true" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/app/SpotLightNode.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-471">
@@ -1033,14 +1030,14 @@
     <entry file="file://$PROJECT_DIR$/code/app/CubeRenderNode.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
         </state>
       </provider>
     </entry>
@@ -1058,13 +1055,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/app/PrismRenderNode.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="489">
@@ -1072,24 +1062,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.fs.glsl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-241">
+          <caret line="25" column="63" selection-start-line="25" selection-start-column="63" selection-end-line="25" selection-end-column="63" />
+          <folding>
+            <element signature="n#!!block;n#moveToRelativPosition#0;n#MovingPoint#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="710">
-          <caret line="801" selection-start-line="801" selection-end-line="801" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/static_color.vs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+        <state relative-caret-position="316">
+          <caret line="746" column="37" selection-start-line="746" selection-start-column="37" selection-end-line="746" selection-end-column="37" />
         </state>
       </provider>
     </entry>
