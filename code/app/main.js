@@ -752,7 +752,6 @@ function renderLine(timeInMilliseconds) {
 
 //called to restart after 30 seconds
 function resetPositions() {
-    jumpToUserCamera = true;
     tram.resetPosition();
     tram2.resetPosition();
     persons.forEach(function (person) {
