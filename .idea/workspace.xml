@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list id="ceb2163f-a745-4f72-8f85-0329291cfc93" name="camera can now zoom(up down) if 'c' is pressed and go left/right" comment="i have no idea what i am doing right now">
-      <changelist_data name="pichristoph" email="pichler.christoph@outlook.com" date="1525642172000">
-        <option name="date" value="1525642172000" />
-        <option name="email" value="pichler.christoph@outlook.com" />
-        <option name="name" value="pichristoph" />
-      </changelist_data>
-    </list>
-    <list default="true" id="0c863394-7201-4b0b-adf3-1b991f4f2d33" name="Default" comment="">
+    <list default="true" id="8272483e-32c0-4f2c-94c5-1c34d54095de" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/code/app/models/tree.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/app/models/tree2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/code/app/models/tree3.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
     </list>
@@ -23,48 +19,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="723" column="9" selection-start-line="723" selection-start-column="4" selection-end-line="723" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RotatingImage.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/RotatingImage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="50" selection-start-column="50" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="gl-matrix.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63376">
-              <caret line="3733" column="4" selection-start-line="3733" selection-start-column="4" selection-end-line="3733" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Station.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/Station.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+            <state relative-caret-position="218">
+              <caret line="671" column="63" selection-start-line="671" selection-start-column="63" selection-end-line="671" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -72,8 +32,26 @@
       <file leaf-file-name="PersonNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
+            <state relative-caret-position="459">
+              <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Station.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/Station.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="50" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BillboardNode.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -81,8 +59,8 @@
       <file leaf-file-name="Tram.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2176">
-              <caret line="128" column="16" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="16" />
+            <state relative-caret-position="578">
+              <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -90,156 +68,8 @@
       <file leaf-file-name="framework.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2839">
-              <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#50#0" />
-                <element signature="n#!!doc;n#loadResources#0" />
-                <element signature="n#!!doc;n#isImageUrl#0;n#!!block;n#loadResources#0" />
-                <element signature="n#!!block;n#isImageUrl#0;n#!!block;n#loadResources#0" />
-                <element signature="n#!!doc;n#isModelUrl#0;n#!!block;n#loadResources#0" />
-                <element signature="n#!!block;n#isModelUrl#0;n#!!block;n#loadResources#0" />
-                <element signature="n#!!block;n#isObjUrl#0;n#!!block;n#loadResources#0" />
-                <element signature="e#831#2149#0" />
-                <element signature="e#916#1049#0" />
-                <element signature="e#971#1009#0" />
-                <element signature="e#1083#1240#0" />
-                <element signature="e#1138#1234#0" />
-                <element signature="e#1162#1201#0" />
-                <element signature="e#1283#1485#0" />
-                <element signature="e#1388#1456#0" />
-                <element signature="e#1510#1950#0" />
-                <element signature="e#1575#1737#0" />
-                <element signature="e#1678#1728#0" />
-                <element signature="e#1772#1819#0" />
-                <element signature="e#1846#1895#0" />
-                <element signature="e#1901#1944#0" />
-                <element signature="e#2020#2120#0" />
-                <element signature="e#2042#2077#0" />
-                <element signature="n#!!doc;n#displayText#0" />
-                <element signature="n#!!doc;n#clearText#0" />
-                <element signature="n#!!block;n#clearText#0" />
-                <element signature="n#!!doc;n#createHtmlText#0" />
-                <element signature="n#!!block;n#createHtmlText#0" />
-                <element signature="n#!!doc;n#createShader#0" />
-                <element signature="n#!!block;n#createShader#0" />
-                <element signature="e#3872#4100#0" />
-                <element signature="n#!!doc;n#createProgram#0" />
-                <element signature="e#4739#4945#0" />
-                <element signature="n#!!doc;n#checkForWindowResize#0" />
-                <element signature="n#!!block;n#checkForWindowResize#0" />
-                <element signature="e#5238#5303#0" />
-                <element signature="n#!!doc;n#isValidAttributeLocation#0" />
-                <element signature="n#!!block;n#isValidAttributeLocation#0" />
-                <element signature="n#!!doc;n#isValidUniformLocation#0" />
-                <element signature="n#!!block;n#isValidUniformLocation#0" />
-                <element signature="n#!!doc;n#hex2rgba#0" />
-                <element signature="n#!!block;n#hex2rgba#0" />
-                <element signature="e#5955#6020#0" />
-                <element signature="e#6162#7387#0" />
-                <element signature="e#6220#6297#0" />
-                <element signature="e#6329#6397#0" />
-                <element signature="e#6430#6506#0" />
-                <element signature="e#6539#6615#0" />
-                <element signature="e#6648#6724#0" />
-                <element signature="e#6762#7383#0" />
-                <element signature="e#6824#6888#0" />
-                <element signature="e#6918#6987#0" />
-                <element signature="e#7017#7086#0" />
-                <element signature="e#7116#7185#0" />
-                <element signature="e#7213#7361#0" />
-                <element signature="n#!!doc;n#makeSphere#0" />
-                <element signature="n#!!block;n#makeSphere#0" />
-                <element signature="e#7942#8737#0" />
-                <element signature="e#8142#8733#0" />
-                <element signature="e#8826#9214#0" />
-                <element signature="e#8900#9210#0" />
-                <element signature="e#9224#9343#0" />
-                <element signature="e#13414#17578#0" />
-                <element signature="e#13547#13624#0" />
-                <element signature="e#13656#13752#0" />
-                <element signature="e#13785#13869#0" />
-                <element signature="e#13899#17574#0" />
-                <element signature="e#13934#14114#0" />
-                <element signature="e#14203#17568#0" />
-                <element signature="e#14215#14237#0" />
-                <element signature="e#14475#14599#0" />
-                <element signature="e#14649#14734#0" />
-                <element signature="e#14749#17387#0" />
-                <element signature="e#14765#15392#0" />
-                <element signature="e#15462#16384#0" />
-                <element signature="e#16690#16859#0" />
-                <element signature="e#17418#17560#0" />
-                <element signature="e#17588#17827#0" />
-                <element signature="n#!!block;n#parseMtlFile#0" />
-                <element signature="e#18177#19265#0" />
-                <element signature="e#18312#18573#0" />
-                <element signature="e#18331#18528#0" />
-                <element signature="e#18601#18657#0" />
-                <element signature="e#18685#18789#0" />
-                <element signature="e#18817#18921#0" />
-                <element signature="e#18949#19054#0" />
-                <element signature="e#19082#19187#0" />
-                <element signature="e#19219#19261#0" />
-                <element signature="n#!!doc;n#makeRect#0" />
-                <element signature="n#!!block;n#makeRect#0" />
-                <element signature="e#19671#19675#0" />
-                <element signature="e#19682#19686#0" />
-                <element signature="e#19693#19697#0" />
-                <element signature="e#19749#19837#0" />
-                <element signature="n#!!doc;n#SGNode#0" />
-                <element signature="n#SGNode#0" />
-                <element signature="n#!!doc;n#constructor#0;n#SGNode#0" />
-                <element signature="n#!!block;n#constructor#0;n#SGNode#0" />
-                <element signature="n#!!doc;n#append#0;n#SGNode#0" />
-                <element signature="n#!!block;n#append#0;n#SGNode#0" />
-                <element signature="n#!!doc;n#push#0;n#SGNode#0" />
-                <element signature="n#!!block;n#push#0;n#SGNode#0" />
-                <element signature="n#!!doc;n#remove#0;n#SGNode#0" />
-                <element signature="n#!!block;n#remove#0;n#SGNode#0" />
-                <element signature="e#20818#20859#0" />
-                <element signature="n#!!doc;n#render#0;n#SGNode#0" />
-                <element signature="n#!!block;n#render#0;n#SGNode#0" />
-                <element signature="e#21046#21085#0" />
-                <element signature="n#!!doc;n#TransformationSGNode#0" />
-                <element signature="n#!!doc;n#constructor#0;n#TransformationSGNode#0" />
-                <element signature="n#!!block;n#render#0;n#TransformationSGNode#0" />
-                <element signature="e#21587#21647#0" />
-                <element signature="e#21657#21745#0" />
-                <element signature="n#!!doc;n#ShaderSGNode#0" />
-                <element signature="n#ShaderSGNode#0" />
-                <element signature="n#!!doc;n#constructor#0;n#ShaderSGNode#0" />
-                <element signature="n#!!block;n#constructor#0;n#ShaderSGNode#0" />
-                <element signature="n#!!block;n#render#0;n#ShaderSGNode#0" />
-                <element signature="e#22534#22578#0" />
-                <element signature="n#!!doc;n#SetUniformSGNode#0" />
-                <element signature="n#SetUniformSGNode#0" />
-                <element signature="n#!!block;n#constructor#0;n#SetUniformSGNode#0" />
-                <element signature="e#22851#22896#0" />
-                <element signature="n#!!block;n#setUniforms#0;n#SetUniformSGNode#0" />
-                <element signature="e#23061#23485#0" />
-                <element signature="e#23194#23237#0" />
-                <element signature="e#23275#23326#0" />
-                <element signature="e#23358#23479#0" />
-                <element signature="n#!!block;n#render#0;n#SetUniformSGNode#0" />
-                <element signature="e#23537#23577#0" />
-                <element signature="n#!!doc;n#modelRenderer#0" />
-                <element signature="n#!!doc;n#MaterialSGNode#0" />
-                <element signature="n#MaterialSGNode#0" />
-                <element signature="n#!!block;n#constructor#0;n#MaterialSGNode#0" />
-                <element signature="n#!!block;n#setMaterialUniforms#0;n#MaterialSGNode#0" />
-                <element signature="n#!!block;n#render#0;n#MaterialSGNode#0" />
-                <element signature="n#!!doc;n#LightSGNode#0" />
-                <element signature="n#LightSGNode#0" />
-                <element signature="n#!!block;n#constructor#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#setLightUniforms#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#setLightPosition#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#computeLightPosition#0;n#LightSGNode#0" />
-                <element signature="n#!!doc;n#setLight#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#setLight#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#render#0;n#LightSGNode#0" />
-                <element signature="n#!!block;n#createSGContext#0" />
-              </folding>
+            <state relative-caret-position="1581">
+              <caret line="93" column="9" selection-start-line="93" selection-start-column="3" selection-end-line="93" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -247,17 +77,35 @@
       <file leaf-file-name="MovingNode.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+            <state relative-caret-position="85">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MovingPoint.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+      <file leaf-file-name="Bridge.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/Bridge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
+            <state relative-caret-position="119">
+              <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="texture.fs.glsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1031">
+              <caret line="112" selection-start-line="112" selection-end-line="112" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="texture.vs.glsl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -273,6 +121,9 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>material</find>
+      <find>v_lighttram</find>
+      <find>createlig</find>
       <find>v_li</find>
       <find>u_ligh</find>
       <find>createrive</find>
@@ -293,16 +144,13 @@
       <find>landsc</find>
       <find>createli</find>
       <find>displayt</find>
-      <find>rotation</find>
-      <find>center</find>
-      <find>resetPos</find>
-      <find>centerPoint</find>
-      <find>createEyePoint</find>
-      <find>camera</find>
-      <find>rail</find>
-      <find>createTra</find>
-      <find>createPrism</find>
-      <find>tram2</find>
+      <find>main station</find>
+      <find>resources.tree</find>
+      <find>tree:</find>
+      <find>createlandsc</find>
+      <find>createland</find>
+      <find>createbillboards</find>
+      <find>createbillb</find>
     </findStrings>
     <replaceStrings>
       <replace>t</replace>
@@ -352,37 +200,50 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1305" />
-    <option name="height" value="1053" />
+    <option name="x" value="-7" />
+    <option name="width" value="1073" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_project" type="462c0819:PsiDirectoryNode" />
+              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_project" type="462c0819:PsiDirectoryNode" />
+              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_project" type="462c0819:PsiDirectoryNode" />
+              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
               <item name="code" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cg-project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cg-project" type="462c0819:PsiDirectoryNode" />
+              <item name="howto" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -412,205 +273,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/Tram.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/main.js</PATH>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -618,41 +281,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -660,41 +288,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -702,41 +295,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="RESTORED" />
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
-          <FILE-GROUP>
-            <option name="myUpdateName" />
-            <option name="myStatusName" />
-            <option name="mySupportsDeletion" value="false" />
-            <option name="myCanBeAbsent" value="false" />
-            <option name="myId" />
-          </FILE-GROUP>
         </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
@@ -745,41 +303,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="MODIFIED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Skipped" />
@@ -787,41 +310,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="SKIPPED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Merged with conflicts" />
@@ -829,41 +317,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Merged with tree conflicts" />
@@ -871,41 +324,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Merged with property conflicts" />
@@ -913,41 +331,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Merged" />
@@ -955,41 +338,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="MERGED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Not in repository" />
@@ -997,41 +345,6 @@
         <option name="mySupportsDeletion" value="true" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="UNKNOWN" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Locally added" />
@@ -1039,41 +352,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="LOCALLY_ADDED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Locally removed" />
@@ -1081,41 +359,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="LOCALLY_REMOVED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
       <FILE-GROUP>
         <option name="myUpdateName" value="Switched" />
@@ -1123,41 +366,6 @@
         <option name="mySupportsDeletion" value="false" />
         <option name="myCanBeAbsent" value="false" />
         <option name="myId" value="SWITCHED" />
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" />
-          <option name="myStatusName" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" />
-        </FILE-GROUP>
       </FILE-GROUP>
     </UpdatedFiles>
   </component>
@@ -1173,16 +381,10 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.index.html (1)">
-    <configuration name="index.html (1)" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/git_project/code/app/index.html" />
+  <component name="RunManager">
     <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/cg-project/code/app/index.html" />
-    <list>
-      <item itemvalue="JavaScript Debug.index.html" />
-      <item itemvalue="JavaScript Debug.index.html (1)" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JavaScript Debug.index.html (1)" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
     </recent_temporary>
@@ -1249,6 +451,7 @@
       <workItem from="1529568330982" duration="5508000" />
       <workItem from="1529589980774" duration="2934000" />
       <workItem from="1529659510348" duration="3190000" />
+      <workItem from="1529671534883" duration="4440000" />
     </task>
     <task id="LOCAL-00001" summary="changed color of quad">
       <created>1524826283792</created>
@@ -1467,60 +670,40 @@
       <option name="project" value="LOCAL" />
       <updated>1529592720510</updated>
     </task>
-    <task id="LOCAL-00032" summary="changed canvas size&#10;fixed bug in jumpToUserCamera (boolean was set wrong)">
-      <created>1529672982220</created>
+    <task id="LOCAL-00032" summary="added trees">
+      <created>1529675446125</created>
       <option name="number" value="00032" />
       <option name="presentableId" value="LOCAL-00032" />
       <option name="project" value="LOCAL" />
-      <updated>1529672982220</updated>
+      <updated>1529675446125</updated>
     </task>
     <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186001000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="186695000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1922" height="1053" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4967249" visible="true" weight="0.13915344" />
-      <window_info anchor="bottom" id="TODO" order="8" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="17" sideWeight="0.36719576" side_tool="true" visible="true" weight="0.23986487" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49427083" weight="0.20274551" />
-      <window_info anchor="bottom" id="Version Control" order="18" sideWeight="0.6328042" visible="true" weight="0.23986487" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" sideWeight="0.5032751" side_tool="true" weight="0.16519824" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978836" weight="0.32995495" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.11666667" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5140625" side_tool="true" visible="true" weight="0.3305174" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4859375" visible="true" weight="0.3305174" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4984375" weight="0.39915523" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="9" />
-      <window_info anchor="bottom" id="Version Control" order="14" sideWeight="0.48645833" visible="true" weight="0.3305174" />
-      <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Debug" order="5" sideWeight="0.4984375" weight="0.39915523" />
-      <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49965495" weight="0.32995495" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="16" sideWeight="0.51354164" side_tool="true" visible="true" weight="0.3305174" />
-      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="13" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49427083" visible="true" weight="0.20274551" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1580,8 +763,8 @@
     <MESSAGE value="workspace.xml needless" />
     <MESSAGE value="Added Spot and materials&#10;fixed 'HBF' and 'JKU' text" />
     <MESSAGE value="set tram windows transparent&#10;changed sun" />
-    <MESSAGE value="changed canvas size&#10;fixed bug in jumpToUserCamera (boolean was set wrong)" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed canvas size&#10;fixed bug in jumpToUserCamera (boolean was set wrong)" />
+    <MESSAGE value="added trees" />
+    <option name="LAST_COMMIT_MESSAGE" value="added trees" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1787,8 +970,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/libs/gl-matrix.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63376">
-          <caret line="3733" column="4" selection-start-line="3733" selection-start-column="4" selection-end-line="3733" selection-end-column="4" />
+        <state relative-caret-position="-2941">
+          <caret line="5341" column="4" selection-start-line="5341" selection-start-column="4" selection-end-line="5341" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1842,6 +1025,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="30" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -1856,6 +1046,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Bridge.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1865,226 +1062,64 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/MovingNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="18" lean-forward="true" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
+        <state relative-caret-position="85">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/libs/framework.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2839">
-          <caret line="646" column="30" selection-start-line="646" selection-start-column="22" selection-end-line="646" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#50#0" />
-            <element signature="n#!!doc;n#loadResources#0" />
-            <element signature="n#!!doc;n#isImageUrl#0;n#!!block;n#loadResources#0" />
-            <element signature="n#!!block;n#isImageUrl#0;n#!!block;n#loadResources#0" />
-            <element signature="n#!!doc;n#isModelUrl#0;n#!!block;n#loadResources#0" />
-            <element signature="n#!!block;n#isModelUrl#0;n#!!block;n#loadResources#0" />
-            <element signature="n#!!block;n#isObjUrl#0;n#!!block;n#loadResources#0" />
-            <element signature="e#831#2149#0" />
-            <element signature="e#916#1049#0" />
-            <element signature="e#971#1009#0" />
-            <element signature="e#1083#1240#0" />
-            <element signature="e#1138#1234#0" />
-            <element signature="e#1162#1201#0" />
-            <element signature="e#1283#1485#0" />
-            <element signature="e#1388#1456#0" />
-            <element signature="e#1510#1950#0" />
-            <element signature="e#1575#1737#0" />
-            <element signature="e#1678#1728#0" />
-            <element signature="e#1772#1819#0" />
-            <element signature="e#1846#1895#0" />
-            <element signature="e#1901#1944#0" />
-            <element signature="e#2020#2120#0" />
-            <element signature="e#2042#2077#0" />
-            <element signature="n#!!doc;n#displayText#0" />
-            <element signature="n#!!doc;n#clearText#0" />
-            <element signature="n#!!block;n#clearText#0" />
-            <element signature="n#!!doc;n#createHtmlText#0" />
-            <element signature="n#!!block;n#createHtmlText#0" />
-            <element signature="n#!!doc;n#createShader#0" />
-            <element signature="n#!!block;n#createShader#0" />
-            <element signature="e#3872#4100#0" />
-            <element signature="n#!!doc;n#createProgram#0" />
-            <element signature="e#4739#4945#0" />
-            <element signature="n#!!doc;n#checkForWindowResize#0" />
-            <element signature="n#!!block;n#checkForWindowResize#0" />
-            <element signature="e#5238#5303#0" />
-            <element signature="n#!!doc;n#isValidAttributeLocation#0" />
-            <element signature="n#!!block;n#isValidAttributeLocation#0" />
-            <element signature="n#!!doc;n#isValidUniformLocation#0" />
-            <element signature="n#!!block;n#isValidUniformLocation#0" />
-            <element signature="n#!!doc;n#hex2rgba#0" />
-            <element signature="n#!!block;n#hex2rgba#0" />
-            <element signature="e#5955#6020#0" />
-            <element signature="e#6162#7387#0" />
-            <element signature="e#6220#6297#0" />
-            <element signature="e#6329#6397#0" />
-            <element signature="e#6430#6506#0" />
-            <element signature="e#6539#6615#0" />
-            <element signature="e#6648#6724#0" />
-            <element signature="e#6762#7383#0" />
-            <element signature="e#6824#6888#0" />
-            <element signature="e#6918#6987#0" />
-            <element signature="e#7017#7086#0" />
-            <element signature="e#7116#7185#0" />
-            <element signature="e#7213#7361#0" />
-            <element signature="n#!!doc;n#makeSphere#0" />
-            <element signature="n#!!block;n#makeSphere#0" />
-            <element signature="e#7942#8737#0" />
-            <element signature="e#8142#8733#0" />
-            <element signature="e#8826#9214#0" />
-            <element signature="e#8900#9210#0" />
-            <element signature="e#9224#9343#0" />
-            <element signature="e#13414#17578#0" />
-            <element signature="e#13547#13624#0" />
-            <element signature="e#13656#13752#0" />
-            <element signature="e#13785#13869#0" />
-            <element signature="e#13899#17574#0" />
-            <element signature="e#13934#14114#0" />
-            <element signature="e#14203#17568#0" />
-            <element signature="e#14215#14237#0" />
-            <element signature="e#14475#14599#0" />
-            <element signature="e#14649#14734#0" />
-            <element signature="e#14749#17387#0" />
-            <element signature="e#14765#15392#0" />
-            <element signature="e#15462#16384#0" />
-            <element signature="e#16690#16859#0" />
-            <element signature="e#17418#17560#0" />
-            <element signature="e#17588#17827#0" />
-            <element signature="n#!!block;n#parseMtlFile#0" />
-            <element signature="e#18177#19265#0" />
-            <element signature="e#18312#18573#0" />
-            <element signature="e#18331#18528#0" />
-            <element signature="e#18601#18657#0" />
-            <element signature="e#18685#18789#0" />
-            <element signature="e#18817#18921#0" />
-            <element signature="e#18949#19054#0" />
-            <element signature="e#19082#19187#0" />
-            <element signature="e#19219#19261#0" />
-            <element signature="n#!!doc;n#makeRect#0" />
-            <element signature="n#!!block;n#makeRect#0" />
-            <element signature="e#19671#19675#0" />
-            <element signature="e#19682#19686#0" />
-            <element signature="e#19693#19697#0" />
-            <element signature="e#19749#19837#0" />
-            <element signature="n#!!doc;n#SGNode#0" />
-            <element signature="n#SGNode#0" />
-            <element signature="n#!!doc;n#constructor#0;n#SGNode#0" />
-            <element signature="n#!!block;n#constructor#0;n#SGNode#0" />
-            <element signature="n#!!doc;n#append#0;n#SGNode#0" />
-            <element signature="n#!!block;n#append#0;n#SGNode#0" />
-            <element signature="n#!!doc;n#push#0;n#SGNode#0" />
-            <element signature="n#!!block;n#push#0;n#SGNode#0" />
-            <element signature="n#!!doc;n#remove#0;n#SGNode#0" />
-            <element signature="n#!!block;n#remove#0;n#SGNode#0" />
-            <element signature="e#20818#20859#0" />
-            <element signature="n#!!doc;n#render#0;n#SGNode#0" />
-            <element signature="n#!!block;n#render#0;n#SGNode#0" />
-            <element signature="e#21046#21085#0" />
-            <element signature="n#!!doc;n#TransformationSGNode#0" />
-            <element signature="n#!!doc;n#constructor#0;n#TransformationSGNode#0" />
-            <element signature="n#!!block;n#render#0;n#TransformationSGNode#0" />
-            <element signature="e#21587#21647#0" />
-            <element signature="e#21657#21745#0" />
-            <element signature="n#!!doc;n#ShaderSGNode#0" />
-            <element signature="n#ShaderSGNode#0" />
-            <element signature="n#!!doc;n#constructor#0;n#ShaderSGNode#0" />
-            <element signature="n#!!block;n#constructor#0;n#ShaderSGNode#0" />
-            <element signature="n#!!block;n#render#0;n#ShaderSGNode#0" />
-            <element signature="e#22534#22578#0" />
-            <element signature="n#!!doc;n#SetUniformSGNode#0" />
-            <element signature="n#SetUniformSGNode#0" />
-            <element signature="n#!!block;n#constructor#0;n#SetUniformSGNode#0" />
-            <element signature="e#22851#22896#0" />
-            <element signature="n#!!block;n#setUniforms#0;n#SetUniformSGNode#0" />
-            <element signature="e#23061#23485#0" />
-            <element signature="e#23194#23237#0" />
-            <element signature="e#23275#23326#0" />
-            <element signature="e#23358#23479#0" />
-            <element signature="n#!!block;n#render#0;n#SetUniformSGNode#0" />
-            <element signature="e#23537#23577#0" />
-            <element signature="n#!!doc;n#modelRenderer#0" />
-            <element signature="n#!!doc;n#MaterialSGNode#0" />
-            <element signature="n#MaterialSGNode#0" />
-            <element signature="n#!!block;n#constructor#0;n#MaterialSGNode#0" />
-            <element signature="n#!!block;n#setMaterialUniforms#0;n#MaterialSGNode#0" />
-            <element signature="n#!!block;n#render#0;n#MaterialSGNode#0" />
-            <element signature="n#!!doc;n#LightSGNode#0" />
-            <element signature="n#LightSGNode#0" />
-            <element signature="n#!!block;n#constructor#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#setLightUniforms#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#setLightPosition#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#computeLightPosition#0;n#LightSGNode#0" />
-            <element signature="n#!!doc;n#setLight#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#setLight#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#render#0;n#LightSGNode#0" />
-            <element signature="n#!!block;n#createSGContext#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="112" selection-start-line="112" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        <state relative-caret-position="1581">
+          <caret line="93" column="9" selection-start-line="93" selection-start-column="3" selection-end-line="93" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Station.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="85" column="138" selection-start-line="85" selection-start-column="131" selection-end-line="85" selection-end-column="138" />
+        <state relative-caret-position="391">
+          <caret line="23" column="50" selection-start-line="23" selection-start-column="50" selection-end-line="23" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/Tram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" column="16" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="16" />
+        <state relative-caret-position="578">
+          <caret line="34" column="72" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/BillboardNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="51" column="8" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/app/PersonNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="42" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/shader/texture.vs.glsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="249">
           <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/index.html">
+    <entry file="file://$PROJECT_DIR$/code/app/shader/texture.fs.glsl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="45" lean-forward="true" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/app/MovingPoint.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="48" column="4" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
+        <state relative-caret-position="1031">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="723" column="9" selection-start-line="723" selection-start-column="4" selection-end-line="723" selection-end-column="9" />
+        <state relative-caret-position="218">
+          <caret line="671" column="63" selection-start-line="671" selection-start-column="63" selection-end-line="671" selection-end-column="63" />
         </state>
       </provider>
     </entry>

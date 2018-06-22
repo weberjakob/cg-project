@@ -145,7 +145,8 @@ loadResources({
     staticcolour_vs: 'shader/static_color.vs.glsl',
     staticcolour_fs: 'shader/static_color.fs.glsl',
     stopsign: 'models/stopsign.png',
-    blank: 'models/blank.png'
+    blank: 'models/blank.png',
+    tree: 'models/tree.png'
 }).then(function (resources /*an object containing our keys with the loaded resources*/) {
     init(resources);
     //render one frame
@@ -173,7 +174,6 @@ function init(resources) {
     rootNode = new ShaderSGNode(shaderProgram);
 
     createLightNodes(resources);
-    createLandScape(resources);
     createRiver(resources);
     createRails(resources);
     createBridge(resources);
@@ -182,9 +182,10 @@ function init(resources) {
     createBillboardedPeople(resources);
     createBillBoards(resources);
     createStations(resources);
+    createLandScape(resources);
     createTram(resources);
     createEyePoint(resources);
-    //createTestCube(resources);
+
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -265,7 +266,25 @@ function mouseMoved(event) {
 }
 
 function createLandScape(resources) {
-   //create billboard trees
+    //create billboard trees at HBF
+    for (i = 0; i <4; i++) {
+        let xPos = i;
+        let yPos = 0.2;
+        let zPos = 0.8;
+        let tree = new BillboardNode(0.6);
+        let rot = new TransformationSGNode(glm.rotateY(180), tree);
+        tree.setPosition(xPos, yPos, zPos);
+        let treeTexture = new AdvancedTextureSGNode(resources.tree, tree);
+        let treeMaterial = new MaterialSGNode(treeTexture);
+        treeMaterial.ambient = [0, 0, 0, 0];
+        treeMaterial.diffuse = [0, 0, 0, 0];
+        treeMaterial.specular = [0, 0, 0, 0];
+        treeMaterial.emission = [0, 0, 0, 0];
+        treeMaterial.shininess = 0;
+        let transformationMatrix = mat4.multiply(mat4.create(), glm.translate(xPos, yPos, zPos), glm.scale(0.2, 0.2, 0.2));
+        let treeTransformation = new TransformationSGNode(transformationMatrix, treeMaterial);
+        rootNode.append(treeTransformation);
+    }
 }
 
 function createRiver(resources) {
@@ -290,7 +309,7 @@ function createTram(resources) {
     tram = new Tram(resources);
     var tramTextureNode = new AdvancedTextureSGNode(resources.orange, [tram]);
     var tramMaterialNode = new MaterialSGNode(tramTextureNode);
-    tramMaterialNode.ambient = [0.2, 0.2, 0.2,1 ];
+    tramMaterialNode.ambient = [0.2, 0.2, 0.2, 1];
     tramMaterialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tramMaterialNode.specular = [0.1, 0.1, 0.1, 1];
     tramMaterialNode.shininess = 50;
@@ -300,7 +319,7 @@ function createTram(resources) {
     tram2 = new Tram(resources);
     var tram2textureNode = new AdvancedTextureSGNode(resources.red, [tram2]);
     var tram2materialNode = new MaterialSGNode(tram2textureNode);
-    tram2materialNode.ambient = [0.2, 0.2, 0.2,1 ];
+    tram2materialNode.ambient = [0.2, 0.2, 0.2, 1];
     tram2materialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tram2materialNode.specular = [0.1, 0.1, 0.1, 1];
     tram2materialNode.shininess = 50;
@@ -386,9 +405,9 @@ function createRails(resources) {
             var railAxeTransformationMatrix = mat4.multiply(mat4.create(), railTransformationMatrix, glm.translate(0, 0, railAxe * 2 - secondLine * 4.5));
             var railTextureNode = new AdvancedTextureSGNode(resources.traintracks, [rail])
             var railMaterialNode = new MaterialSGNode(railTextureNode);
-            railMaterialNode.ambient = [0.0,0.0,0.0,1];
-            railMaterialNode.diffuse = [0.4,0.2,0.2,1];
-            railMaterialNode.specular = [0.4,0.1,0.1,1];
+            railMaterialNode.ambient = [0.0, 0.0, 0.0, 1];
+            railMaterialNode.diffuse = [0.4, 0.2, 0.2, 1];
+            railMaterialNode.specular = [0.4, 0.1, 0.1, 1];
             railMaterialNode.shininess = 10;
             var railTransformationNode = new TransformationSGNode(railAxeTransformationMatrix, [railMaterialNode]);
             rootNode.append(railTransformationNode);
@@ -422,15 +441,15 @@ function createStations(resources) {
 
 function createBillBoards(resources) {
     var billboard1 = new BillboardNode(1);
-    billboard1.setPosition(30, 2, -4);
+    billboard1.setPosition(30, 2, -5);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
     var materialBillboardNode = new MaterialSGNode(textureBillboardNode);
-    materialBillboardNode.ambient=[0, 0, 0, 0];
-    materialBillboardNode.diffuse=[0, 0, 0, 0];
-    materialBillboardNode.specular=[0, 0, 0, 0];
-    materialBillboardNode.emission=[0, 0, 0, 0];
-    materialBillboardNode.shininess=0;
-    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -4), materialBillboardNode);
+    materialBillboardNode.ambient = [0, 0, 0, 0];
+    materialBillboardNode.diffuse = [0, 0, 0, 0];
+    materialBillboardNode.specular = [0, 0, 0, 0];
+    materialBillboardNode.emission = [0, 0, 0, 0];
+    materialBillboardNode.shininess = 0;
+    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -5), materialBillboardNode);
     rootNode.append(billboardPos);
 }
 
@@ -441,9 +460,9 @@ function createPrism(resources) {
     mat4.multiply(prismTransformationMatrix, prismTransformationMatrix, glm.translate(0.04, -0.3, 0));
     var texturePrismNode = new AdvancedTextureSGNode(resources.cement, [prism]);
     var materialPrismNode = new MaterialSGNode(texturePrismNode);
-    materialPrismNode.ambient = [0.1,0.1,0.1,1];
-    materialPrismNode.diffuse = [0.7, 0.7, 0.7,1];
-    materialPrismNode.specular = [0.2,0.2,0.2,1];
+    materialPrismNode.ambient = [0.1, 0.1, 0.1, 1];
+    materialPrismNode.diffuse = [0.7, 0.7, 0.7, 1];
+    materialPrismNode.specular = [0.2, 0.2, 0.2, 1];
     materialPrismNode.shininess = 0.2;
     var prismTransformation = new TransformationSGNode(prismTransformationMatrix, [materialPrismNode]);
     rootNode.append(prismTransformation);
@@ -452,9 +471,9 @@ function createPrism(resources) {
     var prism2 = new PrismRenderNode();
     var texturePrismNode2 = new AdvancedTextureSGNode(resources.cement, [prism2]);
     var materialPrismNode2 = new MaterialSGNode(texturePrismNode2);
-    materialPrismNode2.ambient = [0.1,0.1,0.1,1];
-    materialPrismNode2.diffuse = [0.7, 0.7, 0.7,1];
-    materialPrismNode2.specular = [0.2,0.2,0.2,1];
+    materialPrismNode2.ambient = [0.1, 0.1, 0.1, 1];
+    materialPrismNode2.diffuse = [0.7, 0.7, 0.7, 1];
+    materialPrismNode2.specular = [0.2, 0.2, 0.2, 1];
     materialPrismNode2.shininess = 0.2;
     var prismTransformation2 = new TransformationSGNode(mat4.multiply(mat4.create(), prismTransformationMatrix, glm.translate(0, 0, 0.74)), [materialPrismNode2]);
     rootNode.append(prismTransformation2);
@@ -541,36 +560,44 @@ function render(timeInMilliseconds) {
 
     //update tram transformation
 
-    if       (projectTimeInMilliSeconds < 2500) {
+    if (projectTimeInMilliSeconds < 2500) {
         sceneIndex = 1;
     }
     else if  (projectTimeInMilliSeconds < 5000) {
         tram.setSpeed(vec3.fromValues(15,0,0));
         tram2.setSpeed(vec3.fromValues(8,0,0));
     }
-    else if  (projectTimeInMilliSeconds < 6000) {
+    else if (projectTimeInMilliSeconds < 6000) {
         tram.setSpeed(vec3.create());
     }
-    else if  (projectTimeInMilliSeconds < 8000) {
+    else if (projectTimeInMilliSeconds < 8000) {
         tram.openDoors();
-        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,-2.2));});
+        persons.forEach(function (person) {
+            person.setSpeed(vec3.fromValues(0, 0, -2.2));
+        });
     }
     else if (projectTimeInMilliSeconds < 10000) {
-        persons.forEach(function(person) {person.setSpeed(vec3.create());});
+        persons.forEach(function (person) {
+            person.setSpeed(vec3.create());
+        });
     }
     else if (projectTimeInMilliSeconds < 10500) {
         tram.closeDoors();
     }
     else if (projectTimeInMilliSeconds < 24000) {
         sceneIndex = 2;
-        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(20,0,0));});
-        tram.setSpeed(vec3.fromValues(20,0,0));
+        persons.forEach(function (person) {
+            person.setSpeed(vec3.fromValues(20, 0, 0));
+        });
+        tram.setSpeed(vec3.fromValues(20, 0, 0));
     }
     else if (projectTimeInMilliSeconds < 26000) {
         sceneIndex = 3;
     }
     else if (projectTimeInMilliSeconds < 30000) {
-        persons.forEach(function(person) {person.setSpeed(vec3.fromValues(0,0,1));});
+        persons.forEach(function (person) {
+            person.setSpeed(vec3.fromValues(0, 0, 1));
+        });
         tram.setSpeed(vec3.fromValues(0, 0, 0));
         tram.openDoors();
     }
@@ -609,41 +636,47 @@ function renderMainView() {
 
 function getDistance(position) {
     let vector = vec3.sub(vec3.create(), eye, position);
-    vector[1]=0;
-    return Math.sqrt(vector[0]*vector[0]+vector[1]*vector[1]+vector[2]*vector[2]);
+    vector[1] = 0;
+    return Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + vector[2] * vector[2]);
 }
 
 function getDisplayedText() {
-    let sceneText ="";
-    if(userCamera || tramFrontCamera) {
-     if(getDistance([0,0,0])<5) {
-         sceneText = "Linz Main Station|";
-     } else if(getDistance([20,0,0])<5) {
-         sceneText = "Danube Bridge|";
-     } else if(getDistance([34,0,0])<4) {
-         sceneText = "Linz JKU|";
-     }
+    let sceneText = "";
+    if (userCamera || tramFrontCamera) {
+        if (getDistance([0, 0, 0]) < 5) {
+            sceneText = "Linz HBF|";
+        } else if (getDistance([20, 0, 0]) < 5) {
+            sceneText = "Danube Bridge|";
+        } else if (getDistance([34, 0, 0]) < 4) {
+            sceneText = "Linz JKU|";
+        }
     } else {
         switch (sceneIndex) {
-            case 1: sceneText = "Scene 1 - Main Station/Linz HBF|";break;
-            case 2: sceneText = "Scene 2 - Inside the tram|";break;
-            case 3: sceneText = "Scene 3 - Arrive at JKU|";break;
+            case 1:
+                sceneText = "Scene 1 - Linz HBF|";
+                break;
+            case 2:
+                sceneText = "Scene 2 - Inside the tram|";
+                break;
+            case 3:
+                sceneText = "Scene 3 - Arrive at JKU|";
+                break;
         }
     }
-    sceneText = sceneText+ Math.round(projectTimeInMilliSeconds/1000)+"s";
-    let cameraInfoText = userCamera ? "C: Animated flight|F: Tram front camera":
-        tramFrontCamera ? "C: User camera|F: Animated flight":
+    sceneText = sceneText + Math.round(projectTimeInMilliSeconds / 1000) + "s";
+    let cameraInfoText = userCamera ? "C: Animated flight|F: Tram front camera" :
+        tramFrontCamera ? "C: User camera|F: Animated flight" :
             "C: User camera|F: Tram front camera";
     let effectInfoText = "";
-    if(projectTimeInMilliSeconds<12000) {
-        effectInfoText = "Effect 1: Minimap";
-    } else if(projectTimeInMilliSeconds<18000) {
-        effectInfoText = "Effect 2: Billboarding (sun)";
+    if (projectTimeInMilliSeconds < 18000) {
+        effectInfoText = "Effect 1: Billboarding (sun and trees)";
+    } else if (projectTimeInMilliSeconds < 30000) {
+        effectInfoText = "Effect 2: Minimap";
     } else {
         effectInfoText = "";
     }
 
-    return sceneText+"\n"+effectInfoText+"\n"+cameraInfoText;
+    return sceneText + "\n" + effectInfoText + "\n" + cameraInfoText;
 }
 
 function renderMiniMap(timeInMilliseconds) {
@@ -769,11 +802,11 @@ function calculateViewMatrix() {
     switch (sceneIndex) {
         case 1:
             eyePoint.setPosition([7.5, 1.8, 1.6]);
-            centerPoint.setPosition([6.3,1.6,1.3]);
+            centerPoint.setPosition([6.3, 1.6, 1.3]);
             break;
         case 2:
-            eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2,0.1,0.05]), 2000);
-            centerPoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [3,0.1,0.05]), 2000);
+            eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2, 0.1, 0.05]), 2000);
+            centerPoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [3, 0.1, 0.05]), 2000);
             break;
         case 3:
             eyePoint.setPosition([40, 2, 0]);
@@ -784,7 +817,7 @@ function calculateViewMatrix() {
     //compute the camera's matrix
     viewMatrix = mat4.create();
     if (userCamera) {
-        if(jumpToUserCamera) {
+        if (jumpToUserCamera) {
             //calculate direction
             let directionOffset = vec3.normalize(vec3.create(), vec3.subtract(vec3.create(), center, eye));
             camera.rotation.y = -directionOffset[1] * 360 / Math.PI;
