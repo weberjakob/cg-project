@@ -3,8 +3,8 @@ var gl = null;
 //shader program
 var shaderProgram = null;
 var lineDrawProgram = null;
-var canvasWidth = 800;
-var canvasHeight = 800;
+var canvasWidth = 1800;
+var canvasHeight = 1200;
 var aspectRatio = canvasWidth / canvasHeight;
 
 //rendering context
@@ -325,7 +325,7 @@ function createPerson() {
 
         persons[i].append(new TransformationSGNode(mat4.multiply(
             mat4.create(),
-            glm.translate(i / 2.5 + 1.95, 0.1, 0.5),
+            glm.translate(i / 2.5 + 1.95, 0.08, 0.5),
             glm.scale(7, 7, 7)),
             [new PersonNode()]));//persons[i]);
         rootNode.append(persons[i]);
@@ -719,6 +719,7 @@ function renderLine(timeInMilliseconds) {
 
 //called to restart after 30 seconds
 function resetPositions() {
+    jumpToUserCamera = true;
     tram.resetPosition();
     tram2.resetPosition();
     persons.forEach(function (person) {
@@ -777,6 +778,7 @@ function calculateViewMatrix() {
         case 3:
             eyePoint.setPosition([40, 2, 0]);
             centerPoint.setPosition([39, 1.9, 0]);
+            break;
     }
 
     //compute the camera's matrix
@@ -796,7 +798,6 @@ function calculateViewMatrix() {
         var dirX = Math.cos(camera.rotation.x * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
         var dirY = -camera.rotation.y * Math.PI / 360;
         var dirZ = Math.sin(camera.rotation.z * Math.PI / 360) * Math.cos(camera.rotation.y * Math.PI / 360);
-
         //round in order to neglect rounding mistakes (Math.sin(PI) would be >0 otherwise!)
         dirX = Math.round(dirX * 1000000000) / 1000000000;
         dirY = Math.round(dirY * 1000000000) / 1000000000;
@@ -812,14 +813,16 @@ function calculateViewMatrix() {
         //direction have to be normalized so that the jump to the user camera works
         var tramPos = tram.getPosition();
         vec3.add(eye, tramPos, [-1.8,0.1,0.03]);
-        setCenterPosition(vec3.add(center, tramPos, [-1.7,0.1,0.03]));
+        setCenterPosition(vec3.add(vec3.create(), tramPos, [-1.7,0.1,0.03]));
         up = [0, 1, 0];
+        jumpToUserCamera = true;
     }
     else {
         //direction have to be normalized so that the jump to the user camera works
         eye = eyePoint.getPosition();
         setCenterPosition(centerPoint.getPosition());
         up = [0, 1, 0];
+        jumpToUserCamera = true;
     }
 
     viewMatrix = mat4.lookAt(viewMatrix, eye, center, up);
