@@ -441,7 +441,7 @@ function createStations(resources) {
 
 function createBillBoards(resources) {
     var billboard1 = new BillboardNode(1);
-    billboard1.setPosition(30, 2, -4);
+    billboard1.setPosition(30, 2, -5);
     var textureBillboardNode = new AdvancedTextureSGNode(resources.sun, [billboard1]);
     var materialBillboardNode = new MaterialSGNode(textureBillboardNode);
     materialBillboardNode.ambient = [0, 0, 0, 0];
@@ -449,7 +449,7 @@ function createBillBoards(resources) {
     materialBillboardNode.specular = [0, 0, 0, 0];
     materialBillboardNode.emission = [0, 0, 0, 0];
     materialBillboardNode.shininess = 0;
-    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -4), materialBillboardNode);
+    var billboardPos = new TransformationSGNode(glm.translate(30, 2, -5), materialBillboardNode);
     rootNode.append(billboardPos);
 }
 
@@ -668,10 +668,10 @@ function getDisplayedText() {
         tramFrontCamera ? "C: User camera|F: Animated flight" :
             "C: User camera|F: Tram front camera";
     let effectInfoText = "";
-    if (projectTimeInMilliSeconds < 12000) {
-        effectInfoText = "Effect 1: Minimap";
+    if (projectTimeInMilliSeconds < 18000) {
+        effectInfoText = "Effect 1: Billboarding (sun and trees)";
     } else if (projectTimeInMilliSeconds < 30000) {
-        effectInfoText = "Effect 2: Billboarding (sun and trees)";
+        effectInfoText = "Effect 2: Minimap";
     } else {
         effectInfoText = "";
     }

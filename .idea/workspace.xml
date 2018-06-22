@@ -5,38 +5,8 @@
       <change afterPath="$PROJECT_DIR$/code/app/models/tree.jpg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/code/app/models/tree2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/code/app/models/tree3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/git_project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/git_project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/BillboardNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/BillboardNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/Bridge.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Bridge.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/CubeRenderNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/CubeRenderNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/MovingNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/MovingPoint.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/MovingPoint.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/PersonNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/PersonNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/PrismRenderNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/PrismRenderNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/QuadRenderNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/QuadRenderNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/RotatingImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/RotatingImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/SpotLightNode.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/SpotLightNode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/Station.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Station.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/Tram.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/Tram.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/app/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/phong.fs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/phong.fs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/phong.vs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/phong.vs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/simple.fs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/simple.fs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/simple.vs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/simple.vs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/static_color.fs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/static_color.fs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/static_color.vs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/texture.fs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/shader/texture.vs.glsl" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/shader/texture.vs.glsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/app/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/code/app/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/libs/framework.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/libs/framework.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/libs/gl-matrix.js" beforeDir="false" afterPath="$PROJECT_DIR$/code/libs/gl-matrix.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -53,8 +23,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/app/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="270" column="20" selection-start-line="270" selection-start-column="20" selection-end-line="270" selection-end-column="20" />
+            <state relative-caret-position="218">
+              <caret line="671" column="63" selection-start-line="671" selection-start-column="63" selection-end-line="671" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -151,8 +121,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>spotli</find>
-      <find>materialsgn</find>
       <find>material</find>
       <find>v_lighttram</find>
       <find>createlig</find>
@@ -181,6 +149,8 @@
       <find>tree:</find>
       <find>createlandsc</find>
       <find>createland</find>
+      <find>createbillboards</find>
+      <find>createbillb</find>
     </findStrings>
     <replaceStrings>
       <replace>t</replace>
@@ -289,6 +259,116 @@
       <recent name="D:\webstormProjects\cg-project\code\app\models" />
     </key>
   </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/code/app/main.js</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -371,7 +451,7 @@
       <workItem from="1529568330982" duration="5508000" />
       <workItem from="1529589980774" duration="2934000" />
       <workItem from="1529659510348" duration="3190000" />
-      <workItem from="1529671534883" duration="3789000" />
+      <workItem from="1529671534883" duration="4440000" />
     </task>
     <task id="LOCAL-00001" summary="changed color of quad">
       <created>1524826283792</created>
@@ -590,11 +670,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529592720510</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="added trees">
+      <created>1529675446125</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1529675446125</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186044000" />
+    <option name="totallyTimeSpent" value="186695000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -652,7 +739,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="expanded danube, added static camera movement" />
     <MESSAGE value="camera can now zoom if 'c' is pressed" />
     <MESSAGE value="camera can now zoom(up down) if 'c' is pressed and go left/right" />
     <MESSAGE value="mouseX Action implemented" />
@@ -677,7 +763,8 @@
     <MESSAGE value="workspace.xml needless" />
     <MESSAGE value="Added Spot and materials&#10;fixed 'HBF' and 'JKU' text" />
     <MESSAGE value="set tram windows transparent&#10;changed sun" />
-    <option name="LAST_COMMIT_MESSAGE" value="set tram windows transparent&#10;changed sun" />
+    <MESSAGE value="added trees" />
+    <option name="LAST_COMMIT_MESSAGE" value="added trees" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1031,8 +1118,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/app/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="270" column="20" selection-start-line="270" selection-start-column="20" selection-end-line="270" selection-end-column="20" />
+        <state relative-caret-position="218">
+          <caret line="671" column="63" selection-start-line="671" selection-start-column="63" selection-end-line="671" selection-end-column="63" />
         </state>
       </provider>
     </entry>
