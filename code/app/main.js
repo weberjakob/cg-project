@@ -304,7 +304,7 @@ function createTram(resources) {
     tram2materialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tram2materialNode.specular = [0.1, 0.1, 0.1, 1];
     tram2materialNode.shininess = 50;
-    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(40, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
+    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(35, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
 
     rootNode.append(tramPosition2);
     rootNode.append(tramPosition);
@@ -379,7 +379,7 @@ function createBridge(resources) {
 }
 
 function createRails(resources) {
-    var railTransformationMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.scale(200, 0.05, 0.05));
+    var railTransformationMatrix = mat4.multiply(mat4.create(), glm.translate(10,0,0), glm.scale(85, 0.05, 0.05));
     for (var secondLine = 0; secondLine < 2; secondLine++) {
         for (var railAxe = 0; railAxe < 2; railAxe++) {
             var rail = new CubeRenderNode();
@@ -546,7 +546,7 @@ function render(timeInMilliseconds) {
     }
     else if  (projectTimeInMilliSeconds < 5000) {
         tram.setSpeed(vec3.fromValues(15,0,0));
-        tram2.setSpeed(vec3.fromValues(10,0,0));
+        tram2.setSpeed(vec3.fromValues(8,0,0));
     }
     else if  (projectTimeInMilliSeconds < 6000) {
         tram.setSpeed(vec3.create());
