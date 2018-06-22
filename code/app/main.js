@@ -601,10 +601,49 @@ function renderMainView() {
     gl.useProgram(shaderProgram);
 
     context = createSceneGraphContext(gl, shaderProgram);
-    displayText("c: User cam, f: front tram cam");
+    displayText(getDisplayedText());
     gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_model'), false, context.sceneMatrix);
     //console.log(context.sceneMatrix);
     rootNode.render(context);
+}
+
+function getDistance(position) {
+    let vector = vec3.sub(vec3.create(), eye, position);
+    vector[1]=0;
+    return Math.sqrt(vector[0]*vector[0]+vector[1]*vector[1]+vector[2]*vector[2]);
+}
+
+function getDisplayedText() {
+    let sceneText ="";
+    if(userCamera || tramFrontCamera) {
+     if(getDistance([0,0,0])<5) {
+         sceneText = "Linz Main Station|";
+     } else if(getDistance([20,0,0])<5) {
+         sceneText = "Danube Bridge|";
+     } else if(getDistance([34,0,0])<4) {
+         sceneText = "Linz JKU|";
+     }
+    } else {
+        switch (sceneIndex) {
+            case 1: sceneText = "Scene 1 - Main Station/Linz HBF|";break;
+            case 2: sceneText = "Scene 2 - Inside the tram|";break;
+            case 3: sceneText = "Scene 3 - Arrive at JKU|";break;
+        }
+    }
+    sceneText = sceneText+ Math.round(projectTimeInMilliSeconds/1000)+"s";
+    let cameraInfoText = userCamera ? "C: Animated flight|F: Tram front camera":
+        tramFrontCamera ? "C: User camera|F: Animated flight":
+            "C: User camera|F: Tram front camera";
+    let effectInfoText = "";
+    if(projectTimeInMilliSeconds<12000) {
+        effectInfoText = "Effect 1: Minimap";
+    } else if(projectTimeInMilliSeconds<18000) {
+        effectInfoText = "Effect 2: Billboarding (sun)";
+    } else {
+        effectInfoText = "";
+    }
+
+    return sceneText+"\n"+effectInfoText+"\n"+cameraInfoText;
 }
 
 function renderMiniMap(timeInMilliseconds) {
