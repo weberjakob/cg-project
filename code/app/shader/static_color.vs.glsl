@@ -7,9 +7,6 @@
 // the position of the point
 attribute vec3 a_position;
 
-//the color of the point
-attribute vec3 a_color;
-
 uniform mat4 u_modelView;
 uniform mat4 u_projection;
 
