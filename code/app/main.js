@@ -4,7 +4,7 @@ var gl = null;
 var shaderProgram = null;
 var lineDrawProgram = null;
 var canvasWidth = 2000;
-var canvasHeight = 800;
+var canvasHeight = 950;
 var aspectRatio = canvasWidth / canvasHeight;
 
 //rendering context
