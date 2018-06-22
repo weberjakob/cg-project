@@ -43,6 +43,7 @@ var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=J
 
 var persons, billboardPersons;
 var tram, tram2;
+var tramPosition, tramPosition2;
 
 //links to buffer stored on the GPU
 var quadVertexBuffer, quadColorBuffer, sunColorBuffer;
@@ -243,7 +244,7 @@ function createTram(resources) {
     tramMaterialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tramMaterialNode.specular = [0.1, 0.1, 0.1, 1];
     tramMaterialNode.shininess = 50;
-    var tramPosition = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramMaterialNode]);
+    tramNode = new TransformationSGNode(glm.translate(-4, 0.1, 0.05), [tramMaterialNode]);
 
     //tram2 is driving in the opposite direction
     tram2 = new Tram(resources);
@@ -253,31 +254,22 @@ function createTram(resources) {
     tram2materialNode.diffuse = [0.7, 0.6, 0.5, 1];
     tram2materialNode.specular = [0.1, 0.1, 0.1, 1];
     tram2materialNode.shininess = 50;
-    var tramPosition2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(35, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
+    tramNode2 = new TransformationSGNode(mat4.multiply(mat4.create(), glm.translate(35, 0.1, -0.175), glm.rotateY(180)), [tram2materialNode]);
 
-    rootNode.append(tramPosition2);
-    rootNode.append(tramPosition);
+    rootNode.append(tramNode2);
+    rootNode.append(tramNode);
 }
 
 function createPerson() {
     persons = [];
     for (i = 0; i < 3; i++) {
-
-        //persons[i] = new PersonNode();//mat4.multiply(mat4.create(), glm.translate(0.5, 0.1, 0.5), glm.translate(i / 2.5 + 0.3, 0, 0)));
         persons[i] = new MovingNode();
-        /*mat4.multiply(
-                                                                   mat4.create(),
-                   glm.scale(7,7,7),
-                                                                   glm.translate(i / 2.5 + 0.9, 0.1, 0.5)
-                                                                   ));
-               */
-
         persons[i].append(new TransformationSGNode(mat4.multiply(
             mat4.create(),
             glm.translate(i / 2.5 + 1.95, 0.08, 0.5),
             glm.scale(7, 7, 7)),
             [new PersonNode()]));//persons[i]);
-        rootNode.append(persons[i]);
+        //rootNode.append(persons[i]);
     }
 }
 
@@ -544,8 +536,11 @@ function renderMainView() {
 
     context = createSceneGraphContext(gl, shaderProgram);
     displayText(getDisplayedText());
+
+    //decide based on the positions of the persons wether to render them or not
+    setRenderPerson();
+
     gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_model'), false, context.sceneMatrix);
-    //console.log(context.sceneMatrix);
     rootNode.render(context);
 }
 
@@ -705,8 +700,8 @@ function calculateViewMatrix() {
     //always calculate the position of the animated flight, but only show it if the user selected it
     switch (sceneIndex) {
         case 1:
-            eyePoint.setPosition([7.5, 1.8, 1.6]);
-            centerPoint.setPosition([6.3, 1.6, 1.3]);
+            eyePoint.setPosition([8, 1.8, 1.3]);
+            centerPoint.setPosition([6.7, 1.6, 1.05]);
             break;
         case 2:
             eyePoint.moveTo(vec3.add(vec3.create(), tram.getPosition(), [2, 0.1, 0.05]), 2000);
@@ -773,6 +768,27 @@ function setCenterPosition(centerPos) {
     let direction = vec3.subtract(vec3.create(), centerPos, eye);
     vec3.normalize(direction, direction);
     vec3.add(center, eye, direction);
+}
+
+function setRenderPerson() {
+    persons.forEach(function(person) {
+        if(getDistance(person.getPosition()) > 10) {
+            rootNode.remove(person);
+        }
+        else {
+            let inList = false;
+            rootNode.children.forEach(function (child) {
+               if(child == person) inList = true;
+            });
+            if(!inList) {
+                //remove tram to see persons through windows
+                rootNode.remove(tramNode);
+                rootNode.append(person);
+                //append tram again
+                rootNode.append(tramNode);
+            }
+        }
+    });
 }
 
 /**
