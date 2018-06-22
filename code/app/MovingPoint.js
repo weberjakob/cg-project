@@ -13,7 +13,6 @@ class MovingPoint {
     }
 
     setSpeed(speed) {
-        //this.offset += this.speed * (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet);
         vec3.add(this.offset, this.offset, vec3.scale(vec3.create(), this.speed, (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet)));
         this.timeSinceLastSpeedSet = projectTimeInMilliSeconds;
         vec3.scale(this.speed, speed, slowDownFactor);
@@ -32,7 +31,6 @@ class MovingPoint {
     }
 
     getPosition() {
-        //return (this.offset + (projectTimeInMilliSeconds - this.timeSinceLastSpeedSet) * this.speed) / 8000;
         return vec3.add(
             vec3.create(),
             this.offset,

@@ -1,6 +1,7 @@
 /**
  * as simple vertex shader setting the 2D position of a vertex without any transformations and forwarding the color
  * Created by Samuel Gratzl on 08.02.2016.
+
  */
 
 // the position of the point

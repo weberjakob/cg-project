@@ -1,6 +1,7 @@
 /**
  * a phong shader implementation
  * Created by Samuel Gratzl on 29.02.2016.
+   modified by Jakob Weber and Christoph Pichler
  */
 precision mediump float;
 
@@ -24,19 +25,12 @@ struct Light {
 	vec4 specular;
 };
 
-//TASK 2-1 use uniform for material
-//Material material = Material(vec4(0.24725, 0.1995, 0.0745, 1.),
-//														vec4(0.75164, 0.60648, 0.22648, 1.),
-//														vec4(0.628281, 0.555802, 0.366065, 1.),
-//														vec4(0., 0., 0., 0.),
-//														0.4);
 uniform Material u_material;
 
 Light light = Light(vec4(0., 0., 0., 1.),
 										vec4(1., 1., 1., 1.),
 									    vec4(1., 1., 1., 1.));
 uniform Light u_light;
-//TASK 5-5 use uniform for 2nd light
 uniform Light u_light2;
 
 //varying vectors for light computation
@@ -68,9 +62,7 @@ vec4 calculateSimplePointLight(Light light, Material material, vec3 lightVec, ve
 }
 
 void main() {
-
 	gl_FragColor =
 		calculateSimplePointLight(u_light, u_material, v_lightVec, v_normalVec, v_eyeVec)
 		+ calculateSimplePointLight(u_light2, u_material, v_light2Vec, v_normalVec, v_eyeVec);
-
 }

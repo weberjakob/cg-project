@@ -6,7 +6,6 @@ class Bridge extends SceneGraphNode {
 
         for (var rightSide = 0; rightSide < 2; rightSide++) {
             for (var i = 0; i < 5; i++) {
-
                 for (var j = 0; j < 8; j++) {
                     var columnMatrix = mat4.multiply(mat4.create(), mat4.create(), glm.translate(-2 + i * 1.65, 0.05, rightSide * 0.5));
                     columnMatrix = mat4.multiply(mat4.create(), columnMatrix, glm.rotateZ(-90 + (25.7 * j)));
@@ -39,10 +38,7 @@ class Bridge extends SceneGraphNode {
                         var crossBalk = new TransformationSGNode(crossBalkMatrix, [new CubeRenderNode()]);
                         this.append(crossBalk);
                     }
-
-
                 }
-
             }
         }
     }

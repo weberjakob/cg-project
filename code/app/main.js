@@ -60,7 +60,6 @@ loadResources({
     texture_fs: 'shader/texture.fs.glsl',
     phong_vs: 'shader/phong.vs.glsl',
     phong_fs: 'shader/phong.fs.glsl',
-    churchtexture: 'models/neuerdom.jpg',
     hbftexture: 'models/hbf.png',
     jkutexture: 'models/jku.png',
     rivertexture: 'models/water.jpg',
@@ -71,12 +70,11 @@ loadResources({
     cement: 'models/cement.jpg',
     orange: 'models/orange.jpg',
     red: 'models/red.jpg',
-    staticcolorvs: 'shader/static_color.vs.glsl',
     person1: 'models/person1.png',
     person2: 'models/person2.png',
     person3: 'models/person3.png',
-    staticcolour_vs: 'shader/static_color.vs.glsl',
-    staticcolour_fs: 'shader/static_color.fs.glsl',
+    staticcolor_vs: 'shader/static_color.vs.glsl',
+    staticcolor_fs: 'shader/static_color.fs.glsl',
     stopsign: 'models/stopsign.png',
     blank: 'models/blank.png',
     tree: 'models/tree.png'
@@ -98,7 +96,7 @@ function init(resources) {
     //create the shader program
     shaderProgram = createProgram(gl, resources.texture_vs, resources.texture_fs);
 
-    lineDrawProgram = createProgram(gl, resources.staticcolour_vs, resources.staticcolour_fs);
+    lineDrawProgram = createProgram(gl, resources.staticcolor_vs, resources.staticcolor_fs);
 
     /*set buffers for cube*/
     initBuffer();

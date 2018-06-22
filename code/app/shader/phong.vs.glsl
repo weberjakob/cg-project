@@ -1,6 +1,7 @@
 /**
  * a phong shader implementation
  * Created by Samuel Gratzl on 29.02.2016.
+    modified by Jakob Weber and Christoph Pichler
  */
 attribute vec3 a_position;
 attribute vec3 a_normal;
