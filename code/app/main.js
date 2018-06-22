@@ -9,14 +9,12 @@ var aspectRatio = canvasWidth / canvasHeight;
 
 //rendering context
 var context;
-var rootNode, mainShaderRootNode, simpleShaderRootNode;
+var rootNode;
 var movePointNode;
 
 //camera and projection settings
-var animatedAngle = 0;
 var fieldOfViewInRadians = convertDegreeToRadians(30);
 var eye = vec3.create();
-//var miniMapEye = vec3.create();
 const miniMapYHeight = 30;
 var center = vec3.create();
 var up = vec3.create();
@@ -38,26 +36,12 @@ var mouseButtonPressed = false;
 var mouseX = 0, mouseY = 0, mousePrevX = 0, mousePrevY = 0;
 var zoomspeed = 0.1;
 
-//textures
-var waterTexture;
-var churchTexture;
-
 /*scene settings*/
 var projectTimeInMilliSeconds = 0;//runs from 0.0 to 30.0s
-var animationRepeatedCount = 0;   //tells us how often our scene was already repeated
 var sceneIndex = 0; //indicates the scene: 1=Main Station, 2= Danube Bridge, 3=JKU
-/*var lastSecondRendered = 0;
-function oneSecondSinceLastRendering() {
-    if(projectTimeInMilliSeconds / 1000 > lastSecondRendered) {
-        lastSecondRendered++;
-        return true;
-    }
-    else return false;
-}*/
 
-var tram;
+
 var persons, billboardPersons;
-var personParent = "Station";
 var tram, tram2;
 
 //links to buffer stored on the GPU
@@ -67,57 +51,6 @@ var cubeVertexBuffer, prismVertexBuffer, cubeColorBuffer, bridgeColorBuffer, pri
 
 //render Lines
 var linePositions = [];
-
-var quadColors = new Float32Array([
-    1, 0, 0, 1,
-    1, 1, 0, 1,
-    0, 0, 1, 1,
-    0, 0, 1, 1,
-    1, 1, 0, 1,
-    0, 1, 0, 1]);
-
-
-//used for tram
-var cubeColors = new Float32Array([
-    0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
-    1, 0.5, 0, 1, 0.5, 0, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-    1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
-    1, 0.5, 0, 1, 0.5, 0, 1, 1, 1, 1, 1, 1,
-    0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5,
-]);
-//used for bridge
-var bridgeColors = new Float32Array([
-    0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0,
-    0, 0.25, 0, 0, 0.25, 0, 0, 0.25, 0, 0, 0.25, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0.25, 0, 0, 0.25, 0, 0, 0.25, 0, 0, 0.25, 0,
-    0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0,
-    0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0, 0, 0.5, 0
-]);
-
-var personColors = new Float32Array([
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
-    0, 0.25, 1, 0, 0.25, 1, 0, 0.25, 1, 0, 0.25, 1,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0.25, 1, 0, 0.25, 1, 0, 0.25, 1, 0, 0.25, 1,
-    0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1
-]);
-
-//used for tram
-
-//used for prism
-var prismColors = new Float32Array([
-    1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3,
-    1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3,
-    0.8, 0.35, 0.15, 0.8, 0.35, 0.15, 0.8, 0.35, 0.15, 0.8, 0.35, 0.15,
-    0.8, 0.35, 0.15, 0.8, 0.35, 0.15, 0.8, 0.35, 0.15, 0.8, 0.35, 0.15,
-    0.5, 0.7, 0.3, 0.5, 0.7, 0.3, 0.5, 0.7, 0.3, 0.5, 0.7, 0.3,
-    1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3, 1, 0.7, 0.3
-]);
-
 
 //load the shader resources using a utility function
 loadResources({
@@ -185,7 +118,6 @@ function init(resources) {
     createLandScape(resources);
     createTram(resources);
     createEyePoint(resources);
-
 
     //register keyboard events
     window.addEventListener("keyup", keyUp, false);
@@ -479,14 +411,6 @@ function createPrism(resources) {
     rootNode.append(prismTransformation2);
 }
 
-function createTestCube(resources) {
-    var testCube = new TransformationSGNode(glm.translate(3, 4, 0), [new CubeRenderNode()]);
-    var testCubeTextured = new AdvancedTextureSGNode(resources.cement, [testCube]);
-
-    rootNode.append(testCubeTextured);
-}
-
-
 function initBuffer() {
     //init quad buffer
     quadVertexBuffer = gl.createBuffer();
@@ -534,14 +458,12 @@ function initBuffer() {
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(cubeIndices), gl.STATIC_DRAW);
 
     lineBuffer = gl.createBuffer();
-
 }
 
 /**
  * render one frame
  */
 function render(timeInMilliseconds) {
-
     //project lasts for 30 seconds
     var oldProjectTimeInMilliSeconds = projectTimeInMilliSeconds;
     projectTimeInMilliSeconds = timeInMilliseconds % 30000;
@@ -552,14 +474,9 @@ function render(timeInMilliseconds) {
         movePointNode.moveTo([20, 2, -0.1], 20000);
     }
 
-    //0 to 5: scene
-    // 5 to 25: scene 2
-    //26 to 30: scene 3
-    //sceneIndex = projectTimeInMilliSeconds < 15000 ? 1 : projectTimeInMilliSeconds < 25000 ? 2 : 3;
-    //sceneIndex = 3;
-
-    //update tram transformation
-
+    // 0 to 10,5:  scene 1
+    // 10,5 to 26: scene 2
+    // 26 to 30:   scene 3
     if (projectTimeInMilliSeconds < 2500) {
         sceneIndex = 1;
     }
@@ -694,7 +611,6 @@ function renderMiniMap(timeInMilliseconds) {
     gl.clearColor(0.9, 0.9, 0.9, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-
     var miniMapViewMatrix = mat4.create();
     var savedEye = eye;
     var savedCenter = center;
@@ -708,7 +624,7 @@ function renderMiniMap(timeInMilliseconds) {
     rootNode.render(context);
     renderLine(timeInMilliseconds);
 
-    //restore eye
+    //restore eye and center
     eye = savedEye;
     center = savedCenter;
     //restore viewMatrix
@@ -736,17 +652,14 @@ function renderLine(timeInMilliseconds) {
     gl.uniform3f(gl.getUniformLocation(lineDrawProgram, 'v_color'), lineColor.r, lineColor.g, lineColor.b);
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_modelView'), false, mat4.multiply(mat4.create(), context.viewMatrix, context.sceneMatrix));
     gl.uniformMatrix4fv(gl.getUniformLocation(lineDrawProgram, 'u_projection'), false, context.projectionMatrix);
-    /*const colorLocation = gl.getAttribLocation(shaderProgram, 'a_color');
-    gl.enableVertexAttribArray(colorLocation);
-    gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
-    gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 0);
-    */
     var positionLoc = gl.getAttribLocation(lineDrawProgram, 'a_position');
     gl.enableVertexAttribArray(positionLoc);
     gl.bindBuffer(gl.ARRAY_BUFFER, lineBuffer);
     gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
-    // Draw the triangle
+
     gl.enable(gl.DEPTH_TEST);
+
+    // Draw the connected line
     gl.drawArrays(gl.LINE_STRIP, 0, linePositions.length / 3);
 }
 
@@ -757,12 +670,6 @@ function resetPositions() {
     persons.forEach(function (person) {
         person.resetPosition();
     })
-}
-
-function setUpModelViewMatrix(sceneMatrix, viewMatrix) {
-    var modelViewMatrix = mat4.multiply(mat4.create(), viewMatrix, sceneMatrix);
-    gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_modelView'), false, modelViewMatrix);
-    gl.uniformMatrix4fv(gl.getUniformLocation(context.shader, 'u_model'), false, sceneMatrix);
 }
 
 /**
@@ -914,13 +821,6 @@ class SceneGraphNode {
         });
     };
 }
-
-/**
- * a quad node that renders floor plane
- */
-
-
-
 
 function convertDegreeToRadians(degree) {
     return degree * Math.PI / 180
